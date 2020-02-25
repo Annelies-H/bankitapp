@@ -1,5 +1,8 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
     String street;
     int number;
