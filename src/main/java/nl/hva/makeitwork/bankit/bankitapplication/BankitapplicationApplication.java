@@ -9,5 +9,4 @@ public class BankitapplicationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BankitapplicationApplication.class, args);
 	}
-//test comment
 }
