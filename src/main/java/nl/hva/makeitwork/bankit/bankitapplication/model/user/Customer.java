@@ -3,12 +3,20 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Customer extends User {
+    @Column(nullable = false, unique = true)
     int socialSecurityNumber;
+    @Transient
     List<Bankaccount> bankaccounts = new ArrayList<>();
+
+
+    public Customer() {}
 
     public Customer(int socialSecurityNumber, List<Bankaccount> bankaccounts) {
         this.socialSecurityNumber = socialSecurityNumber;

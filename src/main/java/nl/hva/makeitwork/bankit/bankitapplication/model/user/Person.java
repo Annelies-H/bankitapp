@@ -1,16 +1,31 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
+@Embeddable
 public class Person {
+    @Column(nullable=false)
     String firstName;
     String prefix;
+    @Column(nullable=false)
     String lastName;
+    @Column(nullable=false)
     String initials;
-    Date birthday;
+    @Column(nullable=false)
+            @Temporal(TemporalType.DATE)
+    Calendar birthday;
+    @Column(nullable=false)
     String gender;
 
-    public Person(String firstName, String prefix, String lastName, String initials, Date birthday, String gender) {
+    public Person() {}
+
+    public Person(String firstName, String prefix, String lastName, String initials, Calendar birthday, String gender) {
         this.firstName = firstName;
         this.prefix = prefix;
         this.lastName = lastName;
@@ -51,11 +66,11 @@ public class Person {
         this.initials = initials;
     }
 
-    public Date getBirthday() {
+    public Calendar getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
 
