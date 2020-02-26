@@ -1,11 +1,16 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Bankaccount {
+    @Id
     String iban;
-    List<Transaction> history = new ArrayList<>();
+    @Transient
+    List<Transaction> history;
+    @Column(nullable = false)
     double balance;
 
     public Bankaccount(String iban, List<Transaction> history, double balance) {

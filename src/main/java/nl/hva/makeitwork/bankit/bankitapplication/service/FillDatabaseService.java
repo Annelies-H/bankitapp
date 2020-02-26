@@ -5,10 +5,10 @@ package nl.hva.makeitwork.bankit.bankitapplication.service;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.Address;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.CompanyDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.CustomerDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.EmployeeDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.dao.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Person;
@@ -29,19 +29,41 @@ public class FillDatabaseService {
   private EmployeeDAO employeeDAO;
   @Autowired
   private CustomerDAO customerDAO;
+  @Autowired
+  private PrivateAccountDAO privateAccountDAO;
+  @Autowired
+  private BusinessAccountDAO businessAccountDAO;
 
   public FillDatabaseService() {
     super();
   }
 
   public void fillDatabase() {
-    addCompany();
+    Company company = addCompany();
     addEmployee();
-    addCustomer();
+    Customer customer = addCustomer();
+    addPrivateAccount(customer);
+    addbusinessAccount(company);
     System.out.println("**** Hier wordt de db gevuld");
   }
 
-  public void addCustomer() {
+  public void addbusinessAccount(Company company) {
+    BusinessAccount account = new BusinessAccount();
+    account.setCompany(company);
+    account.setBalance(358);
+    account.setIban("NL65BAIT12345678");
+    businessAccountDAO.save(account);
+  }
+
+  public void addPrivateAccount(Customer customer) {
+    PrivateAccount account = new PrivateAccount();
+    account.setBalance(1230.65);
+    account.setIban("NL33BAIT123456789");
+    account.getAccountHolders().add(customer);
+    privateAccountDAO.save(account);
+  }
+
+  public Customer addCustomer() {
     Address address = new Address("de Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
     ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen", "1234567890");
     Calendar birthday = Calendar.getInstance();
@@ -54,6 +76,7 @@ public class FillDatabaseService {
     customer.setUsername("KBoer01");
     customer.setPassword("W3lk0m2o2o");
     customerDAO.save(customer);
+    return customer;
   }
 
   public void addEmployee() {
@@ -72,11 +95,12 @@ public class FillDatabaseService {
     employeeDAO.save(employee);
   }
 
-  public void addCompany() {
+  public Company addCompany() {
     Address address = new Address("straat", 101, "b", "1234AB", "Hilversum", "Nederland");
     ContactDetails contact = new ContactDetails(address, "info@bankit.nl", "0612345678");
     Company company = new Company("BankIT", "Financiele dienstverlening", 12345, contact );
     companyDAO.save(company);
+    return company;
   }
 
 
