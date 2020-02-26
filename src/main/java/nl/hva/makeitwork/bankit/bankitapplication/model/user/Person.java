@@ -5,8 +5,6 @@ import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Embeddable
 public class Person {
@@ -18,7 +16,7 @@ public class Person {
     @Column(nullable=false)
     String initials;
     @Column(nullable=false)
-            @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     Calendar birthday;
     @Column(nullable=false)
     String gender;

@@ -5,14 +5,15 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class Customer extends User {
     @Column(nullable = false, unique = true)
     int socialSecurityNumber;
-    @Transient
+    @ManyToMany
     List<Bankaccount> bankaccounts = new ArrayList<>();
 
 

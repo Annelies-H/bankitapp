@@ -1,10 +1,19 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class POSterminal {
+    @Id
+    @GeneratedValue
     int POSid;
+    @ManyToOne
     BusinessAccount account;
+
+    public POSterminal() {}
 
     public POSterminal(int POSid, BusinessAccount account) {
         this.POSid = POSid;

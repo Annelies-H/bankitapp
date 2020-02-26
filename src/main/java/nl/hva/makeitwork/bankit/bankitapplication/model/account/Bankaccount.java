@@ -9,7 +9,7 @@ public abstract class Bankaccount {
     @Id
     String iban;
     @Transient
-    List<Transaction> history;
+    List<Transaction> history = new ArrayList<>();
     @Column(nullable = false)
     double balance;
 

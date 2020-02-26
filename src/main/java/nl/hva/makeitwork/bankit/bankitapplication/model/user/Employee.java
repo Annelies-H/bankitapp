@@ -1,7 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
-import org.springframework.context.annotation.EnableLoadTimeWeaving;
 
 import javax.persistence.*;
 
