@@ -1,14 +1,31 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
+    @Column(nullable=false)
     String street;
+    @Column(nullable=false)
     int number;
     String suffix;
+    @Column(nullable=false)
     String zipcode;
+    @Column(nullable=false)
     String city;
+    @Column(nullable=false)
     String country;
 
     public Address() {
+    }
+
+    public Address(String street, int number, String zipcode, String city, String country) {
+        this.street = street;
+        this.number = number;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
     }
 
     public Address(String street, int number, String suffix, String zipcode, String city, String country) {

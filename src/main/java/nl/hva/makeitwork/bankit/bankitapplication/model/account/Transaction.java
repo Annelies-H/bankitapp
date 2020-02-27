@@ -1,16 +1,29 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
-import java.util.Date;
-
+import javax.persistence.*;
+import java.util.Calendar;
+@Entity
 public class Transaction {
+    @Id
+    @GeneratedValue
+    int id;
+    @Transient
     Bankaccount ibanFrom;
+    @Transient
     Bankaccount ibanTo;
+    @Column(nullable = false)
     double ammount;
     String description;
-    Date date;
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    Calendar date;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable=false)
     PaymentMethod paymentMethod;
 
-    public Transaction(Bankaccount ibanFrom, Bankaccount ibanTo, double ammount, String description, Date date, PaymentMethod paymentMethod) {
+    public Transaction() {}
+
+    public Transaction(Bankaccount ibanFrom, Bankaccount ibanTo, double ammount, String description, Calendar date, PaymentMethod paymentMethod) {
         this.ibanFrom = ibanFrom;
         this.ibanTo = ibanTo;
         this.ammount = ammount;
@@ -51,11 +64,11 @@ public class Transaction {
         this.description = description;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 

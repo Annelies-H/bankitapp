@@ -1,6 +1,11 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class ContactDetails {
+    @Embedded
     Address address;
     String email;
     String phoneNumber;

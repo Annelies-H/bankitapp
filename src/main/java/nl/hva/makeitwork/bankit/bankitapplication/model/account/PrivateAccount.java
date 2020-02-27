@@ -1,13 +1,14 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
-import nl.hva.makeitwork.bankit.bankitapplication.model.account.Transaction;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class PrivateAccount extends Bankaccount {
+    @Transient
     List<Customer> accountHolders = new ArrayList<>();
 
     public PrivateAccount(String iban, List<Transaction> history, double balance, List<Customer> accountHolders) {

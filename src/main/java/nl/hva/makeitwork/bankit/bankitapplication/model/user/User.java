@@ -2,11 +2,20 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 
+import javax.persistence.*;
+
+@MappedSuperclass
 public abstract class User {
-    int id = 0;
+    @Id
+    @GeneratedValue
+    int id;
+    @Column(nullable=false)
     String username;
+    @Column(nullable=false)
     String password;
+    @Embedded
     Person person;
+    @Column(nullable=false)
     ContactDetails contactDetails;
 
     public User() {

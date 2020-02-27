@@ -2,10 +2,21 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.company;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Company {
+    @Column(nullable=false)
     String name;
+    @Column(nullable=false)
     String sector;
+    @Id
     int company;
+    @Embedded
+    @Column(nullable=false)
     ContactDetails contactDetails;
 
     public Company() {
