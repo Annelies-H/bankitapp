@@ -7,9 +7,9 @@ public class Transaction {
     @Id
     @GeneratedValue
     int id;
-    @ManyToOne
+    @Transient
     Bankaccount ibanFrom;
-    @ManyToOne
+    @Transient
     Bankaccount ibanTo;
     @Column(nullable = false)
     double ammount;

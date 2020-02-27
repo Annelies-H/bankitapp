@@ -1,5 +1,3 @@
-// Created by huub
-// Creation date 2020-02-23
 
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
@@ -72,7 +70,7 @@ public class FillDatabaseService {
   public void addPOSterminal(BusinessAccount account) {
     POSterminal pos = new POSterminal();
     posDAO.save(pos);
-    POSterminal possy = pos;
+    POSterminal possy = new POSterminal();
     possy.setAccount(account);
     posDAO.save(possy);
   }

@@ -13,6 +13,7 @@ public class BusinessAccount extends Bankaccount {
     @Transient
     List<Customer> accountHolders = new ArrayList<>();
 
+
     public BusinessAccount(String iban, List<Transaction> history, double balance) {
         super(iban, history, balance);
     }
