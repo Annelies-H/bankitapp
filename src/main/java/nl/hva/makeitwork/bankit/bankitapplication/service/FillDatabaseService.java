@@ -33,6 +33,9 @@ public class FillDatabaseService {
   @Autowired
   private TransactionDAO transactionDAO;
 
+
+  //Gebruikt om te kijken of de database connectie werkt
+  //Genereer van elke klasse een object en sla deze op in de database.
   public FillDatabaseService() {
     super();
   }
