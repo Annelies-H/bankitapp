@@ -5,6 +5,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 
 import nl.hva.makeitwork.bankit.bankitapplication.service.FillDatabaseService;
+import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,12 @@ public class TestDatabaseController {
   public String filldatabaseHandler() {
     fillDatabaseService.fillDatabase(); //filldatabase methode wordt aangeroepen
     return "menu"; //vervolgschem wordt teruggegooid
+  }
+
+  @GetMapping("create_users")
+  public String createUsersHandler() {
+    GenerateUsersService.createUsers();
+    return "menu";
   }
 
 
