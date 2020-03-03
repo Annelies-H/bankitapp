@@ -17,6 +17,11 @@ public class ContactDetails {
     }
 
     public ContactDetails() {
+
+    }
+
+    public String toString() {
+        return "\n" + address + "\n" + email +  "\n" + phoneNumber;
     }
 
     public Address getAddress() {

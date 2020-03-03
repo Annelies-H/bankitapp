@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TestDatabaseController {
 
   @Autowired
-  // autowired: roep tegen spring maak jij maar een nieuwe instantie van fildatabaseservice voor elke instantie van
-  // democontroller. Je hoeft dus niet zelf met new huppelepup bezig te gaan
-  // Dit kan alleen met klasses die een @Component zijn (@Controller, @Service, @Repository, @Config)
   private FillDatabaseService fillDatabaseService;
+  @Autowired
+  private GenerateUsersService generateUsersService;
 
   public TestDatabaseController() {
     super();
@@ -31,7 +30,7 @@ public class TestDatabaseController {
 
   @GetMapping("create_users")
   public String createUsersHandler() {
-    GenerateUsersService.createUsers();
+    generateUsersService.createUsers();
     return "menu";
   }
 
