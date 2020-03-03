@@ -36,10 +36,10 @@ public class GenerateUsersService {
         File file = new File(filePath);
         try {
             Scanner scanner = new Scanner(file);
+            scanner.nextLine();
             while (scanner.hasNextLine()) {
                 String[] row = scanner.nextLine().split(",");
-                Address address = new Address(row[7], 1, "", row[9], row[8], "Nederland");
-                ContactDetails contact = new ContactDetails(address, row[11], row[14]);
+                ContactDetails contact = getContactDetails(row);
                 Calendar birthday = Calendar.getInstance();
                 birthday.set(1800, 01,01);
                 Person person = new Person(row[4], "", row[6], row[5], birthday, row[1]);
@@ -48,26 +48,32 @@ public class GenerateUsersService {
                 customer.setPerson(person);
                 customer.setUsername(row[12]);
                 customer.setPassword(row[13]);
-//                Address address = new Address("de Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
-//                ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen", "1234567890");
-//                Calendar birthday = Calendar.getInstance();
-//                birthday.set(1933, 11,30);
-//                Person person = new Person("Liesje", "van", "Jansen", "LL", birthday, "v");
-//                Customer customer = new Customer();
-//                customer.setSocialSecurityNumber(123456789);
-//                customer.setContactDetails(contact);
-//                customer.setPerson(person);
-//                customer.setUsername("KBoer01");
-//                customer.setPassword("W3lk0m2o2o");
                 customers.add(customer);
             }
         }
         catch(FileNotFoundException FnF) {
             System.out.println("file not found");
         }
-        customers.remove(0);
         return customers;
     }
+
+    private ContactDetails getContactDetails(String[] row) {
+        Address address = getAddress(row);
+        ContactDetails contact = new ContactDetails(address, row[11], row[14]);
+        return contact;
+    }
+
+    private Address getAddress(String[] row) {
+        String[] splitStreet = row[7].split(" ");
+        int houseNr = Integer.parseInt(splitStreet[splitStreet.length - 1]);
+        String streetName = "";
+        for (int i = 0; i < splitStreet.length - 1; i++) {
+            streetName += splitStreet[i];
+        }
+        Address address = new Address(streetName, houseNr, null, row[9], row[8], "Nederland");
+        return address;
+    }
+
 
     public List<Integer> createBSNs(int n) {
         Set<Integer> bsns = new HashSet<>();
