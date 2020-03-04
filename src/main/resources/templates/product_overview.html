@@ -5,8 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-JAJAJJAJAJAAAAAAAAAAA
-<h1>Welkom <span th:text="${customer.username}"> </span></h1>
+<h1>Welkom <span th:text="${customer.person.firstName}"> </span>
+    <span th:text="${customer.person.prefix}"> </span>
+    <span th:text="${customer.person.lastName}"> </span></h1>
+<h2>Dit is uw Bank IT productoverzicht.</h2>
 
+<h3>Uw rekeningen</h3>
+<table>
+    <tr>
+        <td>Rekeningnummer</td><td>Saldo</td>
+    </tr>
+    <tr th:each="bankaccount: ${bankaccounts}">
+        <td><a th:href="@{selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
+        <td th:text="${bankaccount.balance}"/>
+    </tr>
+    </table>
+<input type="button" onclick="window.location.href = 'open_account';" value="Open nieuwe rekening."/>
+<input type="button" onclick="window.location.href = 'connect_account';" value="Koppel rekening."/>
 </body>
 </html>
