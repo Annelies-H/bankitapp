@@ -14,9 +14,9 @@ import java.util.List;
 public class Customer extends User {
 
     @Transient
-    public static final int MIN_DIGITS_BSN = 8;
+    public static final int BSN_RANGE_MIN_VALUE = 10000000;
     @Transient
-    public static final int MAX_DIGITS_BSN = 9;
+    public static final int BSN_RANGE_MAX_VALUE = 999999999;
 
     @Column(nullable = false, unique = true)
     int socialSecurityNumber;
@@ -38,37 +38,27 @@ public class Customer extends User {
     }
 
     /**
+     * A valid BSN is of the correct length (8 or 9 digits) and adheres to the 'elfproef' (a type of check digit).
+     * This means that the weighed sum of all the digits is a multiple of 11.
+     * The last digits as a weight of -1, the 2nd last a weight of 2, the 3rd last a weight of 3 etc.
+     * Only the last digit has a negative weight.
      *
      * @param bsn to be validated
      * @return whether the bsn is valid
      */
     public static boolean isValidBSN(int bsn) {
-        if (intLength(bsn) == MIN_DIGITS_BSN || intLength(bsn) == MAX_DIGITS_BSN) {
+        if (bsn >= BSN_RANGE_MIN_VALUE && bsn  <= BSN_RANGE_MAX_VALUE) {
             int sum = -1 * (bsn % 10);
-            int rest = bsn / 10;
+            int remainder = bsn / 10;
             for (int i = 2; i <= 9; i++) {
-                sum += i * (rest % 10);
-                rest /= 10;
+                sum += i * (remainder % 10);
+                remainder /= 10;
             }
             return sum % 11 == 0;
         }
         return false;
     }
 
-    /**
-     * Calculate the number of digits in a positive number
-     * @param number  positive int
-     * @return the number of digits (-1 when attempting to enter a negative number)
-     */
-    public static int intLength(double number) {
-        if (number > 0) {
-            return (int) Math.log10(number) + 1;
-        }
-        if (number == 0) {
-            return 1;
-        }
-        return -1;
-    }
 
     public int getSocialSecurityNumber() {
         return socialSecurityNumber;
