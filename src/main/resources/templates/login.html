@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Inloggen bij BankIT</title>
+</head>
+<body>
+
+<div >
+    <h1 style="text-align: center">Hoi hoi Welkom bij onze bank. </h1>
+
+<form method="post" th:action="@{customer_login}" >
+    <table style="margin-left:auto;margin-right:auto;">
+        <tr>
+            <td>Gebruikersnaam</td><td><input type="text" name="user_name"></td>
+        </tr>
+        <tr>
+            <td>Wachtwoord</td><td><input type="password" name="user_password"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="submit" value="Ok"/></td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+</html>
