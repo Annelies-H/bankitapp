@@ -37,6 +37,12 @@ public class Address {
         this.country = country;
     }
 
+    public String toString() {
+        String streetnr = street + " " + number + suffix;
+        String zipcodecity = zipcode + " " + city;
+        return streetnr + "\n" + zipcodecity + "\n" + country;
+    }
+
     public String getStreet() {
         return street;
     }

@@ -32,6 +32,16 @@ public class Person {
         this.gender = gender;
     }
 
+    public String toString() {
+        String firstN = "\nvoornaam: " + firstName;
+        String  pref = "\nprefix: " + prefix;
+        String lastN = "\nlastname: " + lastName;
+        String init = "\ninitials: " + initials;
+        String bday = "\nbirthday: " + birthday.getTime();
+        String gder = "\ngender: " + gender;
+        return firstN + pref + lastN + init + bday + gder;
+    }
+
     public String getFirstName() {
         return firstName;
     }
