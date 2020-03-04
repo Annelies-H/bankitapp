@@ -2,7 +2,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.service;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.Address;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.CustomerDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Person;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -23,7 +23,7 @@ public class FillDatabaseService {
   @Autowired
   private EmployeeDAO employeeDAO;
   @Autowired
-  private CustomerRepository customerRepository;
+  private CustomerDAO customerDAO;
   @Autowired
   private PrivateAccountDAO privateAccountDAO;
   @Autowired
@@ -56,7 +56,7 @@ public class FillDatabaseService {
     customer.getBankaccounts().add(privateAccount);
     customer.getBankaccounts().add(businessAccount);
     customer.setSocialSecurityNumber(12345678);
-    customerRepository.save(customer);
+    customerDAO.save(customer);
   }
 
   public void addTransaction(Bankaccount from, Bankaccount to) {
@@ -108,7 +108,7 @@ public class FillDatabaseService {
     customer.setPerson(person);
     customer.setUsername("KBoer01");
     customer.setPassword("W3lk0m2o2o");
-    customerRepository.save(customer);
+    customerDAO.save(customer);
     return customer;
   }
 
