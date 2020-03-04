@@ -6,7 +6,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -18,7 +17,6 @@ public class LoginController {
     @Autowired
     private CustomerService customerService;
 
-
     public LoginController() {super();}
 
     @PostMapping("customer_login")
@@ -26,17 +24,15 @@ public class LoginController {
             @RequestParam(name = "user_name") String username,
             @RequestParam(name = "user_password") String password,
             Model model) {
-        String nextPage = "";
+        String nextPage = "redirect:/login";    //changed: always redirect unless correct combination username/password
         Customer customer = customerService.findCustomer(username);
         if (customer != null) {
             if (customer.getPassword().equals(password)) {
                 model.addAttribute("customer", customer);
-                model.addAttribute("bankaccounts", customer.getBankaccounts());
                 nextPage = "product_overview";
-            } else {
-                nextPage = "login";
             }
         }
         return nextPage;
     }
+
 }
