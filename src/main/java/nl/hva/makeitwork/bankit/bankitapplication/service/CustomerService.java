@@ -1,13 +1,9 @@
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.CustomerDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 @Service

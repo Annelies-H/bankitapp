@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BankIt App - Your money is our concern!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href=" ">
+</head>
+<body>
+
+
+<h2 style="width: 750px; margin: auto">Maak uw account aan:</h2><br>
+<form action=" " class="main-form" style="width: 750px; margin: auto;">
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="socialSecurityNumber">Burgerservicenummer:</label>
+            <input type="text" id="socialSecurityNumber" name="socialSecurityNumber" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="firstName">Voornaam:</label>
+                <input type="text" id="firstName" name="firstName" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-1.5" style="width: 80px">
+            <div class="form-group">
+                <label for="initials">Initialen:</label>
+                <input type="text" id="initials" name="initials" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="prefix">Tussenvoegsel:</label>
+                <input type="text" id="prefix" name="prefix" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="lastName">Achternaam:</label>
+                <input type="text" id="lastName" name="lastName" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="birthday">Geboortedatum:</label>
+                <input type="date" id="birthday" name="birthday" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="gender">Geslacht:</label>
+                <select name="gender" id="gender" class="form-control">
+                    <option value="male">Man</option>
+                    <option value="female">Vrouw</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="street">Straat:</label>
+                <input type="text" id="street" name="street" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="number">Nummer:</label>
+                <input type="text" id="number" name="number" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="form-group">
+                <label for="suffix">Toevoeging:</label>
+                <input type="text" id="suffix" name="suffix" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="zipcode">Postcode:</label>
+                <input type="text" id="zipcode" name="zipcode" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="city">Stad:</label>
+                <input type="text" id="city" name="city" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="land">Land:</label>
+                <select name="land" id="land" class="form-control">
+                    <option>Selecteer land</option>
+                    <script>
+                        var myArray = new Array("Nederland", "België", "Duitsland", "Luxemburg");
+                        for(i=0; i<myArray.length; i++) {
+                            document.write('<option value="' + myArray[i] +'">' + myArray[i] + '</option>');
+                        }
+                    </script>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="phoneNumber">Telefoonnummer:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="username">Gebruikersnaam:</label>
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="password">Wachtwoord:</label>
+                <input type="password" id="password" name="password" class="form-control">
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="Maak account" class="btn btn-primary">
+
+
+</form>
+
+</body>
+
+</html>
