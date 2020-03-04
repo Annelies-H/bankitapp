@@ -31,6 +31,7 @@ public class LoginController {
         if (customer != null) {
             if (customer.getPassword().equals(password)) {
                 model.addAttribute("customer", customer);
+                model.addAttribute("bankaccounts", customer.getBankaccounts());
                 nextPage = "product_overview";
             } else {
                 nextPage = "login";
