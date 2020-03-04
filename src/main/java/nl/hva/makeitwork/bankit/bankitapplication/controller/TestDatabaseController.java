@@ -1,3 +1,4 @@
+/*
 // Created by huub
 // Creation date 2020-02-23
 
@@ -41,3 +42,4 @@ public class TestDatabaseController {
 
 
 }
+*/

@@ -16,14 +16,13 @@ public class Person {
     @Column(nullable=false)
     String initials;
     @Column(nullable=false)
-    @Temporal(TemporalType.DATE)
-    Calendar birthday;
+    String birthday;
     @Column(nullable=false)
     String gender;
 
     public Person() {}
 
-    public Person(String firstName, String prefix, String lastName, String initials, Calendar birthday, String gender) {
+    public Person(String firstName, String prefix, String lastName, String initials, String birthday, String gender) {
         this.firstName = firstName;
         this.prefix = prefix;
         this.lastName = lastName;
@@ -37,7 +36,7 @@ public class Person {
         String  pref = "\nprefix: " + prefix;
         String lastN = "\nlastname: " + lastName;
         String init = "\ninitials: " + initials;
-        String bday = "\nbirthday: " + birthday.getTime();
+        String bday = "\nbirthday: " + birthday;
         String gder = "\ngender: " + gender;
         return firstN + pref + lastN + init + bday + gder;
     }
@@ -74,11 +73,11 @@ public class Person {
         this.initials = initials;
     }
 
-    public Calendar getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

@@ -40,6 +40,7 @@ public class FillDatabaseService {
     super();
   }
 
+/*
   public void fillDatabase() {
     Company company = addCompany();
     addEmployee();
@@ -51,6 +52,7 @@ public class FillDatabaseService {
     updateCustomer(customer, pAccount, bAccount);
     System.out.println("**** Hier wordt de db gevuld");
   }
+*/
 
   public void updateCustomer(Customer customer, PrivateAccount privateAccount, BusinessAccount businessAccount) {
     customer.getBankaccounts().add(privateAccount);
@@ -96,7 +98,7 @@ public class FillDatabaseService {
     return account;
   }
 
-  public Customer addCustomer() {
+/*  public Customer addCustomer() {
     Address address = new Address("de Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
     ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen", "1234567890");
     Calendar birthday = Calendar.getInstance();
@@ -110,9 +112,9 @@ public class FillDatabaseService {
     customer.setPassword("W3lk0m2o2o");
     customerDAO.save(customer);
     return customer;
-  }
+  }*/
 
-  public void addEmployee() {
+/*  public void addEmployee() {
     Address address = new Address("Steegje", 43, "5678PB", "Berlijn", "Engeland");
     ContactDetails contact = new ContactDetails(address, "bladiebla@hotmail.com", "0609876543");
     Calendar birthday = Calendar.getInstance();
@@ -126,7 +128,7 @@ public class FillDatabaseService {
     employee.setUsername("KBoer01");
     employee.setPassword("W3lk0m2o2o");
     employeeDAO.save(employee);
-  }
+  }*/
 
   public Company addCompany() {
     Address address = new Address("straat", 101, "b", "1234AB", "Hilversum", "Nederland");

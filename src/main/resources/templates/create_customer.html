@@ -14,36 +14,37 @@
 
 
 <h2 style="width: 750px; margin: auto">Maak uw account:</h2><br>
-<form method="post" class="main-form" style="width: 750px; margin: auto;">
+
+<form action="#" th:action="@{/save}" th:object="${customer}" method="post" class="main-form" style="width: 750px; margin: auto;">
     <div class="row">
         <div class="col-sm-3">
             <label for="socialSecurityNumber">Burgerservicenummer:</label>
-            <input type="text" id="socialSecurityNumber" name="socialSecurityNumber" th:field="*{socialSecurityNumber}" class="form-control">
+            <input type="text" id="socialSecurityNumber" th:field="*{socialSecurityNumber}" class="form-control" placeholder="">
         </div>
     </div>
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="firstName">Voornaam:</label>
-                <input type="text" id="firstName" name="firstName" th:field="*{firstName}" class="form-control">
+                <input type="text" id="firstName" th:field="*{person.firstName}" class="form-control">
             </div>
         </div>
         <div class="col-sm-1.5" style="width: 80px">
             <div class="form-group">
                 <label for="initials">Initialen:</label>
-                <input type="text" id="initials" name="initials" th:field="*{initials}" class="form-control">
+                <input type="text" id="initials" th:field="*{person.initials}" class="form-control">
             </div>
         </div>
         <div class="col-sm-2">
             <div class="form-group">
                 <label for="prefix">Tussenvoegsel:</label>
-                <input type="text" id="prefix" name="prefix" th:field="*{prefix}" class="form-control">
+                <input type="text" id="prefix" th:field="*{person.prefix}" class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="lastName">Achternaam:</label>
-                <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control">
+                <input type="text" id="lastName" th:field="*{person.lastName}" class="form-control">
             </div>
         </div>
     </div>
@@ -52,13 +53,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="birthday">Geboortedatum:</label>
-                <input type="date" id="birthday" name="birthday" th:field="*{birthday}" class="form-control">
+                <input type="date" id="birthday" th:field="*{person.birthday}" class="form-control">
             </div>
         </div>
         <div class="col-sm-2">
             <div class="form-group">
                 <label for="gender">Geslacht:</label>
-                <select name="gender" id="gender" th:field="*{gender}" class="form-control">
+                <select id="gender" th:field="*{person.gender}" class="form-control">
                     <option value="male">Man</option>
                     <option value="female">Vrouw</option>
                 </select>
@@ -69,19 +70,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="street">Straat:</label>
-                <input type="text" id="street" name="street" th:field="*{street}" class="form-control">
+                <input type="text" id="street" th:field="*{ContactDetails.address.street}" class="form-control">
             </div>
         </div>
         <div class="col-sm-2">
             <div class="form-group">
                 <label for="number">Nummer:</label>
-                <input type="text" id="number" name="number" th:field="*{number}" class="form-control">
+                <input type="text" id="number" th:field="*{ContactDetails.address.number}" class="form-control" placeholder="">
             </div>
         </div>
         <div class="col-sm-1">
             <div class="form-group">
                 <label for="suffix">Toevoeging:</label>
-                <input type="text" id="suffix" name="suffix" th:field="*{suffix}" class="form-control">
+                <input type="text" id="suffix" th:field="*{ContactDetails.address.suffix}" class="form-control">
             </div>
         </div>
     </div>
@@ -89,41 +90,47 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label for="zipcode">Postcode:</label>
-                <input type="text" id="zipcode" name="zipcode" th:field="*{zipcode}" class="form-control">
+                <input type="text" id="zipcode" th:field="*{ContactDetails.address.zipcode}" class="form-control">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="city">Stad:</label>
-                <input type="text" id="city" name="city" th:field="*{city}" class="form-control">
+                <input type="text" id="city" th:field="*{ContactDetails.address.city}" class="form-control">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="country">Land:</label>
-                <select name="country" id="country" th:field="*{country}" class="form-control">
-                    <option>Selecteer land</option>
-                    <script>
-                        var myArray = ["Nederland", "België", "Duitsland", "Luxemburg"];
-                        for(i=0; i<myArray.length; i++) {
-                            document.write('<option value="' + myArray[i] +'">' + myArray[i] + '</option>');
-                        }
-                    </script>
-                </select>
+                <input type="text" id="country" th:field="*{ContactDetails.address.country}" class="form-control">
             </div>
+        </div>
+<!--        <div class="col-sm-4">-->
+<!--            <div class="form-group">-->
+<!--                <label for="country">Land:</label>-->
+<!--                <select id="country" class="form-control">-->
+<!--                    <option th:field="*{ContactDetails.address.country}">Selecteer land</option>-->
+<!--                    <script>-->
+<!--                        var myArray = ["Nederland", "België", "Duitsland", "Luxemburg"];-->
+<!--                        for(i=0; i<myArray.length; i++) {-->
+<!--                            document.write('<option value="' + myArray[i] +'">' + myArray[i] + '</option>');-->
+<!--                        }-->
+<!--                    </script>-->
+<!--                </select>-->
+<!--            </div>-->
         </div>
     </div>
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" th:field="*{email}" class="form-control">
+                <input type="text" id="email" th:field="*{ContactDetails.email}" class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="phoneNumber">Telefoonnummer:</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" class="form-control">
+                <input type="text" id="phoneNumber" th:field="*{ContactDetails.phoneNumber}" class="form-control">
             </div>
         </div>
     </div>
@@ -131,13 +138,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="username">Gebruikersnaam:</label>
-                <input type="text" id="username" name="username" th:field="*{username}" class="form-control">
+                <input type="text" id="username" th:field="*{username}" class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="password">Wachtwoord:</label>
-                <input type="password" id="password" name="password" th:field="*{password}" class="form-control">
+                <input type="password" id="password"  th:field="*{password}" class="form-control">
             </div>
         </div>
     </div>

@@ -10,9 +10,12 @@ import nl.hva.makeitwork.bankit.bankitapplication.service.FillDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.naming.Binding;
 
 @Controller
 public class CreateCustomerController {
@@ -20,17 +23,24 @@ public class CreateCustomerController {
   @Autowired
   CustomerDAO customerDAO;
 
-  public CreateCustomerController () {
-    super();
-  }
-  @GetMapping("create_customer")
-  public String createFormAccountHandler (){
+  @GetMapping("/showFormForAdd")
+  public String showFormForAdd(Model theModel) {
+
+    // create model attribute to bind form data
+    Customer theCustomer = new Customer();
+
+    theModel.addAttribute("customer", theCustomer);
+
     return "create_customer";
   }
 
-  @PostMapping("save_customer")
-  public String createCustomerHandler(@ModelAttribute Customer customer) {
-    customerDAO.save(customer);
+  @PostMapping("/save")
+  public String saveEmployee(@ModelAttribute("customer") Customer theCustomer) {
+
+    // save the employee
+    customerDAO.save(theCustomer);
+
+    // use a redirect to prevent duplicate submissions
     return "login";
   }
 }
