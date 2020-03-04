@@ -1,4 +1,4 @@
-package nl.hva.makeitwork.bankit.bankitapplication.model.dao;
+package nl.hva.makeitwork.bankit.bankitapplication.model.repository;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import org.springframework.data.repository.CrudRepository;

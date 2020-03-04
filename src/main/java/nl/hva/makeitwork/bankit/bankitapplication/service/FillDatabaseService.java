@@ -5,7 +5,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.Address;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
-import nl.hva.makeitwork.bankit.bankitapplication.model.dao.*;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Person;
@@ -23,7 +23,7 @@ public class FillDatabaseService {
   @Autowired
   private EmployeeDAO employeeDAO;
   @Autowired
-  private CustomerDAO customerDAO;
+  private CustomerRepository customerRepository;
   @Autowired
   private PrivateAccountDAO privateAccountDAO;
   @Autowired
@@ -53,7 +53,7 @@ public class FillDatabaseService {
     customer.getBankaccounts().add(privateAccount);
     customer.getBankaccounts().add(businessAccount);
     customer.setSocialSecurityNumber(12345678);
-    customerDAO.save(customer);
+    customerRepository.save(customer);
   }
 
   public void addTransaction(Bankaccount from, Bankaccount to) {
@@ -105,7 +105,7 @@ public class FillDatabaseService {
     customer.setPerson(person);
     customer.setUsername("KBoer01");
     customer.setPassword("W3lk0m2o2o");
-    customerDAO.save(customer);
+    customerRepository.save(customer);
     return customer;
   }
 
