@@ -9,24 +9,22 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href=" ">
 </head>
-<body>
-
-<!--<img src="../static/img/bankIT2D_2.png" alt="BankIT App!" class="center" height="125" width="125">-->
+<body class="text-center">
 
 <div>
-    <h1 style="width: 750px; margin: auto">U kunt nu inloggen. </h1>
+    <img src="../img/bankIT2D_2.png" alt="BankIT App!" class="center" height="125" width="125">
 
-    <form method="post" th:action="@{customer_login}" class="main-form" style="width: 750px; margin: auto">
+    <form method="post" th:action="@{customer_login}" class="main-form" style="width: 300px; margin: auto">
         <div class="row">
             <div class="col-sm-4">
                 <label for="user_name">Gebruikersnaam:</label>
-                <input type="text" id="user_name" name="user_name" class="form-control">
+                <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label for="password">Gebruikersnaam:</label>
-                <input type="password" id="password" name="user_password" class="form-control"><br>
+                <label for="password">Wachtwoord:</label>
+                <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto"><br>
             </div>
         </div>
         <div class="row">
