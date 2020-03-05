@@ -15,9 +15,9 @@
     <tr>
         <td>Rekeningnummer</td><td>Saldo</td>
     </tr>
-    <tr th:each="bankaccount: ${bankaccounts}">
+    <tr th:each="bankaccount: ${customer.bankaccounts}">
         <td><a th:href="@{selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
-        <td th:text="${bankaccount.balance}"/>
+        <td th:text="${bankaccount.balance}"></td>
     </tr>
     </table>
 <input type="button" onclick="window.location.href = 'open_account';" value="Open nieuwe rekening."/>
