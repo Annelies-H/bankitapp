@@ -17,13 +17,14 @@
 <h3>Uw rekeningen</h3>
 <table>
     <tr>
-        <td>Rekeningnummer</td><td>Saldo</td>
+        <th>Rekeningnummer</th>
+        <th align="right">Saldo</th>
     </tr>
     <tr th:each="bankaccount: ${customer.bankaccounts}">
         <td><a th:href="@{selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
-        <td th:text="${bankaccount.balance}"></td>
+        <td align="right" th:text="${#numbers.formatDecimal(bankaccount.balance, 1, 2, 'COMMA')}"></td>
     </tr>
-    </table>
+</table>
 <input type="button" onclick="window.location.href = 'open_account';" value="Open nieuwe rekening." class="btn btn-primary"/>
 <input type="button" onclick="window.location.href = 'connect_account';" value="Koppel rekening." class="btn btn-primary"/>
 

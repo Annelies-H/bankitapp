@@ -42,7 +42,7 @@ public class FillDatabaseService {
 
   public void fillDatabase() {
     Company company = addCompany();
-    //addEmployee();
+    addEmployee();
     Customer customer = addCustomer();
     PrivateAccount pAccount = addPrivateAccount(customer);
     BusinessAccount bAccount = addbusinessAccount(company);
@@ -82,7 +82,7 @@ public class FillDatabaseService {
     BusinessAccount account = new BusinessAccount();
     account.setCompany(company);
     account.setBalance(358);
-    account.setIban("NL65BAIT12345678");
+    account.setIban("NL03BAIT0325489621");
     businessAccountDAO.save(account);
     return account;
   }
@@ -90,7 +90,7 @@ public class FillDatabaseService {
   public PrivateAccount addPrivateAccount(Customer customer) {
     PrivateAccount account = new PrivateAccount();
     account.setBalance(1230.65);
-    account.setIban("NL33BAIT123456789");
+    account.setIban("NL53BAIT0213588648");
     account.getAccountHolders().add(customer);
     privateAccountDAO.save(account);
     return account;
@@ -105,7 +105,7 @@ public class FillDatabaseService {
     customer.setSocialSecurityNumber(123456789);
     customer.setContactDetails(contact);
     customer.setPerson(person);
-    customer.setUsername("KBoer01");
+    customer.setUsername("Lotje01");
     customer.setPassword("Welkom2020");
     customerDAO.save(customer);
     return customer;
