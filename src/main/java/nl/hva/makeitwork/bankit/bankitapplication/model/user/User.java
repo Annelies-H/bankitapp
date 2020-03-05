@@ -9,7 +9,7 @@ public abstract class User {
     @Id
     @GeneratedValue
     int id;
-    @Column(nullable=false)
+    @Column(nullable=false, unique = true)
     String username;
     @Column(nullable=false)
     String password;
