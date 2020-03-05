@@ -1,6 +1,4 @@
-/*
-// Created by huub
-// Creation date 2020-02-23
+
 
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
@@ -23,10 +21,11 @@ public class TestDatabaseController {
     super();
   }
 
-  @GetMapping("fill_database")  //als er een 'fill database' request komt doe dan:
+  @GetMapping("fill_database")
   public String filldatabaseHandler() {
-    fillDatabaseService.fillDatabase(); //filldatabase methode wordt aangeroepen
-    return "menu"; //vervolgschem wordt teruggegooid
+    fillDatabaseService.fillDatabase();
+    return "menu";
+  }
 
   @GetMapping("create_users")
   public String createUsersHandler() {
@@ -37,4 +36,3 @@ public class TestDatabaseController {
 
 
 }
-*/
