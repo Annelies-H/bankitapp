@@ -19,7 +19,7 @@ public class Customer extends User {
     public static final int BSN_RANGE_MAX_VALUE = 999999999;
 
     @Column(nullable = false, unique = true)
-    int socialSecurityNumber;
+    Integer socialSecurityNumber;
     @ManyToMany
     List<Bankaccount> bankaccounts = new ArrayList<>();
 
@@ -60,11 +60,11 @@ public class Customer extends User {
     }
 
 
-    public int getSocialSecurityNumber() {
+    public Integer getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
 
-    public void setSocialSecurityNumber(int socialSecurityNumber) {
+    public void setSocialSecurityNumber(Integer socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 

@@ -8,7 +8,7 @@ public class Address {
     @Column(nullable=false)
     String street;
     @Column(nullable=false)
-    int number;
+    Integer number;
     String suffix;
     @Column(nullable=false)
     String zipcode;
@@ -51,11 +51,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
