@@ -27,11 +27,6 @@ public class TestDatabaseController {
   public String filldatabaseHandler() {
     fillDatabaseService.fillDatabase(); //filldatabase methode wordt aangeroepen
     return "menu"; //vervolgschem wordt teruggegooid
-  }
-  @GetMapping("login")  //als er een 'fill database' request komt doe dan:
-  public String naarInlogHandler() {
-    return "login"; //vervolgschem wordt teruggegooid
-  }
 
   @GetMapping("create_users")
   public String createUsersHandler() {

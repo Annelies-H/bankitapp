@@ -23,19 +23,8 @@ public class CreateCustomerController {
   @Autowired
   CustomerDAO customerDAO;
 
-  @GetMapping("/showFormForAdd")
-  public String showFormForAdd(Model theModel) {
-
-    // create model attribute to bind form data
-    Customer theCustomer = new Customer();
-
-    theModel.addAttribute("customer", theCustomer);
-
-    return "create_customer";
-  }
-
   @PostMapping("/save")
-  public String saveEmployee(@ModelAttribute("customer") Customer theCustomer) {
+  public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
 
     // save the employee
     customerDAO.save(theCustomer);
