@@ -151,7 +151,7 @@ public class GenerateUsersService {
         return new ArrayList<>(bsns);
     }
 
-    private int createRandomBSN() {
+    public int createRandomBSN() {
         Random r = new Random();
         int nr = 1; //any invalid bsn will do
         Customer c = new Customer();

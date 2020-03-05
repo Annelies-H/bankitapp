@@ -32,6 +32,8 @@ public class FillDatabaseService {
   private POSterminalDAO posDAO;
   @Autowired
   private TransactionDAO transactionDAO;
+  @Autowired
+  private GenerateUsersService generateUsersService;
 
 
   //Gebruikt om te kijken of de database connectie werkt
@@ -49,13 +51,12 @@ public class FillDatabaseService {
     addPOSterminal(bAccount);
     addTransaction(bAccount, pAccount);
     updateCustomer(customer, pAccount, bAccount);
-    System.out.println("**** Hier wordt de db gevuld");
+    System.out.println("**** Database gevuld met testdata voor elke tabel *****");
   }
 
   public void updateCustomer(Customer customer, PrivateAccount privateAccount, BusinessAccount businessAccount) {
     customer.getBankaccounts().add(privateAccount);
     customer.getBankaccounts().add(businessAccount);
-    customer.setSocialSecurityNumber(12345678);
     customerDAO.save(customer);
   }
 
@@ -97,12 +98,12 @@ public class FillDatabaseService {
   }
 
   public Customer addCustomer() {
-    Address address = new Address("de Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
-    ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen", "1234567890");
+    Address address = new Address("De Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
+    ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen.nl", "0612332145");
     String birthday = "1933-08-21";
-    Person person = new Person("Liesje", "van", "Jansen", "LL", birthday, "v");
+    Person person = new Person("Liesje", null, "Jansen", "LL", birthday, "vrouw");
     Customer customer = new Customer();
-    customer.setSocialSecurityNumber(123456789);
+    customer.setSocialSecurityNumber(generateUsersService.createRandomBSN());
     customer.setContactDetails(contact);
     customer.setPerson(person);
     customer.setUsername("Lotje01");
