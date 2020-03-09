@@ -1,14 +1,13 @@
+/*
 
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.Address;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
-import nl.hva.makeitwork.bankit.bankitapplication.model.user.Person;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,3 +138,4 @@ public class FillDatabaseService {
 
 
 }
+*/

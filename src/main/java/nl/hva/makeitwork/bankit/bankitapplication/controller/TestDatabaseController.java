@@ -1,3 +1,4 @@
+/*
 
 
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
@@ -36,3 +37,4 @@ public class TestDatabaseController {
 
 
 }
+*/

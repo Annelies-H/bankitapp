@@ -1,25 +1,23 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
-
 import javax.persistence.*;
 
 @Entity
 public class Employee extends User {
-    @Id
-    int id = 1;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
-    Position position;
+    private Position position;
 
-    public Employee() {}
+    public Employee() {
+    }
 
-    public Employee(Position position) {
+    public Employee(int userId, String username, String password, Position position) {
+        super(userId, username, password);
         this.position = position;
     }
 
-    public Employee(int id, String username, String password, Person person, ContactDetails contactDetails, Position position) {
-        super(id, username, password, person, contactDetails);
+    public Employee(Position position) {
         this.position = position;
     }
 

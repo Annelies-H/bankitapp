@@ -7,36 +7,29 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class User {
     @Id
-    @GeneratedValue
-    int id;
-    @Column(nullable=false, unique = true)
-    String username;
-    @Column(nullable=false)
-    String password;
-    @Embedded
-    Person person;
-    @Column(nullable=false)
-    ContactDetails contactDetails;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false)
+    private String password;
 
     public User() {
     }
 
-    public User(int id, String username, String password, Person person, ContactDetails contactDetails) {
-        this.id = id;
+    public User(int userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
-        this.person = person;
-        this.contactDetails = contactDetails;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-
     public String getUsername() {
         return username;
     }
@@ -52,20 +45,5 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public ContactDetails getContactDetails() {
-        return contactDetails;
-    }
-
-    public void setContactDetails(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
-    }
 }
+

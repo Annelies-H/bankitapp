@@ -1,35 +1,19 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 
 @Embeddable
 public class ContactDetails {
-    @Embedded
-    Address address;
-    String email;
-    String phoneNumber;
-
-    public ContactDetails(Address address, String email, String phoneNumber) {
-        this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String zipcode;
+    @Column(nullable = false)
+    private Integer houseNumber;
+    private String suffix;
 
     public ContactDetails() {
-
-    }
-
-    public String toString() {
-        return "\n" + address + "\n" + email +  "\n" + phoneNumber;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getEmail() {
@@ -40,11 +24,27 @@ public class ContactDetails {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public Integer getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(Integer houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 }

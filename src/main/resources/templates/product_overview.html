@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BankIt App - Welkom, beste <span th:text="${customer.person.firstName}"> </span>!</title>
+    <title>BankIt App - Welkom, beste <span th:text="${customer.firstName}"> </span>!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href=" ">
 </head>
 <body>
-<h1>Welkom <span th:text="${customer.person.firstName}"> </span>
-    <span th:text="${customer.person.prefix}"> </span>
-    <span th:text="${customer.person.lastName}"> </span></h1>
+<h1>Welkom <span th:text="${customer.firstName}"> </span>
+    <span th:text="${customer.prefix}"> </span>
+    <span th:text="${customer.lastName}"> </span></h1>
 <h2>Dit is uw Bank IT productoverzicht.</h2>
 
 <h3>Uw rekeningen</h3>

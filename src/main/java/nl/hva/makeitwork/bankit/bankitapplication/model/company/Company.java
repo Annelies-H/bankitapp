@@ -2,30 +2,33 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.company;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Company {
-    @Column(nullable=false)
-    String name;
-    @Column(nullable=false)
-    String sector;
     @Id
-    int company;
-    @Embedded
-    @Column(nullable=false)
-    ContactDetails contactDetails;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int companyId;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String sector;
 
     public Company() {
     }
-    public Company(String name, String sector, int company, ContactDetails contactDetails) {
+
+    public Company(int companyId, String name, String sector) {
+        this.companyId = companyId;
         this.name = name;
         this.sector = sector;
-        this.company = company;
-        this.contactDetails = contactDetails;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getName() {
@@ -42,21 +45,5 @@ public class Company {
 
     public void setSector(String sector) {
         this.sector = sector;
-    }
-
-    public int getCompany() {
-        return company;
-    }
-
-    public void setCompany(int company) {
-        this.company = company;
-    }
-
-    public ContactDetails getContactDetails() {
-        return contactDetails;
-    }
-
-    public void setContactDetails(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
     }
 }
