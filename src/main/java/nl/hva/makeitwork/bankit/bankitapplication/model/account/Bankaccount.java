@@ -26,6 +26,18 @@ public abstract class Bankaccount {
     public Bankaccount() {
     }
 
+    public static String num (int accountID){
+        int result = 1460000 + accountID; // voorbeeld
+        String num = "020" + String.valueOf(result); // voorbeeld
+
+        return num;
+    }
+    public static String numBiz (int accountID){
+        int result = 40200000 + accountID;        String num = "06" + String.valueOf(result);
+
+        return num;
+    }
+
     // construct numerical IBAN, modulo 97 and subtract this form 98 to generate the check digits (NLxx)
     // https://nl.wikipedia.org/wiki/International_Bank_Account_Number#Landspecifieke_regels
      public static int generateCheckDigits(String accountnumber){
