@@ -7,8 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Company {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int companyId;
+    private int companyId; //dutch kvk number
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

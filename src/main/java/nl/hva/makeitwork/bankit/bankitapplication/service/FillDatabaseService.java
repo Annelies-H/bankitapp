@@ -1,4 +1,3 @@
-/*
 
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
@@ -31,8 +30,6 @@ public class FillDatabaseService {
   private POSterminalDAO posDAO;
   @Autowired
   private TransactionDAO transactionDAO;
-  @Autowired
-  private GenerateUsersService generateUsersService;
 
 
   //Gebruikt om te kijken of de database connectie werkt
@@ -97,39 +94,38 @@ public class FillDatabaseService {
   }
 
   public Customer addCustomer() {
-    Address address = new Address("De Lange Lindelaan", 101, "1245ZZ", "Utrecht", "Nederland");
-    ContactDetails contact = new ContactDetails(address, "LiesjeLeerd@LotjeLopen.nl", "0612332145");
+    ContactDetails contact = new ContactDetails();
+    contact.setEmail("LiesjeLeerd@LotjeLopen.nl");
+    contact.setHouseNumber(101);
+    contact.setZipcode("1234AB");
     String birthday = "1933-08-21";
-    Person person = new Person("Liesje", null, "Jansen", "LL", birthday, "vrouw");
     Customer customer = new Customer();
-    customer.setSocialSecurityNumber(generateUsersService.createRandomBSN());
+    customer.setSocialSecurityNumber(152842627);
     customer.setContactDetails(contact);
-    customer.setPerson(person);
+    customer.setFirstName("Liesje");
+    customer.setGender("vrouw");
+    customer.setLastName("Linde");
+    customer.setPrefix("van der");
     customer.setUsername("Lotje01");
     customer.setPassword("Welkom2020");
+    customer.setBirthday(birthday);
     customerDAO.save(customer);
     return customer;
   }
 
   public void addEmployee() {
-    Address address = new Address("Steegje", 43, "5678PB", "Berlijn", "Engeland");
-    ContactDetails contact = new ContactDetails(address, "bladiebla@hotmail.com", "0609876543");
-    String birthday = "1986-11-04";
-    Person person = new Person("Kees", "de", "Boer", "C", birthday, "v");
     Employee employee = new Employee();
-    employee.setId(23);
     employee.setPosition(Position.ACCOUNTMANAGER);
-    employee.setContactDetails(contact);
-    employee.setPerson(person);
     employee.setUsername("KBoer01");
     employee.setPassword("W3lk0m2o2o");
     employeeDAO.save(employee);
   }
 
   public Company addCompany() {
-    Address address = new Address("straat", 101, "b", "1234AB", "Hilversum", "Nederland");
-    ContactDetails contact = new ContactDetails(address, "info@bankit.nl", "0612345678");
-    Company company = new Company("BankIT", "Financiele dienstverlening", 12345, contact );
+    Company company = new Company();
+    company.setName("Pijnboom en co");
+    company.setSector("Voeding");
+    company.setCompanyId(23484876);
     companyDAO.save(company);
     return company;
   }
@@ -138,4 +134,3 @@ public class FillDatabaseService {
 
 
 }
-*/
