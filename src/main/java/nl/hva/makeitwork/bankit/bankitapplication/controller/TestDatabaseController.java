@@ -4,7 +4,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 
 import nl.hva.makeitwork.bankit.bankitapplication.service.FillDatabaseService;
-//import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateUsersService;
+import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,8 @@ public class TestDatabaseController {
 
   @Autowired
   private FillDatabaseService fillDatabaseService;
-/*
   @Autowired
   private GenerateUsersService generateUsersService;
-*/
 
   public TestDatabaseController() {
     super();
@@ -29,11 +27,11 @@ public class TestDatabaseController {
     return "menu";
   }
 
-/*  @GetMapping("create_users")
+  @GetMapping("create_users")
   public String createUsersHandler() {
     generateUsersService.createUsers();
     return "menu";
-  }*/
+  }
 
 
 
