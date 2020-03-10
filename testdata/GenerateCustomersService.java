@@ -25,7 +25,7 @@ Some of the fields in the inputfile need some adjusting before they can be used:
 
 
 @Service
-public class GenerateUsersService {
+public class GenerateCustomersService {
     //location of the file:
     static final String FILE_PATH = "documentation/FakeNames.csv";
     //indeces of the different columns containing the required information:
@@ -51,7 +51,7 @@ public class GenerateUsersService {
     @Autowired
     private CustomerDAO customerDAO;
 
-    public GenerateUsersService() {super();}
+    public GenerateCustomersService() {super();}
 
 
 /**
