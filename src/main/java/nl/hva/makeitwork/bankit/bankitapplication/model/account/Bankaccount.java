@@ -26,6 +26,18 @@ public abstract class Bankaccount {
     public Bankaccount() {
     }
 
+    public static String num (int accountID){
+        int result = 1460000 + accountID; // voorbeeld
+        String num = "020" + String.valueOf(result); // voorbeeld
+
+        return num;
+    }
+    public static String numBiz (int accountID){
+        int result = 40200000 + accountID;        String num = "06" + String.valueOf(result);
+
+        return num;
+    }
+
     // construct numerical IBAN, modulo 97 and subtract this form 98 to generate the check digits (NLxx)
     // https://nl.wikipedia.org/wiki/International_Bank_Account_Number#Landspecifieke_regels
      public static int generateCheckDigits(String accountnumber){
@@ -42,6 +54,25 @@ public abstract class Bankaccount {
             result = (result * 10 + (int)num.charAt(i)- '0') % 97;
         return 98 - result ;
     }
+
+    public static String constructIBAN(int accountID){
+        String result = "";
+        String preIban = num(accountID);
+        int checkD = generateCheckDigits(preIban);
+        if (checkD > 9){result="NL"+checkD+ "BAIT"+ preIban ;}
+        else { result = "NL0"+checkD+ "BAIT"+ preIban ;} // ensure the 01 .. 09
+        return result;
+    }
+    public static String constructIBANBiz(int accountID){
+        String result = "";
+        String preIban = numBiz(accountID);
+        int checkD = generateCheckDigits(preIban);
+        if (checkD > 9){result="NL"+checkD+ "BAIT"+ preIban ;}
+        else { result = "NL0"+checkD+ "BAIT"+ preIban ;} // ensure the 01 .. 09
+        return result;
+    }
+
+
     // validate Iban based on dutch accountnumbers (format NL99BANK0123456789)
      public static boolean validateIBAN (String iban){
         // deconstruct iban to numerical for validating (btw -55 is found on inetrnet Ascii A = 65...)
