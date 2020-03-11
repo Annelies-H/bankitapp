@@ -12,13 +12,15 @@
 
 <h1 style="width: 750px; margin: auto;"><a href="/"><img src="../img/bankIT2D_banner_web.png" alt="BankIT App!" height="125" width="100%"></a></h1>
 <br>
-<h2 style="width: 750px; margin: auto;">Hier kan u straks uw rekening aanmaken</h2>
+<h2 style="width: 750px; margin: auto;">Kies het type rekening dat u wilt openen.</h2>
 <br>
 
 <table style="width: 750px; margin: auto">
     <tr>
         <td><div class="col-sm-4">
-            <input type="button" align="right" name="button" value="Open priverekening" class="btn btn-primary" onclick="window.location.href = 'new/private';" style="align-content:end; width: auto; margin: auto"/>
+            <form action="/account/new/private" method="post" class="private-form">
+            <input type="submit" align="right" name="button" value="Open priverekening" class="btn btn-primary" style="align-content:end; width: auto; margin: auto"/>
+            </form>
         </div></td>
         <td><div class="col-sm-4">
             <input type="button" align="right" name="button" value="Open bedrijfsrekening" class="btn btn-primary" onclick="window.location.href = 'new/business';" style="align-content:end; width: auto; margin: auto"/>

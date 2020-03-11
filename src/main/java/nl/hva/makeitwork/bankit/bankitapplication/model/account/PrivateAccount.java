@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class PrivateAccount extends Bankaccount {
-    @Transient
+    @ManyToMany
     List<Customer> accountHolders = new ArrayList<>();
 
     public PrivateAccount(String iban, List<Transaction> history, double balance, List<Customer> accountHolders) {

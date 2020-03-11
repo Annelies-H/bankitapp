@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
 @SessionAttributes("customer")
 @RequestMapping (value = "account")
@@ -28,11 +30,11 @@ public class BankAccountController {
         return "new_account";
     }
 
-    @GetMapping(value = "new/private")
+    @PostMapping(value = "new/private")
     public String newPrivateAccountHandler (Model model){
         Customer customer = (Customer) model.getAttribute("customer");
         bas.newPrivateAccount(customer);
-        return "under_construction";
+        return "account_added";
     }
 
     @GetMapping(value = "new/business")
