@@ -1,27 +1,22 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
-import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
-
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @SessionAttributes("customer")
-public class ProductOverviewController {
-    @Autowired
-    private CustomerService customerService;
+@RequestMapping (value = "account")
 
- public ProductOverviewController(){super();}
+public class BankAccountController {
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler (Model model){
-     return "under_construction";
+        return "under_construction";
     }
 
-    @GetMapping("open_account")
+    @GetMapping(value = "open_account")
     public String openAccountHandler (Model model){
         return "under_construction";
     }
