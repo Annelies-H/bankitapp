@@ -3,6 +3,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,10 @@ public class PrivateAccount extends Bankaccount {
     }
 
     public PrivateAccount() {
+    }
+
+    public void addAccountHolder(Customer customer) {
+        accountHolders.add(customer);
     }
 
     public List<Customer> getAccountHolders() {

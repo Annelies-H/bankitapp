@@ -101,6 +101,9 @@ public abstract class Bankaccount {
     }
 
 
+    public int getAccountID() {
+        return accountID;
+    }
 
     public String getIban() {
         return iban;
