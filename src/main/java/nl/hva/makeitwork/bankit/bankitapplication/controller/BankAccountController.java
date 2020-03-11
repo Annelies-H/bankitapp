@@ -1,15 +1,12 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @SessionAttributes("customer")
@@ -33,8 +30,10 @@ public class BankAccountController {
     @PostMapping(value = "new/private")
     public String newPrivateAccountHandler (Model model){
         Customer customer = (Customer) model.getAttribute("customer");
-        bas.newPrivateAccount(customer);
-        return "account_added";
+        PrivateAccount account = bas.newPrivateAccount(customer);
+        model.addAttribute("account", account);
+        model.addAttribute("accounttype", "priverekening");
+        return "confirm_new_account";
     }
 
     @GetMapping(value = "new/business")

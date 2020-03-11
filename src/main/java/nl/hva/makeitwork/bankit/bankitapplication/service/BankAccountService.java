@@ -26,16 +26,13 @@ public class BankAccountService {
      */
     public PrivateAccount newPrivateAccount(Customer accountHolder) {
         PrivateAccount newAccount = new PrivateAccount();
-        newAccount.setBalance(500);
+        newAccount.setBalance(100);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
-        System.out.println(newAccount.getAccountID());
         pdao.save(newAccount);
-        System.out.println(newAccount.getAccountID());
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
         pdao.save(newAccount);
-        System.out.println(newAccount.getAccountID());
         accountHolder.addAccount(newAccount);
         cdao.save(accountHolder);
         return newAccount;
