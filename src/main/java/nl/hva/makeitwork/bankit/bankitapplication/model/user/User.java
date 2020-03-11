@@ -1,6 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
+import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 
 import javax.persistence.*;
 
@@ -13,6 +13,7 @@ public abstract class User {
     private String username;
     @Column(nullable = false)
     private String password;
+    private String salt;
 
     public User() {
     }
@@ -44,6 +45,14 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt() {
+        this.salt = LoginService.newSalt();
     }
 }
 
