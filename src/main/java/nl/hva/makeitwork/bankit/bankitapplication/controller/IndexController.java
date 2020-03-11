@@ -13,8 +13,8 @@ public class IndexController {
         return "login";
     }
 
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
+    @GetMapping("/signup")
+    public String signupHandler(Model theModel) {
 
         // create model attribute to bind form data
         Customer theCustomer = new Customer();
