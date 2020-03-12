@@ -9,10 +9,17 @@
     <link rel="stylesheet" href=" ">
 </head>
 <body>
-<h1>Welkom <span th:text="${customer.firstName}"> </span>
+<h1>Welkom
+    <span th:switch="${customer.gender}">
+  <span th:case="vrouw">mevrouw</span>
+  <span th:case="man">meneer</span>
+</span>
+    <span th:text="${customer.firstName}"> </span>
     <span th:text="${customer.prefix}"> </span>
     <span th:text="${customer.lastName}"> </span></h1>
+<br>
 <h2>Dit is uw Bank IT productoverzicht.</h2>
+<br>
 
 <h3>Uw rekeningen</h3>
 <table>
@@ -20,7 +27,7 @@
         <th>Rekeningnummer</th>
         <th align="right">Saldo</th>
     </tr>
-    <tr th:each="bankaccount: ${customer.bankaccounts}">
+    <tr th:each="bankaccount: ${customer.bankaccounts}" >
         <td><a th:href="@{account/selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
         <td align="right" th:text="${#numbers.formatDecimal(bankaccount.balance, 1, 2, 'COMMA')}"></td>
     </tr>
