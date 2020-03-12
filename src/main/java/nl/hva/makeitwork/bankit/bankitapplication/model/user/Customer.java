@@ -74,6 +74,10 @@ public class Customer extends User {
         return false;
     }
 
+    public void addAccount(Bankaccount account) {
+        bankaccounts.add(account);
+    }
+
     public Integer getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
