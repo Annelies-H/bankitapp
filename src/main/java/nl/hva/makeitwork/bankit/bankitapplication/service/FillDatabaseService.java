@@ -51,8 +51,8 @@ public class FillDatabaseService {
   }
 
   public void updateCustomer(Customer customer, PrivateAccount privateAccount, BusinessAccount businessAccount) {
-    customer.getBankaccounts().add(privateAccount);
-    customer.getBankaccounts().add(businessAccount);
+    customer.getPrivateAccounts().add(privateAccount);
+    customer.getBusinessAccounts().add(businessAccount);
     customerDAO.save(customer);
   }
 

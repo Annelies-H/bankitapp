@@ -27,7 +27,7 @@
         <th>Rekeningnummer</th>
         <th align="right">Saldo</th>
     </tr>
-    <tr th:each="bankaccount: ${customer.bankaccounts}" >
+    <tr th:each="bankaccount: ${customer.bankaccounts}">
         <td><a th:href="@{account/selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
         <td align="right" th:text="${#numbers.formatDecimal(bankaccount.balance, 1, 2, 'COMMA')}"></td>
     </tr>
