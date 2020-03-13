@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,16 @@
     <title>BankIt App - Inlog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href=" ">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div>
-    <p style="width: 375px; margin: auto" align="center"><a href="/"><img src="../img/bankIT_logo_long.png" alt="BankIT App!" class="center" height="125" width="375"></a></p>
+<div class="jumbotron bg-primary" style="margin-bottom: 0px;">
+    <p style="width: 375px; margin: auto;" align="center"><a href="/"><img src="../img/bankIT_logo_long.png" alt="BankIT App!" class="center" height="125" width="375"></a></p>
+</div>
 
-    <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto">
+<div class="container pt-3">
+    <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
         <div class="row">
             <div class="col-sm-4" >
                 <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>

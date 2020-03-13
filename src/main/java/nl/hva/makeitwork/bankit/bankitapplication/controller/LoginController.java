@@ -24,7 +24,7 @@ public class LoginController {
             @RequestParam(name = "user_name") String username,
             @RequestParam(name = "user_password") String password,
             Model model) {
-        String nextPage = "redirect:/login";    //changed: always redirect unless correct combination username/password
+        String nextPage = "login_failed";    //changed: always redirect unless correct combination username/password
         Customer customer = customerService.findCustomer(username);
         if (customer != null) {
             if (customer.getPassword().equals(password)) {

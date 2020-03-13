@@ -1,1 +1,8 @@
 /* future css sheet */
+
+
+.lowerimage{ background: url("img/index_img.png") no-repeat;
+              height: 850px;
+              background-size: cover;
+}
+

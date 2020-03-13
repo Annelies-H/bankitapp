@@ -23,4 +23,9 @@ public class IndexController {
 
         return "create_customer";
     }
+
+    @GetMapping("about_us")
+    public String aboutusHandler() {
+        return "under_construction";
+    }
 }
