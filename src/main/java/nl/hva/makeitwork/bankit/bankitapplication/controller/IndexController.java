@@ -13,17 +13,6 @@ public class IndexController {
         return "login";
     }
 
-    @GetMapping("/signup")
-    public String signupHandler(Model theModel) {
-
-        // create model attribute to bind form data
-        Customer theCustomer = new Customer();
-
-        theModel.addAttribute("customer", theCustomer);
-
-        return "create_customer";
-    }
-
     @GetMapping("about_us")
     public String aboutusHandler() {
         return "under_construction";
