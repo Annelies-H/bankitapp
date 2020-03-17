@@ -42,11 +42,12 @@
 <table>
     <tr>
         <th>Rekeningnummer</th>
-        <th align="right">Saldo</th>
+        <th align="right">Saldo</th><th>Bedrijf</th>
     </tr>
     <tr th:each="businessaccount: ${customer.businessAccounts}">
         <td><a th:href="@{account/selected_bankaccount}"><span th:text="${businessaccount.iban}"></span></a></td>
         <td align="right" th:text="${#numbers.formatDecimal(businessaccount.balance, 1, 2, 'COMMA')}"></td>
+        <td th:text="${businessaccount.company.name}"></td>
     </tr>
 </table>
 </div>
