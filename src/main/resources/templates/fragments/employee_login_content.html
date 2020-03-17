@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="secondimage">
+    <div class="container plus pt-3">
+               <form method="post" th:action="@{login}" class="main-form" >
+            <div class="row">
+                <div class="col-sm-4" >
+                    <label for="user_name" >Gebruikersnaam:</label>
+                    <input type="text" id="user_name" name="user_name" class="form-control" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="password"  >Wachtwoord:</label>
+                    <input type="password" id="password" name="user_password" class="form-control" ><br>
+                </div>
+            </div>
+            <div class="row">
+                <table >
+                    <tr>
+                        <td>
+                            <div class="col-sm-4">
+                                <input type="submit" name="submit" value="Login" class="btn btn-primary" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,63 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BankIt App - Inlog</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-</head>
+<head th:insert="fragments/base :: head"></head>
 <body>
-
-<div class="jumbotron bg-primary" style="margin-bottom: 0px;">
-    <p style="width: 375px; margin: auto;" align="center"><a href="/"><img src="../img/bankIT_logo_long.png" alt="BankIT App!" class="center" height="125" width="375"></a></p>
-</div>
-
-<div class="container pt-3">
-    <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
-        <div class="row">
-            <div class="col-sm-4" >
-                <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
-                <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
-                <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
-            </div>
-        </div>
-        <div class="row">
-            <table style="width: 300px; margin: auto auto auto 38px">
-                <tr>
-                    <td>
-                        <div class="col-sm-4">
-                            <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-sm-4">
-                            <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = '/customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    </form>
-</div>
-
-</div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<div th:insert="fragments/base :: header"></div>
+<div th:insert="fragments/login_content :: content"></div>
+<div th:insert="fragments/base :: script"></div>
 </body>
 </html>

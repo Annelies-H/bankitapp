@@ -5,4 +5,11 @@
               height: 850px;
               background-size: cover;
 }
+.plus{
+    max-width:750px;margin:auto;
+}
+.imageheader{
+        max-height=125px;
+         max-width=375px;
+}
 

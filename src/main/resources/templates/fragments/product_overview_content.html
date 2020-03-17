@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="container plus">
+        <h1>Welkom <span th:text="${customer.firstName}"> </span>
+            <span th:text="${customer.prefix}"> </span>
+            <span th:text="${customer.lastName}"> </span></h1>
+        <br/>
+
+        <h2>Uw rekeningen</h2>
+        <table class="table-striped">
+            <tr>
+                <th>Rekeningnummer</th>
+                <th align="right">Saldo</th>
+            </tr>
+            <tr th:each="bankaccount: ${customer.bankaccounts}">
+                <td><a th:href="@{/account/selected_bankaccount}"><span th:text="${bankaccount.iban}"></span></a></td>
+                <td align="right" th:text="${#numbers.formatDecimal(bankaccount.balance, 1, 2, 'COMMA')}"></td>
+            </tr>
+        </table>
+        <input type="button" onclick="window.location.href = '/account/new';" value="Open nieuwe rekening" class="btn btn-primary"/>
+        <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening" class="btn btn-primary"/>
+    </div>
+</div>
+</body>
+</html>
