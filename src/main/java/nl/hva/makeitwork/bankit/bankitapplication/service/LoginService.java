@@ -20,7 +20,7 @@ public class LoginService {
         return user.getPassword().equals(inputPassword);
     }
 
-    public String hashPassword(String password, String salt) {
+    public static String hashPassword(String password, String salt) {
         String hashedPassword = "";
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");

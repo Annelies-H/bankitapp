@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface CustomerDAO extends CrudRepository<Customer, Integer> {
 
-    public Optional<Customer> findByusername(String firstname);
+    public Optional<Customer> findByUsername(String firstname);
 }

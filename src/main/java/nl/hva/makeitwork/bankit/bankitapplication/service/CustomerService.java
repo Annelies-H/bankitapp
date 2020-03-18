@@ -10,19 +10,14 @@ import java.util.Optional;
 public class CustomerService {
 
     @Autowired
-    private CustomerDAO cdao;
+    private CustomerDAO customerDAO;
 
     public CustomerService() {super();
     }
 
     public Customer findCustomer(String name){
-        Optional<Customer> customerOption = cdao.findByusername(name);
-        if(customerOption.isPresent()){
-            return customerOption.get();
-
-        }else {
-            return null;
-        }
+        Optional<Customer> customerOption = customerDAO.findByUsername(name);
+        return customerOption.orElse(null);
     }
 
 }

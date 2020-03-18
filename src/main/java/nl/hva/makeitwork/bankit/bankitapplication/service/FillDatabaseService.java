@@ -108,6 +108,7 @@ public class FillDatabaseService {
     customer.setLastName("Linde");
     customer.setPrefix("van der");
     customer.setUsername("Lotje01");
+    customer.setSalt();
     customer.setPassword("Welkom2020");
     customer.setBirthday(birthday);
     customerDAO.save(customer);
@@ -118,6 +119,7 @@ public class FillDatabaseService {
     Employee employee = new Employee();
     employee.setPosition(Position.ACCOUNTMANAGER);
     employee.setUsername("KBoer01");
+    employee.setSalt();
     employee.setPassword("W3lk0m2o2o");
     employeeDAO.save(employee);
   }

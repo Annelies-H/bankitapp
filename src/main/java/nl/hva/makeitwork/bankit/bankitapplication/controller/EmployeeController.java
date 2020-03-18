@@ -72,7 +72,7 @@ public class EmployeeController {
         Employee accountmanager = new Employee();
         accountmanager.setUsername("Piet");
         accountmanager.setSalt();
-        accountmanager.setPassword(loginService.hashPassword("wwpiet", accountmanager.getSalt()));
+        accountmanager.setPassword("wwpiet");
         accountmanager.setPosition(Position.ACCOUNTMANAGER);
         employeeDAO.save(accountmanager);
         return"redirect:/intranet";

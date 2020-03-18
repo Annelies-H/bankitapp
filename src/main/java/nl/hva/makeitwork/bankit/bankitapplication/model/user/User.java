@@ -21,7 +21,7 @@ public abstract class User {
     public User(int userId, String username, String password) {
         this.userId = userId;
         this.username = username;
-        this.password = password;
+        setPassword(password);
     }
 
     public int getUserId() {
@@ -45,7 +45,7 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = LoginService.hashPassword(password, salt);
     }
 
     public String getSalt() {
