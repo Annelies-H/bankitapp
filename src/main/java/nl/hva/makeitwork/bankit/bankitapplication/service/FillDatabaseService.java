@@ -41,7 +41,7 @@ public class FillDatabaseService {
 
   public void fillDatabase() {
     Company company = addCompany();
-    addEmployee();
+    addEmployees();
     Customer customer = addCustomer();
     PrivateAccount pAccount = addPrivateAccount(customer);
     BusinessAccount bAccount = addbusinessAccount(company);
@@ -114,12 +114,30 @@ public class FillDatabaseService {
     return customer;
   }
 
-  public void addEmployee() {
+  public void addEmployees() {
     Employee employee = new Employee();
     employee.setPosition(Position.ACCOUNTMANAGER);
     employee.setUsername("KBoer01");
     employee.setPassword("W3lk0m2o2o");
     employeeDAO.save(employee);
+
+    Employee accountmanager = new Employee();
+    accountmanager.setPosition(Position.ACCOUNTMANAGER);
+    accountmanager.setUsername("Piet");
+    accountmanager.setPassword("wwpiet");
+    employeeDAO.save(accountmanager);
+
+    Employee headBusiness = new Employee();
+    headBusiness.setPosition(Position.ACCOUNTMANAGER);
+    headBusiness.setUsername("Kees");
+    headBusiness.setPassword("wwkees");
+    employeeDAO.save(headBusiness);
+
+    Employee headPrivate = new Employee();
+    headPrivate.setPosition(Position.ACCOUNTMANAGER);
+    headPrivate.setUsername("Jan");
+    headPrivate.setPassword("wwjan");
+    employeeDAO.save(headPrivate);
   }
 
   public Company addCompany() {
