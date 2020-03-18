@@ -3,6 +3,8 @@ package nl.hva.makeitwork.bankit.bankitapplication.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+
+
 @Embeddable
 public class ContactDetails {
     @Column(nullable = false)
@@ -12,6 +14,7 @@ public class ContactDetails {
     @Column(nullable = false)
     private Integer houseNumber;
     private String suffix;
+
 
     public ContactDetails() {
     }

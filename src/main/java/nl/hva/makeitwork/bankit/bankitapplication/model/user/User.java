@@ -31,6 +31,7 @@ public abstract class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
     public String getUsername() {
         return username;
     }
@@ -55,4 +56,3 @@ public abstract class User {
         this.salt = LoginService.newSalt();
     }
 }
-
