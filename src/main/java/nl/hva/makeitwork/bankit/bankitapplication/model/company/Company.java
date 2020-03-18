@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Company {
     @Id
-    private int companyId; //dutch kvk number
+    private Integer companyId; //dutch kvk number
     @Column(nullable = false)
     private String name;
     @Enumerated(EnumType.STRING)
@@ -21,11 +21,11 @@ public class Company {
         this.industry = industry;
     }
 
-    public int getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 
