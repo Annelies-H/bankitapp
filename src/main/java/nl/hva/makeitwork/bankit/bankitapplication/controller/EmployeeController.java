@@ -71,7 +71,6 @@ public class EmployeeController {
     public String createEmployeeHandler() {
         Employee accountmanager = new Employee();
         accountmanager.setUsername("Piet");
-        accountmanager.setSalt();
         accountmanager.setPassword("wwpiet");
         accountmanager.setPosition(Position.ACCOUNTMANAGER);
         employeeDAO.save(accountmanager);

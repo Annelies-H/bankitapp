@@ -45,6 +45,7 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
+        setSalt();
         this.password = LoginService.hashPassword(password, salt);
     }
 
