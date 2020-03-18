@@ -3,15 +3,14 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
-import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 @SessionAttributes("customer")
@@ -41,15 +40,13 @@ public class LoginController {
             return "login_failed";
         }
 
-        /*String nextPage = "login_failed";    //changed: always redirect unless correct combination username/password
-        Customer customer = customerService.findCustomer(username);
-        if (customer != null) {
-            if (customer.getPassword().equals(password)) {
-                model.addAttribute("customer", customer);
-                nextPage = "product_overview";
-            }
-        }
-        return nextPage;*/
+    }
+
+    @GetMapping("logout")
+    public String logoutHandler(@ModelAttribute Customer customer, WebRequest webRequest, SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        webRequest.removeAttribute("customer", WebRequest.SCOPE_REQUEST);
+        return "redirect:/";
     }
 
 }

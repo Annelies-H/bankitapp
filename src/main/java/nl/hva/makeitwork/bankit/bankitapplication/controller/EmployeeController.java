@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionAttributeStore;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 @RequestMapping (value = "/intranet")
 @Controller
@@ -36,6 +39,13 @@ public class EmployeeController {
             return "employee_login";
         }*/
         return "employee_login";
+    }
+
+    @GetMapping("logout")
+    public String logoutHandler(@ModelAttribute Employee employee, WebRequest webRequest, SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        webRequest.removeAttribute("employee", WebRequest.SCOPE_REQUEST);
+        return "redirect:/intranet";
     }
 
     @GetMapping("/")
