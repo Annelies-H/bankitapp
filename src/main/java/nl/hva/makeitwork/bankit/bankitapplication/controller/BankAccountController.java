@@ -47,7 +47,7 @@ public class BankAccountController {
         return "new_business_account";
     }
 
-    @PostMapping(value = "/save_company")
+    @PostMapping(value = "new/save_company")
     public String saveCompanyHandler(@ModelAttribute("company") Company newCompany) {
         //cdao.save(newCompany);
         return "under_construction";

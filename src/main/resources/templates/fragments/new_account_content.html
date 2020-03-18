@@ -52,9 +52,9 @@
 <div th:fragment="new_business_account">
     <div class="container pt-3 plus">
 
-        <h2>Hier kunt u straks uw bedrijfsaccount openen</h2>
+        <h2>Vul hieronder de gegevens van uw bedrijf in.</h2>
         <br>
-        <form method="post" th:action="@{/account/save_company}" th:object="${company}">
+        <form method="post" th:action="@{save_company}" th:object="${company}">
             <div class="row">
                 <div class="col-sm-3">
                     <label for="companyId">KvK nummer:</label>
@@ -76,8 +76,11 @@
                 </select>
                 </div>
             </div>
-        </form>
+            <br>
+            <input type="submit" value="Open rekening" class="btn btn-primary">
+            <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
+        </form>
     </div>
 </div>
 
