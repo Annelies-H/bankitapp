@@ -1,8 +1,23 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
 public enum Position {
-    ACCOUNTMANAGER,
-    HEAD_BUSINESS,
-    HEAD_PRIVATE;
+    ACCOUNTMANAGER{
+        @Override
+        public String toString() {
+            return "Accountmanager";
+        }
+    },
+    HEAD_BUSINESS{
+        @Override
+        public String toString() {
+            return "Head Business";
+        }
+    },
+    HEAD_PRIVATE{
+        @Override
+        public String toString() {
+            return "Head Private";
+        }
+    }
 
 }
