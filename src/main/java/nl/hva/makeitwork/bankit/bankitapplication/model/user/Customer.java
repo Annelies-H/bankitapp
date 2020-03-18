@@ -2,6 +2,8 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +20,9 @@ public class Customer extends User {
     @Column(nullable = false, unique = true)
     private Integer socialSecurityNumber;
     @ManyToMany
-    private List<Bankaccount> bankaccounts = new ArrayList<>();
+    private List<PrivateAccount> privateAccounts = new ArrayList<>();
+    @ManyToMany
+    private List<BusinessAccount> businessAccounts = new ArrayList<>();
 
 
     @Column(nullable = false)
@@ -38,9 +42,10 @@ public class Customer extends User {
     public Customer() {
     }
 
-    public Customer(int socialSecurityNumber, List<Bankaccount> bankaccounts) {
+    public Customer(int socialSecurityNumber, List<PrivateAccount> privateAccounts, List<BusinessAccount> businessAccounts) {
         this.socialSecurityNumber = socialSecurityNumber;
-        this.bankaccounts = bankaccounts;
+        this.privateAccounts = privateAccounts;
+        this.businessAccounts = businessAccounts;
     }
 
     public Customer(String firstName, String prefix, String lastName, String birthday, String gender, ContactDetails contactDetails) {
@@ -75,7 +80,11 @@ public class Customer extends User {
     }
 
     public void addAccount(Bankaccount account) {
-        bankaccounts.add(account);
+        if (account instanceof PrivateAccount) {
+            privateAccounts.add((PrivateAccount) account);
+        } else {
+            businessAccounts.add((BusinessAccount) account);
+        }
     }
 
     public Integer getSocialSecurityNumber() {
@@ -86,14 +95,21 @@ public class Customer extends User {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public List<Bankaccount> getBankaccounts() {
-        return bankaccounts;
+    public List<PrivateAccount> getPrivateAccounts() {
+        return privateAccounts;
     }
 
-    public void setBankaccounts(List<Bankaccount> bankaccounts) {
-        this.bankaccounts = bankaccounts;
+    public void setPrivateAccounts(List<PrivateAccount> privateAccounts) {
+        this.privateAccounts = privateAccounts;
     }
 
+    public List<BusinessAccount> getBusinessAccounts() {
+        return businessAccounts;
+    }
+
+    public void setBusinessAccounts(List<BusinessAccount> businessAccounts) {
+        this.businessAccounts = businessAccounts;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -3,8 +3,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@MappedSuperclass
 public abstract class Bankaccount {
     @Id
     @GeneratedValue
