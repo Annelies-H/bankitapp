@@ -8,6 +8,7 @@ public class Company {
     private int companyId; //dutch kvk number
     @Column(nullable = false)
     private String name;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Industry industry;
 
