@@ -30,11 +30,17 @@ public class EmployeeController {
 
     @GetMapping("")
     public String loginPageHandler(Model model) {
-        if (model.getAttribute("employee") != null) {
+        /*if (model.getAttribute("employee") != null) {
             return "redirect:/intranet/dashboard";
         } else {
             return "employee_login";
-        }
+        }*/
+        return "employee_login";
+    }
+
+    @GetMapping("/")
+    public String redirectHandler(){
+        return "redirect:/intranet";
     }
 
     @PostMapping("login")
@@ -47,14 +53,14 @@ public class EmployeeController {
             model.addAttribute("employee", employee);
             return "redirect:/intranet/dashboard";
         } else {
-            return "redirect:/intranet/";
+            return "redirect:/intranet";
         }
     }
 
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
         if (model.getAttribute("employee") == null) {
-            return "redirect:/intranet/";
+            return "redirect:/intranet";
         } else {
             return "employee_dashboard";
         }
@@ -69,6 +75,6 @@ public class EmployeeController {
         accountmanager.setPassword(loginService.hashPassword("wwpiet", accountmanager.getSalt()));
         accountmanager.setPosition(Position.ACCOUNTMANAGER);
         employeeDAO.save(accountmanager);
-        return"redirect:/intranet/";
+        return"redirect:/intranet";
     }
 }

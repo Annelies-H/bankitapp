@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Medewerker Dashboard</title>
-</head>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/base :: head"></head>
 <body>
-    <h1>Medewerker Dashboard</h1>
-    <h2>Je bent ingelogd als <span th:text="${employee.username}"></span></h2>
+<div th:insert="fragments/base :: header"></div>
+<div th:insert="fragments/employee_dashboard_content :: content"></div>
+<div th:insert="fragments/base :: script"></div>
 </body>
 </html>
