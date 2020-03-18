@@ -128,13 +128,13 @@ public class FillDatabaseService {
     employeeDAO.save(accountmanager);
 
     Employee headBusiness = new Employee();
-    headBusiness.setPosition(Position.ACCOUNTMANAGER);
+    headBusiness.setPosition(Position.HEAD_BUSINESS);
     headBusiness.setUsername("Kees");
     headBusiness.setPassword("wwkees");
     employeeDAO.save(headBusiness);
 
     Employee headPrivate = new Employee();
-    headPrivate.setPosition(Position.ACCOUNTMANAGER);
+    headPrivate.setPosition(Position.HEAD_PRIVATE);
     headPrivate.setUsername("Jan");
     headPrivate.setPassword("wwjan");
     employeeDAO.save(headPrivate);
