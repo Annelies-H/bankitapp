@@ -5,62 +5,64 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="content">
-    <div class="container plus">
-        <h1>Welkom
-            <span th:switch="${customer.gender}">
-  <span th:case="vrouw">mevrouw</span>
-  <span th:case="man">meneer</span>
-</span>
-            <span th:text="${customer.firstName}"> </span>
-            <span th:text="${customer.prefix}"> </span>
-            <span th:text="${customer.lastName}"> </span></h1>
-        <br>
-        <h2>Dit is uw Bank IT productoverzicht.</h2>
-        <br>
-        <div th:if="${#lists.isEmpty(customer.privateAccounts) != true}">
-            <h3>Uw privérekeningen</h3>
-            <table>
-                <tr>
-                    <th>Rekeningnummer</th>
-                    <th align="right">Saldo</th>
-                </tr>
-                <tr th:each="privateaccount: ${customer.privateAccounts}">
-                    <td><a th:href="@{account/selected_bankaccount}"><span th:text="${privateaccount.iban}"></span></a>
-                    </td>
-                    <td align="right" th:text="${#numbers.formatDecimal(privateaccount.balance, 1, 2, 'COMMA')}"></td>
-                </tr>
-            </table>
+    <div th:fragment="content">
+        <div class="container plus">
+            <h1>Welkom
+                <span th:switch="${customer.gender}">
+                    <span th:case="vrouw">mevrouw</span>
+                    <span th:case="man">meneer</span>
+                </span>
+                <span th:text="${customer.firstName}"> </span>
+                <span th:text="${customer.prefix}"> </span>
+                <span th:text="${customer.lastName}"> </span>
+            </h1>
+            <br>
+            <h2>Dit is uw Bank IT productoverzicht.</h2>
+            <br>
+            <div th:if="${#lists.isEmpty(customer.privateAccounts) != true}">
+                <h3>Uw privérekeningen</h3>
+                <table>
+                    <tr>
+                        <th>Rekeningnummer</th>
+                        <th align="right">Saldo</th>
+                    </tr>
+                    <tr th:each="privateaccount: ${customer.privateAccounts}">
+                        <td><a th:href="@{account/selected_bankaccount}"><span th:text="${privateaccount.iban}"></span></a>
+                        </td>
+                        <td align="right" th:text="${#numbers.formatDecimal(privateaccount.balance, 1, 2, 'COMMA')}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div th:if="${#lists.isEmpty(customer.privateAccounts)}">
+                <h3>U heeft nog geen privérekening geopend.</h3>
+            </div>
+            <br>
+            <div th:if="${#lists.isEmpty(customer.businessAccounts) != true}">
+                <h3>Uw zakelijke rekeningen</h3>
+                <table>
+                    <tr>
+                        <th>Rekeningnummer</th>
+                        <th align="right">Saldo</th>
+                        <th>Bedrijf</th>
+                    </tr>
+                    <tr th:each="businessaccount: ${customer.businessAccounts}">
+                        <td>
+                            <a th:href="@{account/selected_bankaccount}"><span th:text="${businessaccount.iban}"></span></a>
+                        </td>
+                        <td align="right" th:text="${#numbers.formatDecimal(businessaccount.balance, 1, 2, 'COMMA')}"></td>
+                        <td th:text="${businessaccount.company.name}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div th:if="${#lists.isEmpty(customer.businessAccounts)}">
+                <h3>U heeft nog geen zakelijke rekening geopend.</h3>
+            </div>
+            <br>
+            <input type="button" onclick="window.location.href = '/account/new';" value="Open nieuwe rekening."
+                   class="btn btn-primary"/>
+            <input type="button" onclick="window.location.href = 'account/connect_account';" value="Koppel rekening."
+                   class="btn btn-primary"/>
         </div>
-        <div th:if="${#lists.isEmpty(customer.privateAccounts)}">
-            <h3>U heeft nog geen privérekening geopend.</h3>
-        </div>
-        <br>
-        <div th:if="${#lists.isEmpty(customer.businessAccounts) != true}">
-            <h3>Uw zakelijke rekeningen</h3>
-            <table>
-                <tr>
-                    <th>Rekeningnummer</th>
-                    <th align="right">Saldo</th>
-                    <th>Bedrijf</th>
-                </tr>
-                <tr th:each="businessaccount: ${customer.businessAccounts}">
-                    <td><a th:href="@{account/selected_bankaccount}"><span th:text="${businessaccount.iban}"></span></a>
-                    </td>
-                    <td align="right" th:text="${#numbers.formatDecimal(businessaccount.balance, 1, 2, 'COMMA')}"></td>
-                    <td th:text="${businessaccount.company.name}"></td>
-                </tr>
-            </table>
-        </div>
-        <div th:if="${#lists.isEmpty(customer.businessAccounts)}">
-            <h3>U heeft nog geen zakelijke rekening geopend.</h3>
-        </div>
-        <br>
-        <input type="button" onclick="window.location.href = '/account/new';" value="Open nieuwe rekening."
-               class="btn btn-primary"/>
-        <input type="button" onclick="window.location.href = 'account/connect_account';" value="Koppel rekening."
-               class="btn btn-primary"/>
     </div>
-</div>
 </body>
 </html>
