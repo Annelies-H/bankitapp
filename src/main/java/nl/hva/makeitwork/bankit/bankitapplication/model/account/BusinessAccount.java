@@ -21,6 +21,10 @@ public class BusinessAccount extends Bankaccount {
     public BusinessAccount() {
     }
 
+    public void addAccountHolder(Customer accountHolder) {
+        accountHolders.add(accountHolder);
+    }
+
     public Company getCompany() {
         return company;
     }

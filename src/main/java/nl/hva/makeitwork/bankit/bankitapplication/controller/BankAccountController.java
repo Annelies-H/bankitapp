@@ -1,5 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
@@ -48,9 +49,12 @@ public class BankAccountController {
     }
 
     @PostMapping(value = "new/save_company")
-    public String saveCompanyHandler(@ModelAttribute("company") Company newCompany) {
-        //cdao.save(newCompany);
-        return "under_construction";
+    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
+        cdao.save(newCompany);
+        BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
+        model.addAttribute("account", account);
+        model.addAttribute("accounttype", "bedrijfsrekening");
+        return "confirm_new_account";
     }
 
     @GetMapping("connect_account")
