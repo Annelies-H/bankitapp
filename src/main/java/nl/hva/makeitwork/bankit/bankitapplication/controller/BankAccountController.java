@@ -38,7 +38,7 @@ public class BankAccountController {
 
     @GetMapping(value = "new/business")
     public String newBusinessAccountHandler (Model model){
-        return "under_construction";
+        return "new_business_account";
     }
 
     @GetMapping("connect_account")

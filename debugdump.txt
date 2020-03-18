@@ -1,0 +1,97 @@
+15:59:24.125000 == Info:   Trying ::1:8080...
+15:59:24.125000 == Info: TCP_NODELAY set
+15:59:24.125000 == Info: Connected to localhost (::1) port 8080 (#0)
+15:59:24.125000 => Send header, 78 bytes (0x4e)
+0000: GET / HTTP/1.1
+0010: Host: localhost:8080
+0026: User-Agent: curl/7.67.0
+003f: Accept: */*
+004c: 
+15:59:24.140000 == Info: Mark bundle as not supporting multiuse
+15:59:24.140000 <= Recv header, 15 bytes (0xf)
+0000: HTTP/1.1 200 
+15:59:24.140000 <= Recv header, 39 bytes (0x27)
+0000: Content-Type: text/html;charset=UTF-8
+15:59:24.140000 <= Recv header, 25 bytes (0x19)
+0000: Content-Language: en-GB
+15:59:24.140000 <= Recv header, 28 bytes (0x1c)
+0000: Transfer-Encoding: chunked
+15:59:24.140000 <= Recv header, 37 bytes (0x25)
+0000: Date: Tue, 17 Mar 2020 14:59:24 GMT
+15:59:24.140000 <= Recv header, 2 bytes (0x2)
+0000: 
+15:59:24.140000 <= Recv data, 2769 bytes (0xad1)
+0000: aca
+0005: <!DOCTYPE html>
+0016: <html lang="en">
+0028: <head><head>
+0036:     <meta charset="UTF-8">
+0052:     <meta name="viewport" content="width=device-width, initial-s
+0092: cale=1.0">
+009e:     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+00d9:     <title>Bank iT App - Your money is our concern!</title>
+0116:     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.
+0156: com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vko
+0196: o8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" c
+01d6: rossorigin="anonymous">
+01ef:     <link rel="stylesheet" href="style.css">
+021d: </head></head>
+022d: 
+022f: <body  class="bg-primary">
+024b: <div><div>
+0257: <div class="jumbotron bg-primary mb-0">
+0280:     <nav class="navbar navbar-expand-sm bg-primary navbar-dark j
+02c0: ustify-content-center" >
+02da:         <a class="navbar-brand" ><img src="img/bankIT2D_2.png" s
+031a: tyle="width:60px;height:60px;padding-right25px;"></a>
+0351:         <ul class="navbar-nav" style="font-size:150%;font-style:
+0391: bold;" >
+039b:             <li class="nav-item" style="color:white">
+03d2:                 <a class="nav-link" href="/about_us"><span style
+0412: ="color:white;">BankIt: Your money is our concern!</span></a>
+0451:             </li>
+0464:             <li class="nav-item" style="color:white">
+049b:                 <a class="nav-link" href="/signup"><span style="
+04db: color:white">Word klant</span></a>
+04ff:             </li>
+0512:             <li class="nav-item" style="color:white">
+0549:                 <a class="nav-link" href="#"><span style="color:
+0589: white">Over ons</span></a>
+05a5:             </li>
+05b8:             <li class="nav-item dropdown">
+05e4:                 <a class="nav-link dropdown-toggle" href="#" id=
+0624: "navbardrop" data-toggle="dropdown"><span style="color:white">In
+0664: loggen</span></a>
+0677:                 <div class="dropdown-menu">
+06a4:                     <a class="dropdown-item" href="/login"><span
+06e4:  style="color:#0275d8">Klant</span></a>
+070d:                     <a class="dropdown-item" href="/intranet"><s
+074d: pan style="color:#0275d8">Medewerker</span></a>
+077e:                 </div>
+0796:             </li>
+07a9:         </ul>
+07b8:     </nav>
+07c4: </div>
+07cc: <div class="flex-container pt-3" > <img src="img/index_img.png" 
+080c: alt="BankIt" width="1920" height="755"/> </div>
+083d: </div></div>
+084b: <div><div>
+0857:     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.j
+0897: s" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7i
+08d7: mGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+0911:     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/d
+0951: ist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHa
+0991: EWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymou
+09d1: s"></script>
+09df:     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.
+0a1f: 4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3u
+0a5f: MBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonym
+0a9f: ous"></script>
+0aaf: </div></div>
+0abd: </body>
+0ac6: 
+0ac8: </html>
+15:59:24.140000 <= Recv data, 5 bytes (0x5)
+0000: 0
+0003: 
+15:59:24.140000 == Info: Connection #0 to host localhost left intact

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="content">
+<div th:fragment="choose_type">
     <div class="container pt-3 plus">
 
         <h2>Kies het type rekening dat u wilt openen.</h2>
@@ -28,5 +28,56 @@
         </table>
     </div>
 </div>
+<div th:fragment="confirm_account">
+    <div class="container plus pt-3">
+
+        <h2>
+            Er is een nieuwe <span th:text="${accounttype}"></span> aangemaakt met rekeningnummer <span th:text="${account.iban}"> </span>
+        </h2>
+        <br>
+
+        <table>
+            <tr>
+                <td><div class="col-sm-4">
+                    <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+                </div></td>
+                <td><div class="col-sm-4">
+                    <input type="button" align="right" name="button" value="Voeg mede-rekeninghouder toe" class="btn btn-primary" onclick="window.location.href = '/account/connect_account';" style="align-content:end; width: auto; margin: auto"/>
+                </div></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div th:fragment="new_business_account">
+    <div class="container pt-3 plus">
+
+        <h2>Hier kunt u straks uw bedrijfsaccount openen</h2>
+        <br>
+
+    </div>
+</div>
+<div th:fragment="confirm_account">
+    <div class="container plus pt-3">
+
+        <h2>
+            Er is een nieuwe <span th:text="${accounttype}"></span> aangemaakt met rekeningnummer <span th:text="${account.iban}"> </span>
+        </h2>
+        <br>
+
+        <table>
+            <tr>
+                <td><div class="col-sm-4">
+                    <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+                </div></td>
+                <td><div class="col-sm-4">
+                    <input type="button" align="right" name="button" value="Voeg mede-rekeninghouder toe" class="btn btn-primary" onclick="window.location.href = '/account/connect_account';" style="align-content:end; width: auto; margin: auto"/>
+                </div></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
 </body>
 </html>
