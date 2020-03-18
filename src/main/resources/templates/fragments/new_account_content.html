@@ -54,6 +54,29 @@
 
         <h2>Hier kunt u straks uw bedrijfsaccount openen</h2>
         <br>
+        <form method="post" th:action="@{/account/save_company}" th:object="${company}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="companyId">KvK nummer:</label>
+                    <input type="text" id="companyId" th:field="*{companyId}" class="form-control" placeholder="...5789">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="name">Bedrijfsnaam:</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="industry">Bedrijfstak</label>
+                    <select id="industry" th:field="*{industry}" class="form-control">
+                        <option th:each="industryOpt : ${T(nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry).values()}"
+                            th:value="${industryOpt}" th:text="${industryOpt}"></option>
+                </select>
+                </div>
+            </div>
+        </form>
 
     </div>
 </div>

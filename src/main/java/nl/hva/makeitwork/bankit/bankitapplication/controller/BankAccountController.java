@@ -1,6 +1,8 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class BankAccountController {
 
     @Autowired
     private BankAccountService bas;
+    @Autowired
+    private CompanyDAO cdao;
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler (Model model){
@@ -38,7 +42,15 @@ public class BankAccountController {
 
     @GetMapping(value = "new/business")
     public String newBusinessAccountHandler (Model model){
+        Company company = new Company();
+        model.addAttribute("company", new Company());
         return "new_business_account";
+    }
+
+    @PostMapping(value = "/save_company")
+    public String saveCompanyHandler(@ModelAttribute("company") Company newCompany) {
+        //cdao.save(newCompany);
+        return "under_construction";
     }
 
     @GetMapping("connect_account")
