@@ -4,6 +4,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.service;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
@@ -124,7 +125,7 @@ public class FillDatabaseService {
   public Company addCompany() {
     Company company = new Company();
     company.setName("Pijnboom en co");
-    company.setSector("Voeding");
+    company.setIndustry(Industry.AGRICULTURE);
     company.setCompanyId(23484876);
     companyDAO.save(company);
     return company;

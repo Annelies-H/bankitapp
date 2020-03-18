@@ -1,7 +1,5 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.company;
 
-import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,15 +9,15 @@ public class Company {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String sector;
+    private Industry industry;
 
     public Company() {
     }
 
-    public Company(int companyId, String name, String sector) {
+    public Company(int companyId, String name, Industry industry) {
         this.companyId = companyId;
         this.name = name;
-        this.sector = sector;
+        this.industry = industry;
     }
 
     public int getCompanyId() {
@@ -38,11 +36,11 @@ public class Company {
         this.name = name;
     }
 
-    public String getSector() {
-        return sector;
+    public Industry getIndustry() {
+        return industry;
     }
 
-    public void setSector(String sector) {
-        this.sector = sector;
+    public void setIndustry(Industry sector) {
+        this.industry = sector;
     }
 }
