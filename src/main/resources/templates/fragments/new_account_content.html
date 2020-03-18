@@ -72,7 +72,7 @@
                     <label for="industry">Bedrijfstak</label>
                     <select id="industry" th:field="*{industry}" class="form-control">
                         <option th:each="industryOpt : ${T(nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry).values()}"
-                            th:value="${industryOpt}" th:text="${industryOpt}"></option>
+                            th:value="${industryOpt}" th:text="${industryOpt.AS_STRING}"></option>
                 </select>
                 </div>
             </div>

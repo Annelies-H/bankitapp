@@ -18,9 +18,8 @@ public enum Industry {
         AS_STRING = industrie;
     }
 
-/*    public String toString() {
-        return this.AS_STRING;
-    }*/
-
+    public String getAS_STRING() {
+        return AS_STRING;
+    }
 
 }
