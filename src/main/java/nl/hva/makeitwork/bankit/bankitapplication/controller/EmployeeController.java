@@ -32,7 +32,11 @@ public class EmployeeController {
 
     @GetMapping("")
     public String loginPageHandler(Model model) {
-        return "employee_login";
+        if (model.getAttribute("employee") != null) {
+            return "redirect:/intranet/dashboard";
+        } else {
+            return "employee_login";
+        }
     }
 
     @GetMapping("logout")

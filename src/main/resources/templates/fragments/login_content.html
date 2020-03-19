@@ -1,84 +1,84 @@
 <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
-        <div th:fragment="content">
-            <div class="container pt-3">
-                <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
-                    <div class="row">
-                        <div class="col-sm-4" >
-                            <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
-                            <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
-                        </div>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="container pt-3">
+            <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
+                <div class="row">
+                    <div class="col-sm-4" >
+                        <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
-                            <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table style="width: 300px; margin: auto auto auto 38px">
-                            <tr>
-                                <td>
-                                    <div class="col-sm-4">
-                                        <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col-sm-4">
-                                        <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
-        <div th:fragment="failed">
-            <div class="container pt-3">
-                <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
-                    <div class="row">
-                        <div class="col-sm-4" >
-                            <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
-                            <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
-                            <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table style="width: 300px; margin: auto auto auto 38px">
-                            <tr>
-                                <td>
-                                    <div class="col-sm-4">
-                                        <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col-sm-4">
-                                        <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </form>
-                <div>
-                    <br/><br/>
-                    <h1 style="text-align:center;color:red">Inloggen mislukt!</h1>
                 </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
+                        <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <table style="width: 300px; margin: auto auto auto 38px">
+                        <tr>
+                            <td>
+                                <div class="col-sm-4">
+                                    <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-4">
+                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div th:fragment="failed">
+        <div class="container pt-3">
+            <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
+                <div class="row">
+                    <div class="col-sm-4" >
+                        <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
+                        <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <table style="width: 300px; margin: auto auto auto 38px">
+                        <tr>
+                            <td>
+                                <div class="col-sm-4">
+                                    <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-4">
+                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </form>
+            <div>
+                <br/><br/>
+                <h1 style="text-align:center;color:red">Inloggen mislukt!</h1>
             </div>
         </div>
-    </body>
-    </html>
+    </div>
+</body>
+</html>
