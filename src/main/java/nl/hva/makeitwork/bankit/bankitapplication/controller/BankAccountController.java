@@ -59,7 +59,7 @@ public class BankAccountController {
 
     @GetMapping("connect_account")
     public String connectAccountHandler (Model model){
-        return "under_construction";
+        return "add_accountholder";
     }
 
     @GetMapping("overview")
