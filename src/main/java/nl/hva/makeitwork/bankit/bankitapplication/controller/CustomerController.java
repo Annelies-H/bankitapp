@@ -35,7 +35,7 @@ public class CustomerController {
         customerDAO.save(theCustomer);
 
         // use a redirect to prevent duplicate submissions
-        return "login";
+        return "redirect:/login";
     }
 }
 
