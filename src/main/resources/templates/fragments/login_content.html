@@ -6,31 +6,31 @@
 </head>
 <body>
     <div th:fragment="content">
-        <div class="container pt-3">
+        <div class="container plus pt-3">
             <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
                 <div class="row">
                     <div class="col-sm-4" >
-                        <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
-                        <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
+                        <label for="user_name" class="fillinfields">Gebruikersnaam:</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control fillinfields">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
-                        <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
+                        <label for="password"  class="fillinfields">Wachtwoord:</label>
+                        <input type="password" id="password" name="user_password" class="form-control fillinfields"><br>
                     </div>
                 </div>
                 <div class="row">
-                    <table style="width: 300px; margin: auto auto auto 38px">
+                    <table class="fillinfields">
                         <tr>
                             <td>
                                 <div class="col-sm-4">
-                                    <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
+                                    <input type="submit" name="submit" value="Login" class="btn btn-primary loginbuttons"/>
                                 </div>
                             </td>
                             <td>
                                 <div class="col-sm-4">
-                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
+                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary loginbuttons" onclick="window.location.href = 'customer/signup';" />
                                 </div>
                             </td>
                         </tr>
@@ -42,31 +42,31 @@
     </div>
 
     <div th:fragment="failed">
-        <div class="container pt-3">
-            <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
+        <div class="container plus pt-3">
+            <form method="post" th:action="@{customer_login}" class="main-form" >
                 <div class="row">
                     <div class="col-sm-4" >
-                        <label for="user_name" style="width: 300px; margin: auto auto auto 38px">Gebruikersnaam:</label>
-                        <input type="text" id="user_name" name="user_name" class="form-control" style="width: 300px; margin: auto auto auto 38px;">
+                        <label for="user_name" class="fillinfields">Gebruikersnaam:</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control fillinfields">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label for="password"  style="width: 300px; margin: auto auto auto 38px">Wachtwoord:</label>
-                        <input type="password" id="password" name="user_password" class="form-control" style="width: 300px; margin: auto auto auto 38px"><br>
+                        <label for="password"  class="fillinfields">Wachtwoord:</label>
+                        <input type="password" id="password" name="user_password" class="form-control fillinfields" ><br>
                     </div>
                 </div>
                 <div class="row">
-                    <table style="width: 300px; margin: auto auto auto 38px">
+                    <table class="fillinfields">
                         <tr>
                             <td>
                                 <div class="col-sm-4">
-                                    <input type="submit" name="submit" value="Login" class="btn btn-primary" style="width: 134px; margin: auto"/>
+                                    <input type="submit" name="submit" value="Login" class="btn btn-primary loginbuttons" />
                                 </div>
                             </td>
                             <td>
                                 <div class="col-sm-4">
-                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary" onclick="window.location.href = 'customer/signup';" style="align-content:end; width: 134px; margin: auto"/>
+                                    <input type="button" align="right" name="button" value="Registreer" class="btn btn-primary loginbuttons" onclick="window.location.href = 'customer/signup';" />
                                 </div>
                             </td>
                         </tr>

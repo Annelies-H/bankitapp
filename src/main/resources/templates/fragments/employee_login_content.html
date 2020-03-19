@@ -6,29 +6,29 @@
 </head>
 <body>
     <div th:fragment="content">
-        <div class="secondimage">
             <div class="container plus pt-3">
                        <form method="post" th:action="@{intranet/login}" class="main-form" >
                     <div class="row">
                         <div class="col-sm-4" >
-                            <label for="user_name" >Gebruikersnaam:</label>
-                            <input type="text" id="user_name" name="user_name" class="form-control" >
+                            <label class="fillinfields" for="user_name" >Gebruikersnaam:</label>
+                            <input type="text" id="user_name" name="user_name" class="form-control fillinfields" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="password"  >Wachtwoord:</label>
-                            <input type="password" id="password" name="user_password" class="form-control" ><br>
+                            <label for="password"  class="fillinfields" >Wachtwoord:</label>
+                            <input type="password" id="password" name="user_password" class="form-control fillinfields" ><br>
                         </div>
                     </div>
                     <div class="row">
-                        <table >
+                        <table class="fillinfields" >
                             <tr>
                                 <td>
                                     <div class="col-sm-4">
-                                        <input type="submit" name="submit" value="Login" class="btn btn-primary" />
+                                        <input type="submit" name="submit" value="Login" class="btn btn-primary loginbuttons" />
                                     </div>
                                 </td>
+
                             </tr>
                         </table>
                     </div>

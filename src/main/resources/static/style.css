@@ -6,10 +6,20 @@
               background-size: cover;
 }
 .plus{
-    max-width:750px;margin:auto;
+    width:375px;
+    margin:auto;
 }
 .imageheader{
         max-height:125px;
          max-width:375px;
+}
+
+.fillinfields{
+    width: 300px;
+    margin: auto auto auto 38px
+}
+.loginbuttons{
+    width: 134px;
+    margin: auto
 }
 

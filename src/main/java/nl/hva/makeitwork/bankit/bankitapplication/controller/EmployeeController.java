@@ -61,7 +61,7 @@ public class EmployeeController {
             model.addAttribute("employee", employee);
             return "redirect:/intranet/dashboard";
         } else {
-            return "redirect:/intranet";
+            return "redirect:/";
         }
     }
 
