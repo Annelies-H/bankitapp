@@ -6,13 +6,18 @@
 </head>
 <body>
     <div th:fragment="content">
-        <h1>Medewerker Dashboard</h1>
-        <h2>
-            Hallo
-            <span th:text="${employee.username}"/>
-            je bent ingelogd als
-            <span th:text="${employee.position}"/>.
-        </h2>
+        <h1><span th:text="${employee.position}"/> Dashboard</h1>
+        <h2>Hallo <span th:text="${employee.username}"/>.</h2>
+        <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="logout">Klik hier</a><br></div>
+    </div>
+    <div th:fragment="accountmanager">
+        Hier komt nog wat voor de accountmanager
+    </div>
+    <div th:fragment="headbusiness">
+        Hier komt nog wat voor de head business
+    </div>
+    <div th:fragment="headprivate">
+        Hier komt nog wat voor de head private
     </div>
 </body>
 </html>

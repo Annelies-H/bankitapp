@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
@@ -33,11 +32,6 @@ public class EmployeeController {
 
     @GetMapping("")
     public String loginPageHandler(Model model) {
-        /*if (model.getAttribute("employee") != null) {
-            return "redirect:/intranet/dashboard";
-        } else {
-            return "employee_login";
-        }*/
         return "employee_login";
     }
 
@@ -69,21 +63,20 @@ public class EmployeeController {
 
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
-        if (model.getAttribute("employee") == null) {
+        Employee employee = (Employee)model.getAttribute("employee");
+        if (employee == null) {
             return "redirect:/intranet";
-        } else {
-            return "employee_dashboard";
         }
+        if (employee.getPosition().equals(Position.ACCOUNTMANAGER)) {
+            return "accountmanager_dashboard";
+        }
+        if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
+            return "headbusiness_dashboard";
+        }
+        if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
+            return "headprivate_dashboard";
+        }
+        return "redirect:/intranet";
     }
 
-    //tijdelijk
-    @GetMapping("create_employee")
-    public String createEmployeeHandler() {
-        Employee accountmanager = new Employee();
-        accountmanager.setUsername("Piet");
-        accountmanager.setPassword("wwpiet");
-        accountmanager.setPosition(Position.ACCOUNTMANAGER);
-        employeeDAO.save(accountmanager);
-        return"redirect:/intranet";
-    }
 }
