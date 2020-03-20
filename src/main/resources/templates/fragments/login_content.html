@@ -6,8 +6,8 @@
 </head>
 <body>
     <div th:fragment="content">
-        <div class="container plus pt-3">
-            <form method="post" th:action="@{customer_login}" class="main-form" style="width: 375px; margin: auto;">
+        <div class="container pluslogin pt-3">
+            <form method="post" th:action="@{customer_login}" class="main-form" >
                 <div class="row">
                     <div class="col-sm-4" >
                         <label for="user_name" class="fillinfields">Gebruikersnaam:</label>
@@ -42,7 +42,7 @@
     </div>
 
     <div th:fragment="failed">
-        <div class="container plus pt-3">
+        <div class="container pluslogin pt-3">
             <form method="post" th:action="@{customer_login}" class="main-form" >
                 <div class="row">
                     <div class="col-sm-4" >
