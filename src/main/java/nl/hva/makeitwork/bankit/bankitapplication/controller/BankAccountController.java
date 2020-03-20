@@ -1,15 +1,22 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
+
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("customer")
@@ -20,11 +27,38 @@ public class BankAccountController {
     @Autowired
     private BankAccountService bas;
     @Autowired
+    private BusinessAccountDAO bdao;
+    @Autowired
+    private PrivateAccountDAO pdao;
+    @Autowired
     private CompanyDAO cdao;
 
     @GetMapping("selected_bankaccount")
-    public String bankaccountOverviewHandler (Model model){
-        return "under_construction";
+    public String bankaccountOverviewHandler (@RequestParam int id, Model model ){
+        Optional<PrivateAccount> selectedPrivateAccount = pdao.findByAccountID(id);
+
+        Optional<BusinessAccount> selectedBusinessAccount = bdao.findByAccountID(id);
+
+        if (selectedPrivateAccount.isPresent()) {
+            PrivateAccount showPrivateAccount = selectedPrivateAccount.get();
+            model.addAttribute("account", showPrivateAccount);
+            model.addAttribute("company", "null");
+        } else if (selectedBusinessAccount.isPresent()) {
+            BusinessAccount showBusinessAccount = selectedBusinessAccount.get();
+            model.addAttribute("account", showBusinessAccount);
+        }
+
+        // als we kiezen voor BankacountDao
+     /*   Optional<Bankaccount> selectedAccount = adao.findByAccountID(id);
+
+        if (selectedAccount.isPresent()){
+            Bankaccount showAccount = selectedAccount.get();
+            model.addAttribute(showAccount);
+            if(showAccount instanceof PrivateAccount){
+                model.addAttribute("company", "null");
+            }
+        }*/
+        return "account_overview";
     }
 
     @GetMapping(value = "new")
