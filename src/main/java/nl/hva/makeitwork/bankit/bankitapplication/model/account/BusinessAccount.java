@@ -40,4 +40,5 @@ public class BusinessAccount extends Bankaccount {
     public void setAccountHolders(List<Customer> accountHolders) {
         this.accountHolders = accountHolders;
     }
+
 }

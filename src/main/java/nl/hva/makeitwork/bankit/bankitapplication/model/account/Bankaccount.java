@@ -1,5 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,7 @@ public abstract class Bankaccount {
         return result == 1;
     }
 
+    public abstract void addAccountHolder(Customer customer);
 
     public int getAccountID() {
         return accountID;
