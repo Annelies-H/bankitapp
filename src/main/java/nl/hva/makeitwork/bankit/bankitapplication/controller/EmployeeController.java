@@ -61,26 +61,19 @@ public class EmployeeController {
             model.addAttribute("employee", employee);
             return "redirect:/intranet/dashboard";
         } else {
-            return "redirect:/";
+            return "redirect:/intranet";
         }
     }
 
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
         Employee employee = (Employee)model.getAttribute("employee");
+
         if (employee == null) {
             return "redirect:/intranet";
         }
-        if (employee.getPosition().equals(Position.ACCOUNTMANAGER)) {
-            return "accountmanager_dashboard";
-        }
-        if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
-            return "headbusiness_dashboard";
-        }
-        if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
-            return "headprivate_dashboard";
-        }
-        return "redirect:/intranet";
+
+        return "employee_dashboard";
     }
 
 }

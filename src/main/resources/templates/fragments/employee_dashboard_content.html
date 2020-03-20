@@ -9,15 +9,18 @@
         <h1><span th:text="${employee.position}"/> Dashboard</h1>
         <h2>Hallo <span th:text="${employee.username}"/>.</h2>
         <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="logout">Klik hier</a><br></div>
-    </div>
-    <div th:fragment="accountmanager">
-        Hier komt nog wat voor de accountmanager
-    </div>
-    <div th:fragment="headbusiness">
-        Hier komt nog wat voor de head business
-    </div>
-    <div th:fragment="headprivate">
-        Hier komt nog wat voor de head private
+
+        <div th:switch="${employee.position}">
+            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
+                Hier komt nog wat voor de accountmanager
+            </div>
+            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_BUSINESS}">
+                Hier komt nog wat voor de head business
+            </div>
+            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_PRIVATE}">
+                Hier komt nog wat voor de head private
+            </div>
+        </div>
     </div>
 </body>
 </html>
