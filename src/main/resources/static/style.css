@@ -1,10 +1,13 @@
 /* future css sheet */
 
 
-.lowerimage{ background: url("img/index_img.png") no-repeat;
-              height: 850px;
-              background-size: cover;
+.lowerimage{
+            background-image: url("img/index_img.png");
+            background-repeat:no-repeat;
+            height: 775px;
+            background-size: 100% 100%;
 }
+
 .plus{
     max-width:750px;
     margin:auto;
@@ -14,6 +17,7 @@
     margin:auto;
 
 }
+
 .imageheader{
         max-height:125px;
          max-width:375px;
@@ -23,6 +27,7 @@
     width: 300px;
     margin: auto auto auto 38px
 }
+
 .loginbuttons{
     width: 134px;
     margin: auto
