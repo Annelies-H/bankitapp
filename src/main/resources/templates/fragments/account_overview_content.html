@@ -33,6 +33,7 @@
                 <tr>
                     <th>Datum</th>
                     <th align="right">Bedrag</th>
+                    <th>Tegenrekening</th>
                     <th>Omschrijving</th>
                 </tr>
                 <tr th:each="transaction: ${account.history}">
@@ -41,7 +42,10 @@
                     </td>
                     <td align="right"
                         th:text="'€ ' + ${#numbers.formatDecimal(transaction.ammount, 1, 2, 'COMMA')}"></td>
-                    <td><span th:text="${transaction.description}"></span></a>
+                    <td><span th:if="${transaction.ibanTo} == ${account.iban}" th:text="${transaction.ibanFrom}"></span>
+                        <span th:if="${transaction.ibanFrom} == ${account.iban}" th:text="${transaction.ibanTo}"></span></td>
+                    <td><span th:text="${transaction.description}"></span></td>
+
                     </td>
                 </tr>
 
@@ -49,16 +53,16 @@
         </div>
 
         <br>
-        <input type="button" onclick="window.location.href = '/account/overview';" value="Terug naar overzicht."
+        <input type="button" onclick="window.location.href = '/account/overview';" value="Terug naar overzicht"
                class="btn btn-primary"/>
-        <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening."
+        <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
                class="btn btn-primary"/>
         <input type="button" onclick="window.location.href = '/transaction/new_transaction';"
-               value="Nieuwe overboeking."
+               value="Nieuwe overboeking"
                class="btn btn-primary"/>
         <span th:if="${company != 'null'}">
         <input type="button" onclick="window.location.href = '/POS/request_POS';"
-               value="Pin automaat aanvragen."
+               value="Pin automaat aanvragen"
                class="btn btn-primary"/>
         </span>
     </div>
