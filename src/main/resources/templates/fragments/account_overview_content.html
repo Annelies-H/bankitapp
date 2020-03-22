@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="container plus" th:object="${account}">
+        <h1>Overzicht van rekening <span th:text="*{iban}"></span>
+            <wbr>
+            <span th:if="${company != 'null'}" th:text="${' voor ' + account.company.name}"></span>
+            <wbr>
+        </h1>
+        <br>
+
+        <div th:if="${!#lists.isEmpty(account.accountHolders)}">
+            <h2 th:each="accountholder: ${account.accountHolders}">
+                <wbr>
+                <span th:text="'Beheerders: ' + ${accountholder.firstName + ' '
+                + accountholder.prefix + ' ' + accountholder.lastName}"></span>
+                <wbr>
+            </h2>
+        </div>
+        <br>
+        <div th:if="${#lists.isEmpty(account.history)}">
+            <h3>U heeft nog geen transacties op deze rekening.</h3>
+        </div>
+        <div th:if="${#lists.isEmpty(account.history) != true}">
+            <h3>Transactieoverzicht.
+                <span align="right">Uw Saldo <span
+                        th:text="'€ ' + ${#numbers.formatDecimal(account.balance, 1, 2, 'COMMA')}"></span></span>
+            </h3>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th align="right">Bedrag</th>
+                    <th>Tegenrekening</th>
+                    <th>Omschrijving</th>
+                </tr>
+                <tr th:each="transaction: ${account.history}">
+                    <td><a th:href="@{transaction/selected_transaction}"><span
+                            th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
+                    </td>
+                    <td align="right"
+                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.ammount, 1, 2, 'COMMA')}"></td>
+                    <td><span th:if="${transaction.ibanTo} == ${account.iban}" th:text="${transaction.ibanFrom}"></span>
+                        <span th:if="${transaction.ibanFrom} == ${account.iban}" th:text="${transaction.ibanTo}"></span>
+                    </td>
+                    <td><span th:text="${transaction.description}"></span></td>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <br>
+        <input type="button" onclick="window.location.href = '/account/overview';" value="Terug naar overzicht"
+               class="btn btn-primary"/>
+        <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
+               class="btn btn-primary"/>
+        <input type="button" onclick="window.location.href = '/transaction/new_transaction';"
+               value="Nieuwe overboeking"
+               class="btn btn-primary"/>
+        <span th:if="${company != 'null'}">
+        <input type="button" onclick="window.location.href = '/POS/request_POS';"
+               value="Pin automaat aanvragen"
+               class="btn btn-primary"/>
+        </span>
+    </div>
+</div>
+</body>
+</html>

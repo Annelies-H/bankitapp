@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Employee extends User {
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Position position;
 
     public Employee() {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
-@RequestMapping (value = "/intranet")
+@RequestMapping(value = "/intranet")
 @Controller
 @SessionAttributes("employee")
 public class EmployeeController {
@@ -47,7 +47,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/")
-    public String redirectHandler(){
+    public String redirectHandler() {
         return "redirect:/intranet";
     }
 
@@ -57,7 +57,7 @@ public class EmployeeController {
             @RequestParam(name = "user_password") String password,
             Model model) {
         Employee employee = employeeService.findEmployee(username);
-        if ( employee != null && loginService.passwordCheck(password, employee) ) {
+        if (employee != null && loginService.passwordCheck(password, employee)) {
             model.addAttribute("employee", employee);
             return "redirect:/intranet/dashboard";
         } else {
@@ -67,7 +67,7 @@ public class EmployeeController {
 
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
-        Employee employee = (Employee)model.getAttribute("employee");
+        Employee employee = (Employee) model.getAttribute("employee");
         if (employee == null) {
             return "redirect:/intranet";
         }

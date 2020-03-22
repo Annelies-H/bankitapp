@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestDatabaseController {
 
-  @Autowired
-  private FillDatabaseService fillDatabaseService;
+    @Autowired
+    private FillDatabaseService fillDatabaseService;
 
-  public TestDatabaseController() {
-    super();
-  }
+    public TestDatabaseController() {
+        super();
+    }
 
-  @GetMapping("fill_database")
-  public String filldatabaseHandler() {
-    fillDatabaseService.fillDatabase();
-    return "menu";
-  }
-
+    @GetMapping("fill_database")
+    public String filldatabaseHandler() {
+        fillDatabaseService.fillDatabase();
+        return "menu";
+    }
 
 
 }

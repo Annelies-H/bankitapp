@@ -1,16 +1,19 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.Calendar;
+
 @Entity
 public class Transaction {
     @Id
     @GeneratedValue
-    int id;
-    @Transient
-    Bankaccount ibanFrom;
-    @Transient
-    Bankaccount ibanTo;
+    int TransactionID;
+    @Column(nullable = false)
+    String ibanFrom;
+    @Column(nullable = false)
+    String ibanTo;
     @Column(nullable = false)
     double ammount;
     String description;
@@ -18,12 +21,13 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     Calendar date;
     @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
+    @Column(nullable = false)
     PaymentMethod paymentMethod;
 
-    public Transaction() {}
+    public Transaction() {
+    }
 
-    public Transaction(Bankaccount ibanFrom, Bankaccount ibanTo, double ammount, String description, Calendar date, PaymentMethod paymentMethod) {
+    public Transaction(String ibanFrom, String ibanTo, double ammount, String description, Calendar date, PaymentMethod paymentMethod) {
         this.ibanFrom = ibanFrom;
         this.ibanTo = ibanTo;
         this.ammount = ammount;
@@ -32,19 +36,19 @@ public class Transaction {
         this.paymentMethod = paymentMethod;
     }
 
-    public Bankaccount getIbanFrom() {
+    public String getIbanFrom() {
         return ibanFrom;
     }
 
-    public void setIbanFrom(Bankaccount ibanFrom) {
+    public void setIbanFrom(String ibanFrom) {
         this.ibanFrom = ibanFrom;
     }
 
-    public Bankaccount getIbanTo() {
+    public String getIbanTo() {
         return ibanTo;
     }
 
-    public void setIbanTo(Bankaccount ibanTo) {
+    public void setIbanTo(String ibanTo) {
         this.ibanTo = ibanTo;
     }
 

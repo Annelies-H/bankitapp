@@ -31,7 +31,7 @@ public class LoginService {
 
             hashedPassword = Base64.getEncoder().encodeToString(digestPassword);
 
-        } catch(NoSuchAlgorithmException error) {
+        } catch (NoSuchAlgorithmException error) {
             System.out.println("Hash error" + error);
         }
         return hashedPassword;

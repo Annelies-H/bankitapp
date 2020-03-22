@@ -25,7 +25,9 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    public LoginController() {super();}
+    public LoginController() {
+        super();
+    }
 
     @PostMapping("customer_login")
     public String loginHandler(
@@ -33,7 +35,7 @@ public class LoginController {
             @RequestParam(name = "user_password") String password,
             Model model) {
         Customer customer = customerService.findCustomer(username);
-        if ( customer != null && loginService.passwordCheck(password, customer) ) {
+        if (customer != null && loginService.passwordCheck(password, customer)) {
             model.addAttribute("customer", customer);
             return "product_overview";
         } else {

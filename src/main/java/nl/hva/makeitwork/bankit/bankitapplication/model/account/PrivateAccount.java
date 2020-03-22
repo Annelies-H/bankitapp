@@ -7,6 +7,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class PrivateAccount extends Bankaccount {
     @ManyToMany
@@ -31,6 +32,7 @@ public class PrivateAccount extends Bankaccount {
     public void addAccountHolder(Customer customer) {
         accountHolders.add(customer);
     }
+
 
     public List<Customer> getAccountHolders() {
         return accountHolders;

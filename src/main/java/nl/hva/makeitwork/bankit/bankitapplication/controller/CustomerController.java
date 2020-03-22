@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping (value = "/customer")
+@RequestMapping(value = "/customer")
 @Controller
 @SessionAttributes("customer")
 public class CustomerController {

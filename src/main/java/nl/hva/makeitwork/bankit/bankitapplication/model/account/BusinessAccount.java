@@ -6,11 +6,12 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class BusinessAccount extends Bankaccount {
     @ManyToOne
     Company company;
-    @Transient
+    @ManyToMany
     List<Customer> accountHolders = new ArrayList<>();
 
 
