@@ -32,6 +32,8 @@ public class PrivateAccount extends Bankaccount {
         accountHolders.add(customer);
     }
 
+
+
     public List<Customer> getAccountHolders() {
         return accountHolders;
     }

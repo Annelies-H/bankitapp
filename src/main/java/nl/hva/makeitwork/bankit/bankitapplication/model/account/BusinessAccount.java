@@ -10,7 +10,7 @@ import java.util.List;
 public class BusinessAccount extends Bankaccount {
     @ManyToOne
     Company company;
-    @Transient
+    @ManyToMany
     List<Customer> accountHolders = new ArrayList<>();
 
 

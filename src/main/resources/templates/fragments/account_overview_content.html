@@ -8,33 +8,40 @@
 <div th:fragment="content">
     <div class="container plus" th:object="${account}">
         <h1>Overzicht van rekening <span th:text="*{iban}"></span>
-            <span th:if="${company != 'null'}" th:text="${'voor ' + account.company.name}"></span></h1>
+            <wbr>
+            <span th:if="${company != 'null'}" th:text="${' voor ' + account.company.name}"></span><wbr></h1>
         <br>
 
         <div th:if="${!#lists.isEmpty(account.accountHolders)}">
             <h2 th:each="accountholder: ${account.accountHolders}">
-                <span th:text="'Beheerders: ' + ${accountholder.firstName + ' ' + accountholder.prefix + ' ' + accountholder.lastName}"></span>
+                <wbr>
+                <span th:text="'Beheerders: ' + ${accountholder.firstName + ' '
+                + accountholder.prefix + ' ' + accountholder.lastName}"></span>
+                <wbr>
             </h2>
         </div>
         <br>
-
         <div th:if="${#lists.isEmpty(account.history)}">
             <h3>U heeft nog geen transacties op deze rekening.</h3>
         </div>
-
         <div th:if="${#lists.isEmpty(account.history) != true}">
-            <h3>Transactieoverzicht.</h3>
+            <h3>Transactieoverzicht.
+                <span align="right">Uw Saldo <span
+                        th:text="'€ ' + ${#numbers.formatDecimal(account.balance, 1, 2, 'COMMA')}"></span></span>
+            </h3>
             <table>
                 <tr>
                     <th>Datum</th>
                     <th align="right">Bedrag</th>
                     <th>Omschrijving</th>
                 </tr>
-                <tr th:each="transaction: *{history}">
-                    <td><a th:href="@{transaction/selected_transaction}"><span th:text="*{transaction.date}"></span></a>
+                <tr th:each="transaction: ${account.history}">
+                    <td><a th:href="@{transaction/selected_transaction}"><span
+                            th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
                     </td>
-                    <td align="right" th:text="${#numbers.formatDecimal*(transaction.ammount, 1, 2, 'COMMA')}"></td>
-                    <td><span th:text="*{transaction.description}"></span></a>
+                    <td align="right"
+                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.ammount, 1, 2, 'COMMA')}"></td>
+                    <td><span th:text="${transaction.description}"></span></a>
                     </td>
                 </tr>
 

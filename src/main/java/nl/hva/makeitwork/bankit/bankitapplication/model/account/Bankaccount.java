@@ -25,6 +25,17 @@ public abstract class Bankaccount {
     public Bankaccount() {
     }
 
+    public void addTransactionHistory (Transaction transaction) {
+        if (transaction.getIbanFrom().equals(this.iban)) {
+            transaction.setAmmount(transaction.getAmmount() * -1);
+            history.add(transaction);
+            balance -= transaction.getAmmount();
+        } else if (transaction.getIbanTo().equals(this.iban)){
+            history.add(transaction);
+            balance += transaction.getAmmount();
+        }
+    }
+
     public static String num (int accountID){
         int result = 1460000 + accountID; // voorbeeld
         String num = "020" + String.valueOf(result); // voorbeeld
