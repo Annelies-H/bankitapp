@@ -87,6 +87,18 @@ public class Customer extends User {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(firstName);
+        if (prefix != null) {
+            stringBuilder.append(" " + prefix);
+        }
+        stringBuilder.append(" " + lastName);
+
+        return stringBuilder.toString();
+    }
+
     public Integer getSocialSecurityNumber() {
         return socialSecurityNumber;
     }

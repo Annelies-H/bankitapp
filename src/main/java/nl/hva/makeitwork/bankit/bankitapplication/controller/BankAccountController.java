@@ -10,6 +10,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.TransactionDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,11 @@ public class BankAccountController {
 
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
+        Customer customer = (Customer)model.getAttribute("customer");
+
+        if (customer == null) {
+            return "redirect:/intranet/dashboard";
+        }
         return "product_overview";
     }
 }
