@@ -1,7 +1,12 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
+import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import nl.hva.makeitwork.bankit.bankitapplication.service.EmployeeService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +28,12 @@ public class EmployeeController {
     EmployeeDAO employeeDAO;
 
     @Autowired
+    BusinessAccountDAO businessAccountDAO;
+
+    @Autowired
+    PrivateAccountDAO privateAccountDAO;
+
+    @Autowired
     LoginService loginService;
 
     public EmployeeController() {
@@ -39,9 +50,12 @@ public class EmployeeController {
     }
 
     @GetMapping("logout")
-    public String logoutHandler(@ModelAttribute Employee employee, WebRequest webRequest, SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
-        webRequest.removeAttribute("employee", WebRequest.SCOPE_REQUEST);
+    public String logoutHandler(Model model, WebRequest webRequest, SessionStatus sessionStatus) {
+        Employee employee = (Employee) model.getAttribute("employee");
+        if (employee != null) {
+            sessionStatus.setComplete();
+            webRequest.removeAttribute("employee", WebRequest.SCOPE_REQUEST);
+        }
         return "redirect:/intranet";
     }
 
@@ -73,6 +87,18 @@ public class EmployeeController {
             return "redirect:/intranet";
         }
 
+        Iterable<BusinessAccount> businessAccounts = businessAccountDAO.findAll();
+        Iterable<PrivateAccount> privateAccounts = privateAccountDAO.findAll();
+
+        if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
+            model.addAttribute("businessAccounts", businessAccounts);
+        } else if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
+            model.addAttribute("privateAccounts", privateAccounts);
+        }
+        else {
+            model.addAttribute("businessAccounts", businessAccounts);
+            model.addAttribute("privateAccounts", businessAccounts);
+        }
         return "employee_dashboard";
     }
 

@@ -6,19 +6,30 @@
 </head>
 <body>
     <div th:fragment="content">
-        <h1><span th:text="${employee.position}"/> Dashboard</h1>
-        <h2>Hallo <span th:text="${employee.username}"/>.</h2>
-        <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="/intranet/logout">Klik hier</a><br></div>
+        <div class="container plus pt-3">
+            <h1><span th:text="${employee.position}"/> Dashboard</h1>
+            <h2>Hallo <span th:text="${employee.username}"/>.</h2>
+            <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="/intranet/logout">Klik hier</a><br></div>
 
-        <div th:switch="${employee.position}">
-            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
-                Hier komt nog wat voor de accountmanager
-            </div>
-            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_BUSINESS}">
-                Hier komt nog wat voor de head business
-            </div>
-            <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_PRIVATE}">
-                Hier komt nog wat voor de head private
+            <div th:switch="${employee.position}">
+                <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
+                    Hier komt nog wat voor de accountmanager
+                </div>
+                <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_BUSINESS}">
+                    <h3>Overzicht Zakelijke Rekeningen</h3>
+                    <table>
+                        <tr style=""><th>Bedrijf</th><th>Rekeningnummer</th><th>Saldo</th><th>Rekeninghouders</th></tr>
+                        <tr th:each="account: ${businessAccounts}">
+                            <td th:text="${account.company.name}"></td>
+                            <td><a th:href="@{~/account/selected_bankaccount(id=${account.accountID})}">
+                                <span th:text="${account.iban}"/></a></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${account.accountHolders}"></td>
+                    </table>
+                </div>
+                <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_PRIVATE}">
+                    Hier komt nog wat voor de head private
+                </div>
             </div>
         </div>
     </div>

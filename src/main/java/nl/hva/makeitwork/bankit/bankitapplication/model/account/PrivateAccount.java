@@ -4,7 +4,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 

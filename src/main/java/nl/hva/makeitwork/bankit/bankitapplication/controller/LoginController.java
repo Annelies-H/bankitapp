@@ -45,9 +45,12 @@ public class LoginController {
     }
 
     @GetMapping("logout")
-    public String logoutHandler(@ModelAttribute Customer customer, WebRequest webRequest, SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
-        webRequest.removeAttribute("customer", WebRequest.SCOPE_REQUEST);
+    public String logoutHandler(Model model, WebRequest webRequest, SessionStatus sessionStatus) {
+        Customer customer = (Customer)model.getAttribute("customer");
+        if (customer != null) {
+            sessionStatus.setComplete();
+            webRequest.removeAttribute("customer", WebRequest.SCOPE_REQUEST);
+        }
         return "redirect:/";
     }
 
