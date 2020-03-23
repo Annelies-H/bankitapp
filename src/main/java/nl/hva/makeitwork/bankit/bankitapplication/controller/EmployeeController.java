@@ -2,7 +2,6 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
-import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import nl.hva.makeitwork.bankit.bankitapplication.service.EmployeeService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

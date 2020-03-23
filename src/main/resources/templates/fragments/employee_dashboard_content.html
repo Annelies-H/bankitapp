@@ -8,7 +8,7 @@
     <div th:fragment="content">
         <h1><span th:text="${employee.position}"/> Dashboard</h1>
         <h2>Hallo <span th:text="${employee.username}"/>.</h2>
-        <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="logout">Klik hier</a><br></div>
+        <div>Ben jij <span th:text="${employee.username}"/> niet? <a href="/intranet/logout">Klik hier</a><br></div>
 
         <div th:switch="${employee.position}">
             <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
