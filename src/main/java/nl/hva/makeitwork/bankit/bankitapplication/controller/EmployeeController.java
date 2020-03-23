@@ -2,7 +2,6 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
-import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import nl.hva.makeitwork.bankit.bankitapplication.service.EmployeeService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,26 +60,20 @@ public class EmployeeController {
             model.addAttribute("employee", employee);
             return "redirect:/intranet/dashboard";
         } else {
-            return "redirect:/";
+            return "redirect:/intranet";
         }
     }
 
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
-        Employee employee = (Employee) model.getAttribute("employee");
+
+        Employee employee = (Employee)model.getAttribute("employee");
+
         if (employee == null) {
             return "redirect:/intranet";
         }
-        if (employee.getPosition().equals(Position.ACCOUNTMANAGER)) {
-            return "accountmanager_dashboard";
-        }
-        if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
-            return "headbusiness_dashboard";
-        }
-        if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
-            return "headprivate_dashboard";
-        }
-        return "redirect:/intranet";
+
+        return "employee_dashboard";
     }
 
 }
