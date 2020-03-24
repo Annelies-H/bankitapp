@@ -30,12 +30,10 @@ public abstract class Bankaccount {
     public static String num (int accountID){
         int result = 1460000 + accountID; // voorbeeld
         String num = "020" + String.valueOf(result); // voorbeeld
-
         return num;
     }
     public static String numBiz (int accountID){
         int result = 40200000 + accountID;        String num = "06" + String.valueOf(result);
-
         return num;
     }
 
@@ -97,7 +95,6 @@ public abstract class Bankaccount {
         // One by one process all digits of 'num'
         for (int i = 0; i < num.length(); i++)
             result = (result * 10 + (int)num.charAt(i)- '0') % 97;
-
         return result == 1;
     }
 

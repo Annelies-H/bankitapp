@@ -7,7 +7,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,7 @@ public class BankAccountService {
     private static final double INIT_BALANCE = 100;
 
     @Autowired
-    private CustomerDAO cdao;
-    @Autowired
-    private BankAccountDAO adao;
+    private BankAccountDAO badao;
 
 
     /**
@@ -43,16 +40,20 @@ public class BankAccountService {
         return (BusinessAccount) newAccountHelper(newAccount, accountHolder);
     }
 
+    /**
+     *
+     * @param newAccount
+     * @param accountHolder
+     * @return
+     */
     private Bankaccount newAccountHelper(Bankaccount newAccount, Customer accountHolder) {
         newAccount.setBalance(INIT_BALANCE);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
-        adao.save(newAccount);
+        badao.save(newAccount);
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
-        adao.save(newAccount);
-        accountHolder.addAccount(newAccount);
-        cdao.save(accountHolder);
+        badao.save(newAccount);;
         return newAccount;
     }
 
