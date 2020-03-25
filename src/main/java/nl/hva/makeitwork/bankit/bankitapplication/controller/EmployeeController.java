@@ -97,7 +97,7 @@ public class EmployeeController {
         }
         else {
             model.addAttribute("businessAccounts", businessAccounts);
-            model.addAttribute("privateAccounts", businessAccounts);
+            model.addAttribute("privateAccounts", privateAccounts);
         }
         return "employee_dashboard";
     }
