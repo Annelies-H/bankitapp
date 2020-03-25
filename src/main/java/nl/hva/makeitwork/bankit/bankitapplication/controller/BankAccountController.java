@@ -30,20 +30,20 @@ public class BankAccountController {
         return "under_construction";
     }
 
-    @GetMapping(value = "new/private")
+    @PostMapping(value = "new/private")
     public String newPrivateAccountHandler (Model model){
         model.addAttribute("accounttype", "priverekening");
-        return "confirm_new_account";
+        return "confirm_new_private_account";
     }
 
     @PostMapping(value = "new/private/confirmed")
-    public String confirmAccountHandler(Model model) {
+    public String confirmBusinessAccountHandler(Model model) {
         Customer customer = (Customer) model.getAttribute("customer");
         PrivateAccount account = bas.newPrivateAccount(customer);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "priverekening");
-        return "new_account_created";
+        return "new_account_confirmed";
     }
 
     @GetMapping(value = "new/business")
@@ -54,20 +54,14 @@ public class BankAccountController {
     }
 
     @PostMapping(value = "new/save_company")
-    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany) {
+    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
         cdao.save(newCompany);
-        model.addAttribute("accounttype", "bedrijfsrekening");
-        return "confirm_new_business_account";
-
-    }
-
-    @PostMapping(value = "new/business/confirmed")
-    public String confirmBusinessAccountHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "bedrijfsrekening");
-        return "new_account_created";
+        return "new_account_confirmed";
+
     }
 
     @GetMapping("connect_account")
