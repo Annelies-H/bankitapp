@@ -1,103 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-    <div th:fragment="newcustomer">
-        <div class="container plus pt-3">
-            <h2 style="width: 750px; margin: auto">Maak uw account:</h2><br>
-            <form action="#" th:action="@{/customer/save}" th:object="${customer}" method="post" class="main-form" >
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label for="socialSecurityNumber">Burgerservicenummer:</label>
-                        <input type="text" id="socialSecurityNumber" th:field="*{socialSecurityNumber}" class="form-control" placeholder="...5789">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="firstName">Voornaam:</label>
-                            <input type="text" id="firstName" th:field="*{firstName}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="prefix">Tussenvoegsel:</label>
-                            <input type="text" id="prefix" th:field="*{prefix}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="lastName">Achternaam:</label>
-                            <input type="text" id="lastName" th:field="*{lastName}" class="form-control">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="birthday">Geboortedatum:</label>
-                            <input type="date" id="birthday" th:field="*{birthday}" class="form-control">
+<body>
+    <div th:fragment="content">
+        <div class="container">
+            <div style="background:transparent !important" class="jumbotron">
+                <h1 class="display-4">Wordt nu klant</h1>
+                <p class="lead">Voer uw gegevens in om een account aan te maken.</p>
+
+                <form action="#" th:action="@{/customer/save}" th:object="${customer}" method="post" class="main-form">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label for="socialSecurityNumber">Burgerservicenummer:</label>
+                            <input type="text" id="socialSecurityNumber" th:field="*{socialSecurityNumber}"
+                                class="form-control" placeholder="...5789" required pattern="[0-9]{9}"
+                                title="Het burgerservicenummer moet uit negen cijfers bestaan.">
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="gender">Geslacht:</label>
-                            <select id="gender" th:field="*{gender}" class="form-control">
-                                <option value="man">Man</option>
-                                <option value="vrouw">Vrouw</option>
-                            </select>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="firstName">Voornaam:</label>
+                                <input type="text" id="firstName" th:field="*{firstName}" class="form-control" required
+                                    pattern="[a-zA-Z-'\s?]{1,200}" title="Alleen letters, - en '.">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="prefix">Tussenvoegsel:</label>
+                                <input type="text" id="prefix" th:field="*{prefix}" class="form-control"
+                                    pattern="[a-zA-Z-'\s?]{0,200}" title="Alleen letters, - en '.">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="lastName">Achternaam:</label>
+                                <input type="text" id="lastName" th:field="*{lastName}" class="form-control" required
+                                    pattern="[a-zA-Z-'\s?]{1,200}" title="Alleen letters, - en '.">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="zipcode">Postcode:</label>
-                            <input type="text" id="zipcode" th:field="*{ContactDetails.zipcode}" class="form-control">
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="birthday">Geboortedatum:</label>
+                                <input type="date" id="birthday" onclick="minAge()" th:field="*{birthday}"
+                                    class="form-control" min="1900-01-01" max="2002-03-01" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="gender">Geslacht:</label>
+                                <select id="gender" th:field="*{gender}" class="form-control" required>
+                                    <option value="">Selecteer...</option>
+                                    <option value="man">Man</option>
+                                    <option value="vrouw">Vrouw</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="houseNumber">Huisnummer:</label>
-                            <input type="text" id="houseNumber" th:field="*{ContactDetails.houseNumber}" class="form-control" placeholder="123..">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="zipcode">Postcode:</label>
+                                <input type="text" id="zipcode" th:field="*{ContactDetails.zipcode}"
+                                    class="form-control" required pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
+                                    title="De postcode moet bestaan uit vier cijfers en twee letters.">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="houseNumber">Huisnummer:</label>
+                                <input type="text" id="houseNumber" th:field="*{ContactDetails.houseNumber}"
+                                    class="form-control" placeholder="123.." required pattern="[0-9]{1,5}"
+                                    title="Het huisnummer kan alleen uit cijfer(s) bestaan.">
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label for="suffix">Toevoeging:</label>
+                                <input type="text" id="suffix" th:field="*{ContactDetails.suffix}" class="form-control"
+                                    pattern="[0-9a-zA-Z-'\s?]{1,200}" title="Alleen letters, cijfers en -.">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label for="suffix">Toevoeging:</label>
-                            <input type="text" id="suffix" th:field="*{ContactDetails.suffix}" class="form-control">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="text" id="email" th:field="*{ContactDetails.email}" class="form-control"
+                                    required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    title="voer een geldig e-mailadres in.">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="text" id="email" th:field="*{ContactDetails.email}" class="form-control">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="username">Gebruikersnaam:</label>
+                                <input type="text" id="username" th:field="*{username}" class="form-control" required
+                                    pattern="^[a-zA-Z0-9-_\.]{2,20}$"
+                                    title="De gebruikersnaam moet bestaan uit 2 tot 20 letters of cijfers.">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="password">Wachtwoord:</label>
+                                <input type="password" id="password" th:field="*{password}" class="form-control"
+                                    required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                    title="Het wachtwoord moet minimaal bestaan uit één hoofdletter, één kleine letter, één teken, en 8 characters.">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="username">Gebruikersnaam:</label>
-                            <input type="text" id="username" th:field="*{username}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="password">Wachtwoord:</label>
-                            <input type="password" id="password"  th:field="*{password}" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <input type="submit" value="Maak account" class="btn btn-primary">
-            </form>
-        </div>
+                    <input type="submit" value="Maak account" class="btn btn-primary">
+                </form>
+            </div><!-- /.jumbotron -->
+        </div><!-- /.container -->
+        <script>
+            function minAge() {
+                let today = new Date();
+                let dd = today.getDate();
+                let mm = today.getMonth() + 1;
+                let yyyy = today.getFullYear() - 18; //min age for making account
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                let minAge = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("birthday").setAttribute("max", minAge);
+            }
+        </script>
     </div>
 </body>
+
 </html>
