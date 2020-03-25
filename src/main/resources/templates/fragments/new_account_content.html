@@ -5,27 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:fragment="choose_type">
-        <div class="container pt-3 plus">
-            <h2>Kies het type rekening dat u wilt openen.</h2>
-            <br>
-            <table>
-                <tr>
-                    <td><div class="col-sm-4">
-                        <form action="/account/new/private" method="post" class="private-form">
-                            <input type="submit" align="right" name="button" value="Open priverekening" class="btn btn-primary" style="align-content:end; width: auto; margin: auto"/>
-                        </form>
-                    </div></td>
-                    <td><div class="col-sm-4">
-                        <input type="button" align="right" name="button" value="Open bedrijfsrekening" class="btn btn-primary" onclick="window.location.href = 'new/business';" style="align-content:end; width: auto; margin: auto"/>
-                    </div></td>
-                    <td><div class="col-sm-4">
-                        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = 'overview';" style="align-content:end; width: auto; margin: auto"/>
-                    </div></td>
-                </tr>
-            </table>
-        </div>
-    </div>
     <div th:fragment="confirm_account">
         <div class="container plus pt-3">
 

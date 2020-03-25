@@ -30,11 +30,6 @@ public class BankAccountController {
         return "under_construction";
     }
 
-    @GetMapping(value = "new")
-    public String newAccountHandler (Model model){
-        return "new_account";
-    }
-
     @PostMapping(value = "new/private")
     public String newPrivateAccountHandler (Model model){
         Customer customer = (Customer) model.getAttribute("customer");
