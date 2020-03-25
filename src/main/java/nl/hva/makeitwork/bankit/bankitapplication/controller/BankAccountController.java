@@ -30,14 +30,20 @@ public class BankAccountController {
         return "under_construction";
     }
 
-    @PostMapping(value = "new/private")
+    @GetMapping(value = "new/private")
     public String newPrivateAccountHandler (Model model){
+        model.addAttribute("accounttype", "priverekening");
+        return "confirm_new_account";
+    }
+
+    @PostMapping(value = "new/private/confirmed")
+    public String confirmAccountHandler(Model model) {
         Customer customer = (Customer) model.getAttribute("customer");
         PrivateAccount account = bas.newPrivateAccount(customer);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "priverekening");
-        return "confirm_new_account";
+        return "new_account_created";
     }
 
     @GetMapping(value = "new/business")
@@ -54,7 +60,7 @@ public class BankAccountController {
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "bedrijfsrekening");
-        return "confirm_new_account";
+        return "new_account_created";
     }
 
     @GetMapping("connect_account")
