@@ -9,6 +9,9 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccou
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ import java.util.Optional;
 
 @Service
 public class BankAccountService {
+    private static final double INIT_BALANCE = 100;
 
     @Autowired
     private BusinessAccountDAO bdao;
@@ -26,6 +30,9 @@ public class BankAccountService {
     private CustomerDAO cdao;
     @Autowired
     private TransactionService tService;
+    @Autowired
+    private BankAccountDAO badao;
+
 
 
     /**
@@ -36,16 +43,7 @@ public class BankAccountService {
      */
     public PrivateAccount newPrivateAccount(Customer accountHolder) {
         PrivateAccount newAccount = new PrivateAccount();
-        newAccount.setBalance(100);
-        newAccount.setIban("");
-        newAccount.addAccountHolder(accountHolder);
-        pdao.save(newAccount);
-        String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
-        newAccount.setIban(iban);
-        pdao.save(newAccount);
-        accountHolder.addAccount(newAccount);
-        cdao.save(accountHolder);
-        return newAccount;
+        return (PrivateAccount) newAccountHelper(newAccount, accountHolder);
     }
 
     public PrivateAccount findPrivateAccountByID(int id) {
@@ -71,16 +69,24 @@ public class BankAccountService {
      */
     public BusinessAccount newBusinessAccount(Customer accountHolder, Company company) {
         BusinessAccount newAccount = new BusinessAccount();
-        newAccount.setBalance(100);
+        newAccount.setCompany(company);
+        return (BusinessAccount) newAccountHelper(newAccount, accountHolder);
+    }
+
+    /**
+     *
+     * @param newAccount
+     * @param accountHolder
+     * @return
+     */
+    private Bankaccount newAccountHelper(Bankaccount newAccount, Customer accountHolder) {
+        newAccount.setBalance(INIT_BALANCE);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
-        newAccount.setCompany(company);
-        bdao.save(newAccount);
+        badao.save(newAccount);
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
-        bdao.save(newAccount);
-        accountHolder.addAccount(newAccount);
-        cdao.save(accountHolder);
+        badao.save(newAccount);;
         return newAccount;
     }
 

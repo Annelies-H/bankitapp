@@ -13,6 +13,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.TransactionService;
+import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,8 @@ public class BankAccountController {
     private CompanyDAO cdao;
     @Autowired
     private TransactionDAO tdao;
+    @Autowired
+    private CustomerService cs;
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler(@RequestParam int id, Model model) {
@@ -55,18 +58,20 @@ public class BankAccountController {
         return "account_overview";
     }
 
-    @GetMapping(value = "new")
-    public String newAccountHandler(Model model) {
-        return "new_account";
-    }
-
     @PostMapping(value = "new/private")
     public String newPrivateAccountHandler(Model model) {
+        model.addAttribute("accounttype", "priverekening");
+        return "confirm_new_private_account";
+    }
+
+    @PostMapping(value = "new/private/confirmed")
+    public String confirmPrivateAccountHandler(Model model) {
         Customer customer = (Customer) model.getAttribute("customer");
         PrivateAccount account = bas.newPrivateAccount(customer);
+        cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "priverekening");
-        return "confirm_new_account";
+        return "new_account_confirmed";
     }
 
     @GetMapping(value = "new/business")
@@ -80,9 +85,10 @@ public class BankAccountController {
     public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
         cdao.save(newCompany);
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
+        cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "bedrijfsrekening");
-        return "confirm_new_account";
+        return "new_account_confirmed";
     }
 
     @GetMapping("connect_account")
@@ -93,7 +99,6 @@ public class BankAccountController {
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");
-
         if (customer == null) {
             return "redirect:/intranet/dashboard";
         }

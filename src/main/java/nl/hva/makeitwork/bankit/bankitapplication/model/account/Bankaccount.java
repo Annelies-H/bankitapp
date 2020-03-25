@@ -1,5 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +40,12 @@ public abstract class Bankaccount {
     public static String num(int accountID) {
         int result = 1460000 + accountID; // voorbeeld
         String num = "020" + String.valueOf(result); // voorbeeld
-
         return num;
     }
 
     public static String numBiz(int accountID) {
         int result = 40200000 + accountID;
         String num = "06" + String.valueOf(result);
-
         return num;
     }
 
@@ -90,7 +90,6 @@ public abstract class Bankaccount {
         return result;
     }
 
-
     // validate Iban based on dutch accountnumbers (format NL99BANK0123456789)
     public static boolean validateIBAN(String iban) {
         // deconstruct iban to numerical for validating (btw -55 is found on inetrnet Ascii A = 65...)
@@ -113,11 +112,11 @@ public abstract class Bankaccount {
         int result = 0;
         // One by one process all digits of 'num'
         for (int i = 0; i < num.length(); i++)
-            result = (result * 10 + (int) num.charAt(i) - '0') % 97;
-
+        result = (result * 10 + (int) num.charAt(i) - '0') % 97;
         return result == 1;
     }
 
+    public abstract void addAccountHolder(Customer customer);
 
     public int getAccountID() {
         return accountID;

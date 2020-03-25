@@ -5,26 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:fragment="choose_type">
-        <div class="container pt-3 plus">
-            <h2>Kies het type rekening dat u wilt openen.</h2>
-            <br>
-            <table>
-                <tr>
-                    <td><div class="col-sm-4">
-                        <form action="/account/new/private" method="post" class="private-form">
-                            <input type="submit" align="right" name="button" value="Open priverekening" class="btn btn-primary" style="align-content:end; width: auto; margin: auto"/>
-                        </form>
-                    </div></td>
-                    <td><div class="col-sm-4">
-                        <input type="button" align="right" name="button" value="Open bedrijfsrekening" class="btn btn-primary" onclick="window.location.href = 'new/business';" style="align-content:end; width: auto; margin: auto"/>
-                    </div></td>
-                    <td><div class="col-sm-4">
-                        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = 'overview';" style="align-content:end; width: auto; margin: auto"/>
-                    </div></td>
-                </tr>
-            </table>
-        </div>
+    <div th:fragment="are_you_sure">
+        <h2>Weet u zeker dat u een een nieuwe <span th:text="${accounttype}"></span> wilt maken?</h2>
+        <br>
+        <table>
+            <tr>
+                <td><div class="col-sm-4">
+                    <form action="/account/new/private/confirmed" method="post" class="private-form">
+                        <button class="btn btn-primary" type="submit" onclick="window.location.href = 'account/new/private/confirmed';">
+                            Bevestig</button>
+                    </form>
+                </div></td>
+                <td><div class="col-sm-4">
+                    <input type="button" onclick="window.location.href = '/account/overview';" value="Annuleren"
+                           class="btn btn-primary"/>
+                 </div></td>
+            </tr>
+        </table>
     </div>
     <div th:fragment="confirm_account">
         <div class="container plus pt-3">
@@ -55,13 +52,15 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="companyId">KvK nummer:</label>
-                        <input type="text" id="companyId" th:field="*{companyId}" class="form-control" placeholder="...5789">
+                        <input type="text" id="companyId" th:field="*{companyId}" class="form-control" placeholder="...5789"
+                               required pattern="[0-9]{8}" title="Het KvK moet uit acht cijfers bestaan.">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="name">Bedrijfsnaam:</label>
-                        <input type="text" id="name" th:field="*{name}" class="form-control">
+                        <input type="text" id="name" th:field="*{name}" class="form-control"
+                               required pattern="[a-zA-Z-#&*()!? ']{1,200}" title="Vul hier je bedrijfsnaam in">
                     </div>
                 </div>
                 <div class="row">
