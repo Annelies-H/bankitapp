@@ -6,7 +6,7 @@
 </head>
 <body>
     <div th:fragment="are_you_sure">
-        <h2>Weet u zeker dat een een nieuwe <span th:text="${accounttype}"></span> wilt maken?</h2>
+        <h2>Weet u zeker dat u een een nieuwe <span th:text="${accounttype}"></span> wilt maken?</h2>
         <br>
         <table>
             <tr>
@@ -17,11 +17,30 @@
                     </form>
                 </div></td>
                 <td><div class="col-sm-4">
-                    <input type="button" onclick="window.location.href = '/account/overview';" value="Koppel rekening."
+                    <input type="button" onclick="window.location.href = '/account/overview';" value="Annuleren"
                            class="btn btn-primary"/>
                  </div></td>
             </tr>
         </table>
+    </div>
+    <div th:fragment="are_you_sure_business">
+        <h2>Weet u zeker dat u een een nieuwe <span th:text="${accounttype}"></span> wilt maken?</h2>
+        <br>
+        <table>
+            <tr>
+                <td><div class="col-sm-4">
+                    <form action="/account/new/private/confirmed" method="post" class="private-form">
+                        <button class="btn btn-primary" type="submit" onclick="window.location.href = 'account/new/business/confirmed';">
+                            Bevestig</button>
+                    </form>
+                </div></td>
+                <td><div class="col-sm-4">
+                    <input type="button" onclick="window.location.href = '/account/overview';" value="Annuleren"
+                           class="btn btn-primary"/>
+                </div></td>
+            </tr>
+        </table>
+    </div>
     </div>
     <div th:fragment="confirm_account">
         <div class="container plus pt-3">

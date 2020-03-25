@@ -54,8 +54,15 @@ public class BankAccountController {
     }
 
     @PostMapping(value = "new/save_company")
-    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
+    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany) {
         cdao.save(newCompany);
+        model.addAttribute("accounttype", "bedrijfsrekening");
+        return "confirm_new_business_account";
+
+    }
+
+    @PostMapping(value = "new/business/confirmed")
+    public String confirmBusinessAccountHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
