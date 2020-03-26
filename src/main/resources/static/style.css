@@ -1,5 +1,19 @@
 /* future css sheet */
+.bannerimage{
+             width:60px;
+             height:60px;
+}
+.bannerstyling{
+                font-size:150%;
+                padding-right:25px;
+}
+.jumbofontcolor{
+                color:white;
+}
 
+.dropdowncolor{
+                color:#007bff;
+}
 
 .lowerimage{
             background-image: url("img/index_img.png");

@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-<body class="bg-primary">
-    <!--<h2>klik <a href="/fill_database">hier</a> om de database te vullen.</h2>-->
-    <!--<h2>klik <a href="/create_users">hier</a> om 5000 customers te genereren</h2><br><br>-->
-    <div th:fragment="content">
-        <div class="jumbotron bg-primary pb-0 mb-0">
-            <nav class="navbar navbar-expand-sm bg-primary navbar-dark justify-content-center">
-                <a class="navbar-brand"><img src="img/bankIT2D_2.png" style="width:60px;height:60px;"></a>
-                <ul class="navbar-nav" style="font-size:150%;padding-right:25px;">
-                    <li class="nav-item" style="color:white">
-                        <a class="nav-link" href="/about_us"><span style="color:white;">BankIt: Your money is our
-                                concern!</span></a>
-                    </li>
-                    <li class="nav-item" style="color:white">
-                        <a class="nav-link" href="/customer/signup"><span style="color:white">Word klant</span></a>
-                    </li>
-                    <li class="nav-item" style="color:white">
-                        <a class="nav-link" href="#"><span style="color:white">Over ons</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><span
-                                style="color:white">Inloggen</span></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/login"><span style="color:#0275d8">Klant</span></a>
-                            <a class="dropdown-item" href="/intranet"><span style="color:#0275d8">Medewerker</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body class="bg-primary">
+        <!--<h2>klik <a href="/fill_database">hier</a> om de database te vullen.</h2>-->
+        <!--<h2>klik <a href="/create_users">hier</a> om 5000 customers te genereren</h2><br><br>-->
+        <div th:fragment="content">
+            <div class="jumbotron bg-primary pb-0 mb-0">
+                <nav class="navbar navbar-expand-sm bg-primary navbar-dark justify-content-center">
+                    <a class="navbar-brand"><img src="img/bankIT2D_2.png" class="bannerimage"></a>
+                    <ul class="navbar-nav bannerstyling">
+                        <li class="nav-item jumbofontcolor">
+                            <a class="nav-link" href="/about_us"><span class="jumbofontcolor">BankIt: Your money is our concern!</span></a>
+                        </li>
+                        <li class="nav-item jumbofontcolor" >
+                            <a class="nav-link" href="/customer/signup"><span class="jumbofontcolor">Word klant</span></a>
+                        </li>
+                        <li class="nav-item" style="color:white">
+                            <a class="nav-link" href="/about_us"><span class="jumbofontcolor">Over ons</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><span class="jumbofontcolor">Inloggen</span></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/login"><span class="dropdowncolor">Klant</span></a>
+                                <a class="dropdown-item" href="/intranet"><span class="dropdowncolor">Medewerker</span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+                <div class="lowerimage">
+                </div>
         </div>
-        <div class="lowerimage">
-        </div>
-    </div>
-
-
-</body>
+    </body>
 
 </html>
