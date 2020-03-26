@@ -287,9 +287,8 @@ public class FillDatabaseService {
 
     public boolean databaseIsEmpty() {
         Employee employee = employeeDAO.findEmployeeByUserId(1);
-        Customer customer = customerDAO.findByUserId(1);
-        return employee != null && customer != null;
+        Customer customer = customerDAO.findCustomerByUserId(1);
+        return employee == null || customer == null;
     }
-
 
 }
