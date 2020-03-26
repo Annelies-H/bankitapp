@@ -54,7 +54,7 @@ public class FillDatabaseService {
         updateCustomerBusinessAccount(customers.get(0), bAccounts.get(0));
         updateCustomerBusinessAccount(customers.get(1), bAccounts.get(1));
         updateCustomerBusinessAccount(customers.get(2), bAccounts.get(1));
-        updateCustomerBusinessAccount(customers.get(1), bAccounts.get(2));
+        updateCustomerBusinessAccount(customers.get(2), bAccounts.get(2));
 
         updateCustomerPrivateAccount(customers.get(0), pAccounts.get(0));
         updateCustomerPrivateAccount(customers.get(1), pAccounts.get(1));
