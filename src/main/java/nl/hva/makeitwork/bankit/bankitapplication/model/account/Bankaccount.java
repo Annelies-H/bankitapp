@@ -28,11 +28,15 @@ public abstract class Bankaccount {
 
     public void addTransactionHistory(Transaction transaction) {
         if (transaction.getIbanFrom().equals(this.iban)) {
-            transaction.setAmmount(transaction.getAmmount() * -1);
+            transaction.setAmount(transaction.getAmount() * -1);
             history.add(transaction);
         } else if (transaction.getIbanTo().equals(this.iban)) {
             history.add(transaction);
         }
+    }
+
+    public void updateBalanceAfterTransaction (Double amount){
+        this.balance += amount;
     }
 
     public static String num(int accountID) {

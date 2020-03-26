@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface BusinessAccountDAO extends CrudRepository<BusinessAccount, Integer> {
 
     public Optional<BusinessAccount> findByAccountID(int id);
+
+    public Optional<BusinessAccount> findBusinessAccountByIban(String iban);
 }

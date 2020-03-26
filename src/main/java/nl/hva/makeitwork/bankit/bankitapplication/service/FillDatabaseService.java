@@ -60,7 +60,7 @@ public class FillDatabaseService {
     public void addTransaction(String fromIban, String toIban) {
         Calendar date = Calendar.getInstance();
         Transaction transaction = new Transaction();
-        transaction.setAmmount(3.15);
+        transaction.setAmount(3.15);
         transaction.setDate(date);
         transaction.setIbanFrom(fromIban);
         transaction.setIbanTo(toIban);

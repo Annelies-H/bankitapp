@@ -43,7 +43,7 @@
                             th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
                     </td>
                     <td align="right"
-                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.ammount, 1, 2, 'COMMA')}"></td>
+                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.amount, 1, 2, 'COMMA')}"></td>
                     <td><span th:if="${transaction.ibanTo} == ${account.iban}" th:text="${transaction.ibanFrom}"></span>
                         <span th:if="${transaction.ibanFrom} == ${account.iban}" th:text="${transaction.ibanTo}"></span>
                     </td>
@@ -60,9 +60,8 @@
                class="btn btn-primary"/>
         <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
                class="btn btn-primary"/>
-        <input type="button" onclick="window.location.href = '/transaction/new_transaction';"
-               value="Nieuwe overboeking"
-               class="btn btn-primary"/>
+        <input type="button" th:onclick="|window.location.href='@{~/transaction/new_transaction(id=${account.accountID})}'|"
+               value="Nieuwe overboeking" class="btn btn-primary" />
         <span th:if="${company != 'null'}">
         <input type="button" onclick="window.location.href = '/POS/request_POS';"
                value="Pin automaat aanvragen"

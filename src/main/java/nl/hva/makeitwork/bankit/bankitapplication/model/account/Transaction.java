@@ -1,7 +1,5 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -15,7 +13,7 @@ public class Transaction {
     @Column(nullable = false)
     String ibanTo;
     @Column(nullable = false)
-    double ammount;
+    double amount;
     String description;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -27,10 +25,10 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String ibanFrom, String ibanTo, double ammount, String description, Calendar date, PaymentMethod paymentMethod) {
+    public Transaction(String ibanFrom, String ibanTo, double amount, String description, Calendar date, PaymentMethod paymentMethod) {
         this.ibanFrom = ibanFrom;
         this.ibanTo = ibanTo;
-        this.ammount = ammount;
+        this.amount = amount;
         this.description = description;
         this.date = date;
         this.paymentMethod = paymentMethod;
@@ -52,12 +50,12 @@ public class Transaction {
         this.ibanTo = ibanTo;
     }
 
-    public double getAmmount() {
-        return ammount;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmmount(double ammount) {
-        this.ammount = ammount;
+    public void setAmount(double ammount) {
+        this.amount = ammount;
     }
 
     public String getDescription() {
