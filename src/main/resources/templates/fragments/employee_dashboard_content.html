@@ -14,6 +14,28 @@
             <div th:switch="${employee.position}">
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
                     Hier komt nog wat voor de accountmanager
+                    <h3>Overzicht Zakelijke Rekeningen</h3>
+                    <table>
+                        <tr style=""><th>Bedrijf</th><th>Rekeningnummer</th><th>Saldo</th><th>Rekeninghouders</th></tr>
+                        <tr th:each="account: ${businessAccounts}">
+                            <td th:text="${account.company.name}"></td>
+                            <td><a th:href="@{~/account/selected_bankaccount(id=${account.accountID})}">
+                                <span th:text="${account.iban}"/></a></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${account.accountHolders}"></td>
+                    </table>
+
+                    <h3>Overzicht Prive Rekeningen</h3>
+                    <table>
+                        <tr style=""><th>Rekeningnummer</th><th>Saldo</th><th>Rekeninghouders</th></tr>
+                        <tr th:each="account: ${privateAccounts}">
+                            <td><a th:href="@{~/account/selected_bankaccount(id=${account.accountID})}">
+                                <span th:text="${account.iban}"/></a></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${account.accountHolders}"></td>
+                    </table>
+
+
                 </div>
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_BUSINESS}">
                     <h3>Overzicht Zakelijke Rekeningen</h3>
@@ -28,7 +50,15 @@
                     </table>
                 </div>
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_PRIVATE}">
-                    Hier komt nog wat voor de head private
+                    <h3>Overzicht Prive Rekeningen</h3>
+                    <table>
+                        <tr style=""><th>Rekeningnummer</th><th>Saldo</th><th>Rekeninghouders</th></tr>
+                        <tr th:each="account: ${privateAccounts}">
+                            <td><a th:href="@{~/account/selected_bankaccount(id=${account.accountID})}">
+                                <span th:text="${account.iban}"/></a></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${account.accountHolders}"></td>
+                    </table>
                 </div>
             </div>
         </div>
