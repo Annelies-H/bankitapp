@@ -62,7 +62,7 @@ public class TransactionController {
         bas.updateBalanceAccountWithTransaction(transaction);
 
 
-        return "redirect:/transaction/new_transaction?id=" + id;
+        return "redirect:/account/selected_bankaccount?id=" + id;
 
 
     }
