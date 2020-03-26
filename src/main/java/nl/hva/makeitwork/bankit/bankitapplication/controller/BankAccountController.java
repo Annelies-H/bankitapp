@@ -98,6 +98,8 @@ public class BankAccountController {
         if (customer == null) {
             return "redirect:/intranet/dashboard";
         }
+
+        // update customer info
         customer = cus.findCustomer(customer.getUsername());
         model.addAttribute("customer", customer);
         return "/product_overview";
