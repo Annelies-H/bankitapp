@@ -16,10 +16,6 @@ public class LoginService {
         return user.getPassword().equals(hashedInput);
     }
 
-    public boolean passwordCheckNoHash(String inputPassword, User user) {
-        return user.getPassword().equals(inputPassword);
-    }
-
     public static String hashPassword(String password, String salt) {
         String hashedPassword = "";
         try {

@@ -12,7 +12,10 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FillDatabaseService {
@@ -40,32 +43,57 @@ public class FillDatabaseService {
     }
 
     public void fillDatabase() {
-        Company company = addCompany();
         addEmployees();
-        Customer customer = addCustomer();
-        PrivateAccount pAccount = addPrivateAccount(customer);
-        BusinessAccount bAccount = addbusinessAccount(company, customer);
-        addPOSterminal(bAccount);
-        addTransaction(bAccount.getIban(), pAccount.getIban());
-        updateCustomer(customer, pAccount, bAccount);
-        System.out.println("**** Database gevuld met testdata voor elke tabel *****");
+        List<Company> companies = addCompanies();
+        List<Customer> customers = addCustomers();
+        List<PrivateAccount> pAccounts = addPrivateAccounts(customers);
+        List<BusinessAccount> bAccounts = addbusinessAccounts(companies, customers);
+        addPOSterminal(bAccounts.get(0));
+
+        //add bankaccounts to customers accountlist
+        updateCustomerBusinessAccount(customers.get(0), bAccounts.get(0));
+        updateCustomerBusinessAccount(customers.get(1), bAccounts.get(1));
+        updateCustomerBusinessAccount(customers.get(2), bAccounts.get(1));
+        updateCustomerBusinessAccount(customers.get(1), bAccounts.get(2));
+
+        updateCustomerPrivateAccount(customers.get(0), pAccounts.get(0));
+        updateCustomerPrivateAccount(customers.get(1), pAccounts.get(1));
+        updateCustomerPrivateAccount(customers.get(2), pAccounts.get(2));
+
+        // add transactions
+        addTransaction(bAccounts.get(0).getIban(), pAccounts.get(0).getIban(), 70, PaymentMethod.ATM, "Geldautomaat");
+        addTransaction(bAccounts.get(0).getIban(), pAccounts.get(0).getIban(), 2100, PaymentMethod.BANKTRANSFER, "Loon");
+        addTransaction(bAccounts.get(2).getIban(), pAccounts.get(1).getIban(), 1562, PaymentMethod.BANKTRANSFER, "Loon");
+        addTransaction(pAccounts.get(0).getIban(), bAccounts.get(1).getIban(), 999, PaymentMethod.POS, "Computer gekocht");
+        addTransaction(pAccounts.get(1).getIban(), bAccounts.get(1).getIban(), 1099, PaymentMethod.POS, "Laptop gekocht");
+        addTransaction(pAccounts.get(2).getIban(), bAccounts.get(0).getIban(), 3.50, PaymentMethod.POS, "Pijnboompit gekocht");
+
+        System.out.println("**** Database gevuld met testdata *****");
     }
 
-    public void updateCustomer(Customer customer, PrivateAccount privateAccount, BusinessAccount businessAccount) {
+    public void updateCustomerPrivateAccount(Customer customer, PrivateAccount privateAccount) {
         customer.getPrivateAccounts().add(privateAccount);
+        customerDAO.save(customer);
+    }
+
+    public void updateCustomerBusinessAccount(Customer customer, BusinessAccount businessAccount) {
         customer.getBusinessAccounts().add(businessAccount);
         customerDAO.save(customer);
     }
 
-    public void addTransaction(String fromIban, String toIban) {
+    public void addTransaction(String fromIban, String toIban, double amount, PaymentMethod paymentMethod, String description) {
+
         Calendar date = Calendar.getInstance();
+
         Transaction transaction = new Transaction();
-        transaction.setAmount(3.15);
+        transaction.setAmount(amount);
         transaction.setDate(date);
         transaction.setIbanFrom(fromIban);
+        transaction.setDescription(description);
         transaction.setIbanTo(toIban);
-        transaction.setPaymentMethod(PaymentMethod.ATM);
+        transaction.setPaymentMethod(paymentMethod);
         transactionDAO.save(transaction);
+
     }
 
     public void addPOSterminal(BusinessAccount account) {
@@ -76,32 +104,87 @@ public class FillDatabaseService {
         posDAO.save(possy);
     }
 
-    public BusinessAccount addbusinessAccount(Company company, Customer customer) {
-        BusinessAccount account = new BusinessAccount();
-        account.setCompany(company);
+    public List<BusinessAccount> addbusinessAccounts(List<Company> companies, List<Customer> customers) {
+        List<BusinessAccount> businessAccounts = new ArrayList<>();
+        BusinessAccount account;
+
+        account = new BusinessAccount();
+        account.setCompany(companies.get(0));
         account.setBalance(358);
         account.setIban("NL03BAIT0325489621");
-        account.getAccountHolders().add(customer);
+        account.getAccountHolders().add(customers.get(0));
         businessAccountDAO.save(account);
-        return account;
+        businessAccounts.add(account);
+
+        account = new BusinessAccount();
+        account.setCompany(companies.get(1));
+        account.setBalance(194687164.23);
+        account.setIban("NL29BAIT0201460006");
+        account.getAccountHolders().add(customers.get(2));
+        businessAccountDAO.save(account);
+        businessAccounts.add(account);
+
+        account = new BusinessAccount();
+        account.setCompany(companies.get(1));
+        account.setBalance(213070);
+        account.setIban("NL29BAIT0201460007");
+        account.getAccountHolders().add(customers.get(2));
+        account.getAccountHolders().add(customers.get(1));
+        businessAccountDAO.save(account);
+        businessAccounts.add(account);
+
+        account = new BusinessAccount();
+        account.setCompany(companies.get(2));
+        account.setBalance(3156743);
+        account.setIban("NL72BAIT0201460051");
+        account.getAccountHolders().add(customers.get(1));
+        businessAccountDAO.save(account);
+        businessAccounts.add(account);
+
+        return businessAccounts;
     }
 
-    public PrivateAccount addPrivateAccount(Customer customer) {
-        PrivateAccount account = new PrivateAccount();
-        account.setBalance(1230.65);
-        account.setIban("NL53BAIT0213588648");
-        account.getAccountHolders().add(customer);
+    public List<PrivateAccount> addPrivateAccounts(List<Customer> customers) {
+        List<PrivateAccount> privateAccounts = new ArrayList<>();
+        PrivateAccount account;
+
+        account = new PrivateAccount();
+        account.setBalance(3230.65);
+        account.setIban("NL53BAIT0213844212");
+        account.getAccountHolders().add(customers.get(0));
         privateAccountDAO.save(account);
-        return account;
+        privateAccounts.add(account);
+
+        account = new PrivateAccount();
+        account.setBalance(3641);
+        account.setIban("NL83BAIT0201460004");
+        account.getAccountHolders().add(customers.get(1));
+        privateAccountDAO.save(account);
+        privateAccounts.add(account);
+
+        account = new PrivateAccount();
+        account.setBalance(1947616467.62);
+        account.setIban("NL02BAIT0201460007");
+        account.getAccountHolders().add(customers.get(2));
+        privateAccountDAO.save(account);
+        privateAccounts.add(account);
+
+        return privateAccounts;
     }
 
-    public Customer addCustomer() {
-        ContactDetails contact = new ContactDetails();
+    public List<Customer> addCustomers() {
+        List<Customer> customers = new ArrayList<>();
+        ContactDetails contact;
+        String birthday;
+        Customer customer;
+
+
+        contact = new ContactDetails();
         contact.setEmail("LiesjeLeerd@LotjeLopen.nl");
         contact.setHouseNumber(101);
         contact.setZipcode("1234AB");
-        String birthday = "1933-08-21";
-        Customer customer = new Customer();
+        birthday = "1933-08-21";
+        customer = new Customer();
         customer.setSocialSecurityNumber(152842627);
         customer.setContactDetails(contact);
         customer.setFirstName("Liesje");
@@ -112,42 +195,99 @@ public class FillDatabaseService {
         customer.setPassword("Welkom2020");
         customer.setBirthday(birthday);
         customerDAO.save(customer);
-        return customer;
+        customers.add(customer);
+
+        contact = new ContactDetails();
+        contact.setEmail("Donald@duck.nl");
+        contact.setHouseNumber(13);
+        contact.setZipcode("1337YO");
+        birthday = "1900-01-01";
+        customer = new Customer();
+        customer.setSocialSecurityNumber(68149971);
+        customer.setContactDetails(contact);
+        customer.setFirstName("Donald");
+        customer.setGender("man");
+        customer.setLastName("Duck");
+        //customer.setPrefix("");
+        customer.setUsername("Donald");
+        customer.setPassword("<3katrien>");
+        customer.setBirthday(birthday);
+        customerDAO.save(customer);
+        customers.add(customer);
+
+        contact = new ContactDetails();
+        contact.setEmail("Bill@hotmail.com");
+        contact.setHouseNumber(1);
+        contact.setZipcode("1000MS");
+        birthday = "1951-08-21";
+        customer = new Customer();
+        customer.setSocialSecurityNumber(91961343);
+        customer.setContactDetails(contact);
+        customer.setFirstName("Bill");
+        customer.setGender("man");
+        customer.setLastName("Gates");
+        //customer.setPrefix("");
+        customer.setUsername("Bill");
+        customer.setPassword("iloveM$");
+        customer.setBirthday(birthday);
+        customerDAO.save(customer);
+        customers.add(customer);
+
+        return customers;
     }
 
     public void addEmployees() {
-        Employee employee = new Employee();
-        employee.setPosition(Position.ACCOUNTMANAGER);
-        employee.setUsername("KBoer01");
-        employee.setPassword("W3lk0m2o2o");
-        employeeDAO.save(employee);
 
         Employee accountmanager = new Employee();
         accountmanager.setPosition(Position.ACCOUNTMANAGER);
-        accountmanager.setUsername("Piet");
-        accountmanager.setPassword("wwpiet");
+        accountmanager.setUsername("JPMorgan");
+        accountmanager.setPassword("ifyouasktheprice");
         employeeDAO.save(accountmanager);
 
         Employee headBusiness = new Employee();
         headBusiness.setPosition(Position.HEAD_BUSINESS);
-        headBusiness.setUsername("Kees");
-        headBusiness.setPassword("wwkees");
+        headBusiness.setUsername("DavidRockefeller");
+        headBusiness.setPassword("iammoney");
         employeeDAO.save(headBusiness);
 
         Employee headPrivate = new Employee();
         headPrivate.setPosition(Position.HEAD_PRIVATE);
-        headPrivate.setUsername("Jan");
-        headPrivate.setPassword("wwjan");
+        headPrivate.setUsername("WimDuisenberg");
+        headPrivate.setPassword("ecb");
         employeeDAO.save(headPrivate);
     }
 
-    public Company addCompany() {
-        Company company = new Company();
+    public List<Company> addCompanies() {
+        List<Company> companies = new ArrayList<>();
+        Company company;
+
+        company = new Company();
         company.setName("Pijnboom en co");
         company.setIndustry(Industry.AGRICULTURE);
         company.setCompanyId(23484876);
         companyDAO.save(company);
-        return company;
+        companies.add(company);
+
+        company = new Company();
+        company.setName("Microsoft");
+        company.setIndustry(Industry.INDUSTRY);
+        company.setCompanyId(13371337);
+        companyDAO.save(company);
+        companies.add(company);
+
+        company = new Company();
+        company.setName("Gemeente Duckstad");
+        company.setIndustry(Industry.GOVERNMENT);
+        company.setCompanyId(65487489);
+        companyDAO.save(company);
+        companies.add(company);
+
+        return companies;
+    }
+
+    public boolean databaseIsEmpty() {
+        Employee employee = employeeDAO.findEmployeeByUserId(1);
+        return employee == null;
     }
 
 

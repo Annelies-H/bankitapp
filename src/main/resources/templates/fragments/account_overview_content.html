@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -39,7 +39,7 @@
                     <th>Omschrijving</th>
                 </tr>
                 <tr th:each="transaction: ${account.history}">
-                    <td><a th:href="@{transaction/selected_transaction}"><span
+                    <td><a th:href="@{../transaction/selected_transaction}"><span
                             th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
                     </td>
                     <td align="right"
