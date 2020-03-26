@@ -210,7 +210,7 @@ public class FillDatabaseService {
         customer.setLastName("Duck");
         //customer.setPrefix("");
         customer.setUsername("Donald");
-        customer.setPassword("<3katrien>");
+        customer.setPassword("<3katrien");
         customer.setBirthday(birthday);
         customerDAO.save(customer);
         customers.add(customer);
