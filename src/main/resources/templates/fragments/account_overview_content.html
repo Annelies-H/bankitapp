@@ -56,7 +56,7 @@
         </div>
 
         <br>
-        <input type="button" onclick="window.location.href = '/account/overview';" value="Terug naar overzicht"
+        <input type="button" th:onclick="|window.location.href='@{~/account/overview}'|" value="Terug naar overzicht"
                class="btn btn-primary"/>
         <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
                class="btn btn-primary"/>

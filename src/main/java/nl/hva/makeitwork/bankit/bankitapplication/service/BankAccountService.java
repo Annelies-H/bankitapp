@@ -49,16 +49,6 @@ public class BankAccountService {
 
     public PrivateAccount findPrivateAccountByID(int id) {
         Optional<PrivateAccount> selectedPrivateAccount = pdao.findByAccountID(id);
-        if (selectedPrivateAccount.isPresent()) {
-            String iban = selectedPrivateAccount.get().getIban();
-            List<Transaction> transactions = tService.findTransactionsByIban(iban);
-            if (transactions != null) {
-                for (Transaction transaction : transactions
-                ) {
-                    selectedPrivateAccount.get().addTransactionHistory(transaction);
-                }
-            }
-        }
         return selectedPrivateAccount.orElse(null);
     }
 
@@ -99,17 +89,7 @@ public class BankAccountService {
 
     public BusinessAccount findBusinessAccountByID(int id) {
         Optional<BusinessAccount> selectedBusinessAccount = bdao.findByAccountID(id);
-        if (selectedBusinessAccount.isPresent()) {
-            String iban = selectedBusinessAccount.get().getIban();
-            List<Transaction> transactions = tService.findTransactionsByIban(iban);
-            if (transactions != null) {
-                for (Transaction transaction : transactions
-                ) {
-                    selectedBusinessAccount.get().addTransactionHistory(transaction);
-                }
-            }
-        }
-        return selectedBusinessAccount.orElse(null);
+          return selectedBusinessAccount.orElse(null);
     }
 
     public BusinessAccount findBusinessAccountByIbanWithoutTransactionHistory(String iban) {
@@ -118,7 +98,35 @@ public class BankAccountService {
         return selectedBusinessAccount.orElse(null);
     }
 
-    public void addAccountToModelById(int id, Model model) {
+    public void addAccountToModelByIdIncludingTransactions(int id, Model model) {
+        PrivateAccount pAccount = findPrivateAccountByID(id);
+        BusinessAccount bAccount = findBusinessAccountByID(id);
+
+        if (pAccount != null) {
+            tService.addTransactionsToBankaccountService((Bankaccount) pAccount);
+            model.addAttribute("account", pAccount);
+            model.addAttribute("company", "null");
+        } else {
+            tService.addTransactionsToBankaccountService((Bankaccount)bAccount);
+            model.addAttribute("account", bAccount);
+        }
+    }
+
+    public void addAccountToModelByIdIncludingTenTransactions(int id, Model model) {
+        PrivateAccount pAccount = findPrivateAccountByID(id);
+        BusinessAccount bAccount = findBusinessAccountByID(id);
+
+        if (pAccount != null) {
+            tService.addTenTransactionsToBankaccountService((Bankaccount) pAccount);
+            model.addAttribute("account", pAccount);
+            model.addAttribute("company", "null");
+        } else {
+            tService.addTenTransactionsToBankaccountService((Bankaccount)bAccount);
+            model.addAttribute("account", bAccount);
+        }
+    }
+
+    public void addAccountToModelByIdWithoutTransactions(int id, Model model) {
         PrivateAccount pAccount = findPrivateAccountByID(id);
         BusinessAccount bAccount = findBusinessAccountByID(id);
 

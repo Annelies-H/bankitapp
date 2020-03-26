@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TransactionDAO extends CrudRepository<Transaction, Integer> {
-    public List<Transaction> findByIbanFromOrIbanToOrderByDate(String ibanFrom, String ibanTo);
+    public List<Transaction> findByIbanFromOrIbanToOrderByDateDesc(String ibanFrom, String ibanTo);
+
+    public List<Transaction> findTop10ByIbanFromOrIbanToOrderByDateDesc (String ibanFrom, String ibanTo);
 }

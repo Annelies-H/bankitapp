@@ -38,7 +38,7 @@ public class TransactionController {
 
     @GetMapping("new_transaction")
     public String NewTransactionHandler(@RequestParam int id, Model model) {
-        bas.addAccountToModelById(id, model);
+        bas.addAccountToModelByIdWithoutTransactions(id, model);
 
         Transaction transaction = new Transaction();
         model.addAttribute("transaction", transaction);
@@ -48,7 +48,7 @@ public class TransactionController {
 
     @PostMapping("save_transaction")
     public String saveTransaction(@ModelAttribute("transaction") Transaction transaction, @RequestParam int id, Model model) {
-        bas.addAccountToModelById(id, model);
+        bas.addAccountToModelByIdWithoutTransactions(id, model);
 
         Bankaccount bankaccount = (Bankaccount)model.getAttribute("account");
         assert bankaccount != null;
@@ -57,7 +57,6 @@ public class TransactionController {
         transaction.setPaymentMethod(PaymentMethod.BANKTRANSFER);
 
         // save transaction
-
         tdao.save(transaction);
         bas.updateBalanceAccountWithTransaction(transaction);
 
