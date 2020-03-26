@@ -14,6 +14,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDA
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class BankAccountService {
         Optional<PrivateAccount> selectedPrivateAccount = pdao.findByAccountID(id);
         if (selectedPrivateAccount.isPresent()) {
             String iban = selectedPrivateAccount.get().getIban();
-            List<Transaction> transactions = tService.findTransactionByIban(iban);
+            List<Transaction> transactions = tService.findTransactionsByIban(iban);
             if (transactions != null) {
                 for (Transaction transaction : transactions
                 ) {
@@ -58,6 +59,12 @@ public class BankAccountService {
                 }
             }
         }
+        return selectedPrivateAccount.orElse(null);
+    }
+
+    public PrivateAccount findPrivateAccountByIbanWithoutTransactionHistory(String iban) {
+        Optional<PrivateAccount> selectedPrivateAccount = pdao.findPrivateAccountByIban(iban);
+
         return selectedPrivateAccount.orElse(null);
     }
 
@@ -94,7 +101,7 @@ public class BankAccountService {
         Optional<BusinessAccount> selectedBusinessAccount = bdao.findByAccountID(id);
         if (selectedBusinessAccount.isPresent()) {
             String iban = selectedBusinessAccount.get().getIban();
-            List<Transaction> transactions = tService.findTransactionByIban(iban);
+            List<Transaction> transactions = tService.findTransactionsByIban(iban);
             if (transactions != null) {
                 for (Transaction transaction : transactions
                 ) {
@@ -105,4 +112,46 @@ public class BankAccountService {
         return selectedBusinessAccount.orElse(null);
     }
 
+    public BusinessAccount findBusinessAccountByIbanWithoutTransactionHistory(String iban) {
+        Optional<BusinessAccount> selectedBusinessAccount = bdao.findBusinessAccountByIban(iban);
+
+        return selectedBusinessAccount.orElse(null);
+    }
+
+    public void addAccountToModelById(int id, Model model) {
+        PrivateAccount pAccount = findPrivateAccountByID(id);
+        BusinessAccount bAccount = findBusinessAccountByID(id);
+
+        if (pAccount != null) {
+            model.addAttribute("account", pAccount);
+            model.addAttribute("company", "null");
+        } else {
+            model.addAttribute("account", bAccount);
+        }
+    }
+
+    public void updateBalanceAccountWithTransaction(Transaction transaction) {
+       PrivateAccount pAccountTo = findPrivateAccountByIbanWithoutTransactionHistory(transaction.getIbanTo());
+        BusinessAccount bAccountTo = findBusinessAccountByIbanWithoutTransactionHistory(transaction.getIbanTo());
+        PrivateAccount pAccountFrom = findPrivateAccountByIbanWithoutTransactionHistory(transaction.getIbanFrom());
+        BusinessAccount bAccountFrom = findBusinessAccountByIbanWithoutTransactionHistory(transaction.getIbanFrom());
+
+        Double amount = transaction.getAmount();
+
+        if (pAccountTo != null) {
+            pAccountTo.updateBalanceAfterTransaction(amount);
+            pdao.save(pAccountTo);
+        } else if (bAccountTo != null){
+            bAccountTo.updateBalanceAfterTransaction(amount);
+            bdao.save(bAccountTo);
+        }
+
+        if (pAccountFrom != null) {
+            pAccountFrom.updateBalanceAfterTransaction(amount * -1.0);
+            pdao.save(pAccountFrom);
+        } else if (bAccountFrom != null){
+            bAccountFrom.updateBalanceAfterTransaction(amount * -1.0);
+            bdao.save(bAccountFrom);
+        }
+    }
 }

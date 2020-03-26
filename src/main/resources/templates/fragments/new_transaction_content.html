@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Overboeking</title>
+</head>
+<body>
+<div th:fragment="new_transaction">
+    <div class="container plus pt-3" th:value="${account}">
+
+        <h2 style="width: 750px; margin: auto">Overboeking van rekening <span th:text="${account.iban}"></span></h2><br>
+        <form id="transcation_form" action="#" th:action="@{~/transaction/save_transaction(id=${account.accountID})}" th:object="${transaction}" method="post" class="main-form" >
+            <div class="col-sm-6">
+                <div class="row">
+                    <label for="ibanTo">Naar rekening:</label>
+                    <input type="text" id="ibanTo" th:field="*{ibanTo}" class="form-control" placeholder="NL00BANK123456789" autofocus required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="amount">Bedrag:</label>
+                        <input type="number" id="amount" th:field="*{amount}" class="form-control" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="description">Omschrijving:</label>
+                        <input type="text" id="description" th:field="*{description}" class="form-control">
+                    </div>
+                </div>
+            </div>
+              <input type="submit" value="Overboeken" class="btn btn-primary" >
+            <input type="button" th:onclick="|window.location.href='@{~/account/selected_bankaccount(id=${account.accountID})}'|"
+                   value="Terug naar rekeningoverzicht" class="btn btn-primary" />
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

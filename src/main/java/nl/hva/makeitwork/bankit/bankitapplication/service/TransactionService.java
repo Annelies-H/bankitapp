@@ -1,5 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Transaction;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.TransactionDAO;
@@ -20,13 +22,18 @@ public class TransactionService {
         super();
     }
 
-    public List<Transaction> findTransactionByIban(String iban) {
+    public List<Transaction> findTransactionsByIban(String iban) {
         List<Transaction> transactions = tdao.findByIbanFromOrIbanToOrderByDate(iban, iban);
         if (transactions.isEmpty()) {
             return null;
         } else {
             return transactions;
         }
+
     }
+
+
+
+
 
 }

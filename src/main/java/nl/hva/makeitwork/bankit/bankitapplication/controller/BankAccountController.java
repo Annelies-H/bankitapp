@@ -45,15 +45,7 @@ public class BankAccountController {
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler(@RequestParam int id, Model model) {
-        PrivateAccount pAccount = bas.findPrivateAccountByID(id);
-        BusinessAccount bAccount = bas.findBusinessAccountByID(id);
-
-        if (pAccount != null) {
-            model.addAttribute("account", pAccount);
-            model.addAttribute("company", "null");
-        } else {
-            model.addAttribute("account", bAccount);
-        }
+        bas.addAccountToModelById(id, model);
 
         return "account_overview";
     }
