@@ -31,6 +31,8 @@ import java.util.Optional;
 public class BankAccountController {
 
     @Autowired
+    private CustomerService cus;
+    @Autowired
     private BankAccountService bas;
     @Autowired
     private BusinessAccountDAO bdao;
@@ -45,7 +47,7 @@ public class BankAccountController {
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler(@RequestParam int id, Model model) {
-        bas.addAccountToModelById(id, model);
+        bas.addAccountToModelByIdIncludingTenTransactions(id, model);
 
         return "account_overview";
     }
@@ -91,9 +93,15 @@ public class BankAccountController {
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");
+
+
         if (customer == null) {
             return "redirect:/intranet/dashboard";
         }
-        return "product_overview";
+
+        // update customer info
+        customer = cus.findCustomer(customer.getUsername());
+        model.addAttribute("customer", customer);
+        return "/product_overview";
     }
 }
