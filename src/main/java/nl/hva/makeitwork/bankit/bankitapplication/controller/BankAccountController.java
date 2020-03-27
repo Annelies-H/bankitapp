@@ -102,6 +102,6 @@ public class BankAccountController {
         // update customer info
         customer = cus.findCustomer(customer.getUsername());
         model.addAttribute("customer", customer);
-        return "/product_overview";
+        return "product_overview";
     }
 }
