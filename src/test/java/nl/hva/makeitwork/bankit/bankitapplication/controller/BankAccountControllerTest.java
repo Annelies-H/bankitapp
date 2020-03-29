@@ -2,7 +2,10 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
@@ -31,7 +34,6 @@ public class BankAccountControllerTest {
     private MockMvc mockMvc;
     @Autowired
     //ObjectMapper kan gebruikt worden om stringwaardes van een object te genereren die je kan meegeven in de request
-    //Bijvoorbeeld .content(objectMapper.writeValueAsString(customer))) om een customer in je post request te zetten
     private ObjectMapper objectMapper;
 
     //Spring wilt graag dat alle service in de controller die je test gemockt worden
@@ -73,6 +75,7 @@ public class BankAccountControllerTest {
     //Er wordt alleen getest of je juist wordt doorgestuurd naar de volgende pagina (http statys 200 OK)
     //Deze methode test niet of alles ook netjes in de db wordt opgeslagen en of de juiste attributen worden meegegeven
      void newPrivateAccountConfirmedController() throws Exception {
+        //Creer het session attribuut
         Customer customer = new Customer();
 
         //Creeer een priveaccount en zorg dat de juiste methode in de BankAccountService wordt gemockt
@@ -85,6 +88,33 @@ public class BankAccountControllerTest {
                 .contentType("application/json")
                 //geeft een sessionattribuut mee
                 .sessionAttr("customer", customer))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void saveCompanyController() throws Exception {
+        //Creer het session attribuut
+        Customer customer = new Customer();
+
+        //Creer een bankaccount en daarmee de bankrekening
+        //zorg dat deze in de controller gegenereerd wordt met de mockservice
+        Company newCompany = new Company(12345678, "testbedrijf", Industry.INDUSTRY);
+        System.out.println(newCompany);
+        BusinessAccount account = new BusinessAccount();
+        account.setCompany(newCompany);
+        account.setIban("NL33BAIT0123456789");
+        System.out.println(account.getIban());
+        when(bservice.newBusinessAccount(customer, newCompany)).thenReturn(account);
+
+        mockMvc.perform(post("/account/new/save_company")
+                .contentType("application/x-www-form-urlencoded")
+                .sessionAttr("customer", customer)
+                //voeg de parameters uit het formulier toe aan de request
+                //weet je niet zeker welke er zijn en hoe ze er uit zien
+                //run de applicatie en kijk bij de netwerktools in de browser naar het postrequest
+                .param("companyId", "12345678")
+                .param("name", "testbedrijf")
+                .param("industry", "INDUSTRY"))
                 .andExpect(status().isOk());
     }
 

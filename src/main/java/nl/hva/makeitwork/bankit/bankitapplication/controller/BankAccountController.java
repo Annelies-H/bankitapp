@@ -44,12 +44,9 @@ public class BankAccountController {
         Customer customer = (Customer) model.getAttribute("customer");
         PrivateAccount account = bas.newPrivateAccount(customer);
         cs.addBankAccount(customer, account);
-        System.out.println("IK ZOU NU EEN ACCOUNT MOETEN HEBBEN");
-        System.out.println(account.getIban());
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "priverekening");
         return "new_account_confirmed";
-     //     return "add_accountholder";
     }
 
     @GetMapping(value = "new/business")
@@ -59,9 +56,15 @@ public class BankAccountController {
     }
 
     @PostMapping(value = "new/save_company")
-    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
+    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany) {
+        Customer customer = (Customer) model.getAttribute("customer");
+        System.out.println("Ik ben nu in de controller");
+        System.out.println(newCompany);
         cdao.save(newCompany);
+        System.out.println("ik ben ben opgeslagen" + newCompany);
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
+        System.out.println("IK ZOU NU EEN ACCOUNT MOETEN HEBBEN");
+        System.out.println(account.getIban());
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "bedrijfsrekening");

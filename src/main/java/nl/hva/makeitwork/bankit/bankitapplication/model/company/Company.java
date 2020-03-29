@@ -21,6 +21,15 @@ public class Company {
         this.industry = industry;
     }
 
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyId=" + companyId +
+                ", name='" + name + '\'' +
+                ", industry=" + industry +
+                '}';
+    }
+
     public Integer getCompanyId() {
         return companyId;
     }
