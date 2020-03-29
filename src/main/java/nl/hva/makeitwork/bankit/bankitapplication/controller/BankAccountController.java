@@ -33,7 +33,7 @@ public class BankAccountController {
         return "account_overview";
     }
 
-    @PostMapping(value = "new/private")
+    @GetMapping(value = "new/private")
     public String newPrivateAccountHandler(Model model) {
         model.addAttribute("accounttype", "priverekening");
         return "confirm_new_private_account";

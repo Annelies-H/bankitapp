@@ -33,7 +33,7 @@ public class BankAccountControllerTest {
 
 
     @Test
-    //Test whether request returns Ok
+    //Test of een simpel getrequest daadwerkelijk een ok retouneert
     void whenConnectAccountRequest_thenReturns200() throws Exception {
         mockMvc.perform(get("/account/connect_account")
                 .contentType("application/json"))
