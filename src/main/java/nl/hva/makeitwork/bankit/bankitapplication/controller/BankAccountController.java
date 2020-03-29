@@ -44,9 +44,12 @@ public class BankAccountController {
         Customer customer = (Customer) model.getAttribute("customer");
         PrivateAccount account = bas.newPrivateAccount(customer);
         cs.addBankAccount(customer, account);
+        System.out.println("IK ZOU NU EEN ACCOUNT MOETEN HEBBEN");
+        System.out.println(account.getIban());
         model.addAttribute("account", account);
         model.addAttribute("accounttype", "priverekening");
         return "new_account_confirmed";
+     //     return "add_accountholder";
     }
 
     @GetMapping(value = "new/business")
