@@ -60,13 +60,13 @@ public class BankAccountService {
     /**
      * Create a new private bank account for the customer and update the database accordingly
      *
-     * @param accountHolder
+     * @param
      * @return new private account
      */
-    public BusinessAccount newBusinessAccount(Customer accountHolder, Company company) {
+    public BusinessAccount newBusinessAccount(Customer customer, Company company) {
         BusinessAccount newAccount = new BusinessAccount();
         newAccount.setCompany(company);
-        return (BusinessAccount) newAccountHelper(newAccount, accountHolder);
+        return (BusinessAccount) newAccountHelper(newAccount, customer);
     }
 
     /**
@@ -82,7 +82,7 @@ public class BankAccountService {
         badao.save(newAccount);
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
-        badao.save(newAccount);;
+        badao.save(newAccount);
         return newAccount;
     }
 

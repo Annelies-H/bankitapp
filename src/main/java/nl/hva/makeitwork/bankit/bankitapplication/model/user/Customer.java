@@ -8,6 +8,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Customer extends User {
@@ -97,6 +98,27 @@ public class Customer extends User {
         stringBuilder.append(" " + lastName);
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        Customer customer = (Customer) o;
+        return socialSecurityNumber.equals(customer.socialSecurityNumber) &&
+                privateAccounts.equals(customer.privateAccounts) &&
+                businessAccounts.equals(customer.businessAccounts) &&
+                firstName.equals(customer.firstName) &&
+                Objects.equals(prefix, customer.prefix) &&
+                lastName.equals(customer.lastName) &&
+                birthday.equals(customer.birthday) &&
+                gender.equals(customer.gender) &&
+                contactDetails.equals(customer.contactDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(socialSecurityNumber, privateAccounts, businessAccounts, firstName, prefix, lastName, birthday, gender, contactDetails);
     }
 
     public Integer getSocialSecurityNumber() {

@@ -78,6 +78,10 @@ public class BankAccountControllerTest {
         //Creeer een priveaccount en zorg dat de juiste methode in de BankAccountService wordt gemockt
         PrivateAccount privateAccount = new PrivateAccount();
         privateAccount.setIban("NL33BAIT0123456789");
+        //Onderstaande mock methode gebruikt de equals methodes van de klasses die als parameters worden megegeven
+        //Of als je (zoals in dit geval) verwijst naar het zelfde object in het geheugen
+        //Heb je geen equals methode of heb je geen zin om een geheel object op te tuigen dan moet je de paramter mocken
+        //In plaats van een object geef je als parameter Mockito.any(VulHierJeKlasseNaamIn.class) mee
         when(bservice.newPrivateAccount(customer)).thenReturn(privateAccount);
 
         //Test het postrequest
@@ -101,6 +105,10 @@ public class BankAccountControllerTest {
         account.setCompany(newCompany);
         account.setIban("NL33BAIT0123456789");
         System.out.println(account.getIban());
+        //Onderstaande methode gebruikt de equals methodes van de klasses die als paramters worden megegeven
+        //Heb je geen equals methode of heb je geen zin om een geheel object op te tuigen dan moet je de paramter mocken
+        //In plaats van een object geef je als parameter Mockito.any(VulHierJeKlasseNaamIn.class) mee
+        //when(bservice.newBusinessAccount(Mockito.any(Customer.class), Mockito.any(Company.class))).thenReturn(account);
         when(bservice.newBusinessAccount(customer, newCompany)).thenReturn(account);
 
         mockMvc.perform(post("/account/new/save_company")
