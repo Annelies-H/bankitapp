@@ -1,6 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.company;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Company {
@@ -19,6 +20,31 @@ public class Company {
         this.companyId = companyId;
         this.name = name;
         this.industry = industry;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyId=" + companyId +
+                ", name='" + name + '\'' +
+                ", industry=" + industry +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company)) return false;
+        Company company = (Company) o;
+        return companyId.equals(company.companyId) &&
+                name.equals(company.name) &&
+                industry == company.industry;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(companyId, name, industry);
     }
 
     public Integer getCompanyId() {

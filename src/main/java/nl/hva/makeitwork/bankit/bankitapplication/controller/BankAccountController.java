@@ -33,7 +33,7 @@ public class BankAccountController {
         return "account_overview";
     }
 
-    @PostMapping(value = "new/private")
+    @GetMapping(value = "new/private")
     public String newPrivateAccountHandler(Model model) {
         model.addAttribute("accounttype", "priverekening");
         return "confirm_new_private_account";
@@ -56,8 +56,10 @@ public class BankAccountController {
     }
 
     @PostMapping(value = "new/save_company")
-    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany, @ModelAttribute("customer") Customer customer) {
+    public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany) {
+        Customer customer = (Customer) model.getAttribute("customer");
         cdao.save(newCompany);
+        System.out.println("ik ben ben opgeslagen" + newCompany);
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);

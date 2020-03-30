@@ -5,6 +5,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @MappedSuperclass
 public abstract class Bankaccount {
@@ -120,10 +121,30 @@ public abstract class Bankaccount {
         return result == 1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bankaccount)) return false;
+        Bankaccount that = (Bankaccount) o;
+        return accountID == that.accountID &&
+                Double.compare(that.balance, balance) == 0 &&
+                Objects.equals(iban, that.iban) &&
+                Objects.equals(history, that.history);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountID, iban, history, balance);
+    }
+
     public abstract void addAccountHolder(Customer customer);
 
     public int getAccountID() {
         return accountID;
+    }
+
+    public void setAccountID(int id) {
+        this.accountID = id;
     }
 
     public String getIban() {

@@ -1,6 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Employee extends User {
@@ -19,6 +20,19 @@ public class Employee extends User {
 
     public Employee(Position position) {
         this.position = position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return position == employee.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 
     public Position getPosition() {

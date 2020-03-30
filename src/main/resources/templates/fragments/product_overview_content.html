@@ -66,11 +66,9 @@
                 Open nieuwe rekening
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuAccountType">
-                <form action="/account/new/private" method="post" class="private-form">
-                    <button class="dropdown-item" type="submit"
-                            onclick="window.location.href = '/account/new/private';">Nieuwe priverekening
-                    </button>
-                </form>
+                <button class="dropdown-item" type="button" onclick="window.location.href = '/account/new/private';">
+                    Nieuwe priverekening
+                </button>
                 <button class="dropdown-item" type="button" onclick="window.location.href = '/account/new/business';">
                     Nieuwe bedrijfsrekening
                 </button>

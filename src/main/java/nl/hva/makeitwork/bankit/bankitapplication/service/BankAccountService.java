@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
 public class BankAccountService {
-    private static final double INIT_BALANCE = 100;
+    public static final double INIT_BALANCE = 100;
 
     @Autowired
     private BusinessAccountDAO bdao;
@@ -54,20 +54,19 @@ public class BankAccountService {
 
     public PrivateAccount findPrivateAccountByIbanWithoutTransactionHistory(String iban) {
         Optional<PrivateAccount> selectedPrivateAccount = pdao.findPrivateAccountByIban(iban);
-
         return selectedPrivateAccount.orElse(null);
     }
 
     /**
      * Create a new private bank account for the customer and update the database accordingly
      *
-     * @param accountHolder
+     * @param
      * @return new private account
      */
-    public BusinessAccount newBusinessAccount(Customer accountHolder, Company company) {
+    public BusinessAccount newBusinessAccount(Customer customer, Company company) {
         BusinessAccount newAccount = new BusinessAccount();
         newAccount.setCompany(company);
-        return (BusinessAccount) newAccountHelper(newAccount, accountHolder);
+        return (BusinessAccount) newAccountHelper(newAccount, customer);
     }
 
     /**
@@ -80,10 +79,13 @@ public class BankAccountService {
         newAccount.setBalance(INIT_BALANCE);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
+        System.out.println(newAccount.getAccountID());
         badao.save(newAccount);
+        System.out.println(newAccount.getAccountID());
+        System.out.println(newAccount.getAccountID());
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
-        badao.save(newAccount);;
+        badao.save(newAccount);
         return newAccount;
     }
 
