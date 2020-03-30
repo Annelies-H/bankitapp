@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Service
 public class BankAccountService {
-    private static final double INIT_BALANCE = 100;
+    public static final double INIT_BALANCE = 100;
 
     @Autowired
     private BusinessAccountDAO bdao;
@@ -79,7 +79,10 @@ public class BankAccountService {
         newAccount.setBalance(INIT_BALANCE);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
+        System.out.println(newAccount.getAccountID());
         badao.save(newAccount);
+        System.out.println(newAccount.getAccountID());
+        System.out.println(newAccount.getAccountID());
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
         badao.save(newAccount);

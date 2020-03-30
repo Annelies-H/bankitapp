@@ -143,6 +143,10 @@ public abstract class Bankaccount {
         return accountID;
     }
 
+    public void setAccountID(int id) {
+        this.accountID = id;
+    }
+
     public String getIban() {
         return iban;
     }
