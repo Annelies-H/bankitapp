@@ -1,7 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.hva.makeitwork.bankit.bankitapplication.model.ContactDetails;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
@@ -18,14 +17,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//Hier geef je aan welke controller je gaat testen
+//Met de @WebMvcTest geef je aan welke controller je gaat testen
 @WebMvcTest(BankAccountController.class)
 public class BankAccountControllerTest {
 
@@ -108,6 +105,7 @@ public class BankAccountControllerTest {
 
         mockMvc.perform(post("/account/new/save_company")
                 .contentType("application/x-www-form-urlencoded")
+                //voeg een session attribute toe:
                 .sessionAttr("customer", customer)
                 //voeg de parameters uit het formulier toe aan de request
                 //weet je niet zeker welke er zijn en hoe ze er uit zien
@@ -115,7 +113,41 @@ public class BankAccountControllerTest {
                 .param("companyId", "12345678")
                 .param("name", "testbedrijf")
                 .param("industry", "INDUSTRY"))
+                //controleer de code van de response
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getProductOverviewAsCustomer() throws Exception {
+        Customer customer = new Customer();
+        customer.setGender("man");
+        customer.setFirstName("Donald");
+        customer.setLastName("Duck");
+
+        //mock de findCustomer methode die wordt aangeroepen in de controler
+        when(cservice.findCustomer(customer.getUsername())).thenReturn(customer);
+
+        mockMvc.perform(get("/account/overview")
+                .contentType("application/json")
+                //voeg de customer toe als session attribute:
+                .sessionAttr("customer", customer))
+                //controleer de http code van de response:
+                .andExpect(status().isOk())
+                //controleer of de juiste view wordt getoond:
+                .andExpect(view().name("product_overview"));
+    }
+
+    @Test
+    public void getProductOverviewAsEmployee() throws Exception {
+        mockMvc.perform(get("/account/overview")
+                .contentType("application/json"))
+                //Als er geen customer session attribuut is wordt de gebruiker geredirect
+                //In plaats van een 200 verwacht je nu een 302 http code (temporary redirect):
+                .andExpect(status().is3xxRedirection())
+                //Hij returned nu niet direct een view maar een redirct:
+                .andExpect(view().name("redirect:/intranet/dashboard"))
+                //Je kan ook direct testen dat er een redirect url is en wat deze behoort te zijn:
+                .andExpect(redirectedUrl("/intranet/dashboard"));
     }
 
 }
