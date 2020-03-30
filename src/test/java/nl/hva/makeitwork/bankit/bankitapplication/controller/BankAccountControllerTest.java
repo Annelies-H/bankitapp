@@ -107,7 +107,7 @@ public class BankAccountControllerTest {
         System.out.println(account.getIban());
         //Onderstaande methode gebruikt de equals methodes van de klasses die als paramters worden megegeven
         //Heb je geen equals methode of heb je geen zin om een geheel object op te tuigen dan moet je de paramter mocken
-        //In plaats van een object geef je als parameter Mockito.any(VulHierJeKlasseNaamIn.class) mee
+        //In plaats van een object geef je als parameter Mockito.any(VulHierJeKlasseNaamIn.class) mee, zie volgende regel
         //when(bservice.newBusinessAccount(Mockito.any(Customer.class), Mockito.any(Company.class))).thenReturn(account);
         when(bservice.newBusinessAccount(customer, newCompany)).thenReturn(account);
 

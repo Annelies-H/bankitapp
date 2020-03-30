@@ -3,6 +3,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.user;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @MappedSuperclass
 public abstract class User {
@@ -22,6 +23,22 @@ public abstract class User {
         this.userId = userId;
         this.username = username;
         setPassword(password);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return userId == user.userId &&
+                username.equals(user.username) &&
+                password.equals(user.password) &&
+                salt.equals(user.salt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, username, password, salt);
     }
 
     public int getUserId() {

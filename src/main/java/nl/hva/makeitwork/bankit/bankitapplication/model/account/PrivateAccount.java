@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class PrivateAccount extends Bankaccount {
@@ -32,6 +33,19 @@ public class PrivateAccount extends Bankaccount {
         accountHolders.add(customer);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PrivateAccount)) return false;
+        if (!super.equals(o)) return false;
+        PrivateAccount that = (PrivateAccount) o;
+        return accountHolders.equals(that.accountHolders);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), accountHolders);
+    }
 
     public List<Customer> getAccountHolders() {
         return accountHolders;

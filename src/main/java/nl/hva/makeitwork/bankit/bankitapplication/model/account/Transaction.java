@@ -2,6 +2,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Objects;
 
 @Entity
 public class Transaction {
@@ -32,6 +33,25 @@ public class Transaction {
         this.description = description;
         this.date = date;
         this.paymentMethod = paymentMethod;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transaction)) return false;
+        Transaction that = (Transaction) o;
+        return TransactionID == that.TransactionID &&
+                Double.compare(that.amount, amount) == 0 &&
+                ibanFrom.equals(that.ibanFrom) &&
+                ibanTo.equals(that.ibanTo) &&
+                description.equals(that.description) &&
+                date.equals(that.date) &&
+                paymentMethod == that.paymentMethod;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(TransactionID, ibanFrom, ibanTo, amount, description, date, paymentMethod);
     }
 
     public String getIbanFrom() {

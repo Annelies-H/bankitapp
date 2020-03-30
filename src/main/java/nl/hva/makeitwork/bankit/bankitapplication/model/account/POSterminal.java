@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class POSterminal {
@@ -28,6 +29,20 @@ public class POSterminal {
     public POSterminal(int POSid, BusinessAccount account) {
         this.POSid = POSid;
         this.account = account;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof POSterminal)) return false;
+        POSterminal that = (POSterminal) o;
+        return POSid == that.POSid &&
+                account.equals(that.account);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(POSid, account);
     }
 
     public int getPOSid() {
