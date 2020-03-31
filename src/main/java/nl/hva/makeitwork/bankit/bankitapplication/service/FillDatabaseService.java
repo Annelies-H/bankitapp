@@ -105,42 +105,27 @@ public class FillDatabaseService {
 
     public List<BusinessAccount> addbusinessAccounts(List<Company> companies, List<Customer> customers) {
         List<BusinessAccount> businessAccounts = new ArrayList<>();
-        BusinessAccount account;
 
-        account = new BusinessAccount();
-        account.setCompany(companies.get(0));
-        account.setBalance(358);
-        account.setIban("NL03BAIT0325489621");
-        account.getAccountHolders().add(customers.get(0));
-        businessAccountDAO.save(account);
-        businessAccounts.add(account);
-
-        account = new BusinessAccount();
-        account.setCompany(companies.get(1));
-        account.setBalance(194687164.23);
-        account.setIban("NL29BAIT0201460006");
-        account.getAccountHolders().add(customers.get(2));
-        businessAccountDAO.save(account);
-        businessAccounts.add(account);
-
-        account = new BusinessAccount();
-        account.setCompany(companies.get(1));
-        account.setBalance(213070);
-        account.setIban("NL29BAIT0201460007");
-        account.getAccountHolders().add(customers.get(2));
-        account.getAccountHolders().add(customers.get(1));
-        businessAccountDAO.save(account);
-        businessAccounts.add(account);
-
-        account = new BusinessAccount();
-        account.setCompany(companies.get(2));
-        account.setBalance(3156743);
-        account.setIban("NL72BAIT0201460051");
-        account.getAccountHolders().add(customers.get(1));
-        businessAccountDAO.save(account);
-        businessAccounts.add(account);
+        businessAccounts.add(newBusinessAccount(companies.get(0), 358, "NL03BAIT0325489621", new Customer[]{customers.get(0)}));
+        businessAccounts.add(newBusinessAccount(companies.get(1), 194687164.23, "NL29BAIT0201460006", new Customer[]{customers.get(2)}));
+        businessAccounts.add(newBusinessAccount(companies.get(1), 213070, "NL29BAIT0201460007", new Customer[]{customers.get(1), customers.get(2)}));
+        businessAccounts.add(newBusinessAccount(companies.get(2), 3156743, "NL72BAIT0201460051", new Customer[]{customers.get(1)}));
 
         return businessAccounts;
+    }
+
+    public BusinessAccount newBusinessAccount(Company company, double balance, String iban, Customer[] accountHolders) {
+        BusinessAccount account = new BusinessAccount();
+        account.setCompany(company);
+        account.setBalance(balance);
+        account.setIban(iban);
+
+        for (Customer accountHolder : accountHolders) {
+            account.addAccountHolder(accountHolder);
+        }
+
+        businessAccountDAO.save(account);
+        return account;
     }
 
     public List<PrivateAccount> addPrivateAccounts(List<Customer> customers) {
