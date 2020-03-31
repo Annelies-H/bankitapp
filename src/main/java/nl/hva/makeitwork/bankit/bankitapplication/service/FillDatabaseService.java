@@ -34,9 +34,8 @@ public class FillDatabaseService {
     @Autowired
     private TransactionDAO transactionDAO;
 
-
-    //Gebruikt om te kijken of de database connectie werkt
-    //Genereer van elke klasse een object en sla deze op in de database.
+    // Gebruikt om te kijken of de database connectie werkt
+    // Genereer van elke klasse een object en sla deze op in de database.
     public FillDatabaseService() {
         super();
     }
@@ -49,7 +48,7 @@ public class FillDatabaseService {
         List<BusinessAccount> bAccounts = addbusinessAccounts(companies, customers);
         addPOSterminal(bAccounts.get(0));
 
-        //add bankaccounts to customers accountlist
+        // add bankaccounts to customers accountlist
         updateCustomerBusinessAccount(customers.get(0), bAccounts.get(0));
         updateCustomerBusinessAccount(customers.get(1), bAccounts.get(1));
         updateCustomerBusinessAccount(customers.get(2), bAccounts.get(1));
@@ -61,11 +60,16 @@ public class FillDatabaseService {
 
         // add transactions
         addTransaction(bAccounts.get(0).getIban(), pAccounts.get(0).getIban(), 70, PaymentMethod.ATM, "Geldautomaat");
-        addTransaction(bAccounts.get(0).getIban(), pAccounts.get(0).getIban(), 2100, PaymentMethod.BANKTRANSFER, "Loon");
-        addTransaction(bAccounts.get(2).getIban(), pAccounts.get(1).getIban(), 1562, PaymentMethod.BANKTRANSFER, "Loon");
-        addTransaction(pAccounts.get(0).getIban(), bAccounts.get(1).getIban(), 999, PaymentMethod.POS, "Computer gekocht");
-        addTransaction(pAccounts.get(1).getIban(), bAccounts.get(1).getIban(), 1099, PaymentMethod.POS, "Laptop gekocht");
-        addTransaction(pAccounts.get(2).getIban(), bAccounts.get(0).getIban(), 3.50, PaymentMethod.POS, "Pijnboompit gekocht");
+        addTransaction(bAccounts.get(0).getIban(), pAccounts.get(0).getIban(), 2100, PaymentMethod.BANKTRANSFER,
+                "Loon");
+        addTransaction(bAccounts.get(2).getIban(), pAccounts.get(1).getIban(), 1562, PaymentMethod.BANKTRANSFER,
+                "Loon");
+        addTransaction(pAccounts.get(0).getIban(), bAccounts.get(1).getIban(), 999, PaymentMethod.POS,
+                "Computer gekocht");
+        addTransaction(pAccounts.get(1).getIban(), bAccounts.get(1).getIban(), 1099, PaymentMethod.POS,
+                "Laptop gekocht");
+        addTransaction(pAccounts.get(2).getIban(), bAccounts.get(0).getIban(), 3.50, PaymentMethod.POS,
+                "Pijnboompit gekocht");
 
         System.out.println("**** Database gevuld met testdata *****");
     }
@@ -80,7 +84,8 @@ public class FillDatabaseService {
         customerDAO.save(customer);
     }
 
-    public void addTransaction(String fromIban, String toIban, double amount, PaymentMethod paymentMethod, String description) {
+    public void addTransaction(String fromIban, String toIban, double amount, PaymentMethod paymentMethod,
+            String description) {
 
         Calendar date = Calendar.getInstance();
 
@@ -177,7 +182,6 @@ public class FillDatabaseService {
         String birthday;
         Customer customer;
 
-
         contact = new ContactDetails();
         contact.setEmail("LiesjeLeerd@LotjeLopen.nl");
         contact.setHouseNumber(101);
@@ -202,12 +206,12 @@ public class FillDatabaseService {
         contact.setZipcode("1337YO");
         birthday = "1900-01-01";
         customer = new Customer();
-        customer.setSocialSecurityNumber(68149971);
+        customer.setSocialSecurityNumber(268149971);
         customer.setContactDetails(contact);
         customer.setFirstName("Donald");
         customer.setGender("man");
         customer.setLastName("Duck");
-        //customer.setPrefix("");
+        // customer.setPrefix("");
         customer.setUsername("Donald");
         customer.setPassword("<3katrien");
         customer.setBirthday(birthday);
@@ -220,12 +224,12 @@ public class FillDatabaseService {
         contact.setZipcode("1000MS");
         birthday = "1951-08-21";
         customer = new Customer();
-        customer.setSocialSecurityNumber(91961343);
+        customer.setSocialSecurityNumber(291961343);
         customer.setContactDetails(contact);
         customer.setFirstName("Bill");
         customer.setGender("man");
         customer.setLastName("Gates");
-        //customer.setPrefix("");
+        // customer.setPrefix("");
         customer.setUsername("Bill");
         customer.setPassword("iloveM$");
         customer.setBirthday(birthday);

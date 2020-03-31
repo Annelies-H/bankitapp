@@ -65,10 +65,8 @@ public class EmployeeController {
     }
 
     @PostMapping("login")
-    public String loginHandler(
-            @RequestParam(name = "user_name") String username,
-            @RequestParam(name = "user_password") String password,
-            Model model) {
+    public String loginHandler(@RequestParam(name = "user_name") String username,
+            @RequestParam(name = "user_password") String password, Model model) {
         Employee employee = employeeService.findEmployee(username);
         if (employee != null && loginService.passwordCheck(password, employee)) {
             model.addAttribute("employee", employee);
@@ -81,7 +79,7 @@ public class EmployeeController {
     @GetMapping("dashboard")
     public String dashboardHandler(Model model) {
 
-        Employee employee = (Employee)model.getAttribute("employee");
+        Employee employee = (Employee) model.getAttribute("employee");
 
         if (employee == null) {
             return "redirect:/intranet";
@@ -94,8 +92,7 @@ public class EmployeeController {
             model.addAttribute("businessAccounts", businessAccounts);
         } else if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
             model.addAttribute("privateAccounts", privateAccounts);
-        }
-        else {
+        } else {
             model.addAttribute("businessAccounts", businessAccounts);
             model.addAttribute("privateAccounts", privateAccounts);
         }
