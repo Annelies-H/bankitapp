@@ -11,7 +11,12 @@
         <div class="container">
             <div style="background:transparent !important" class="jumbotron">
                 <h1 class="display-4">Word nu klant</h1>
+
                 <p class="lead">Voer uw gegevens in om een account aan te maken.</p>
+                <div id="ssnAlert">
+                    <p id="ssnError"></p>
+                </div>
+
 
                 <form action="#" th:action="@{/customer/save}" th:object="${customer}" method="post" class="main-form">
                     <div class="row">
@@ -20,6 +25,7 @@
                             <input type="text" id="socialSecurityNumber" th:field="*{socialSecurityNumber}"
                                 class="form-control" placeholder="...5789" required pattern="[0-9]{9}"
                                 title="Het burgerservicenummer moet uit negen cijfers bestaan.">
+
                         </div>
                     </div>
                     <div class="row">
@@ -121,24 +127,61 @@
                     <input type="submit" value="Maak account" class="btn btn-primary">
                 </form>
             </div><!-- /.jumbotron -->
-        </div><!-- /.container -->
-        <script>
-            function minAge() {
-                let today = new Date();
-                let dd = today.getDate();
-                let mm = today.getMonth() + 1;
-                let yyyy = today.getFullYear() - 18; //min age for making account
-                if (dd < 10) {
-                    dd = '0' + dd;
+            <script>
+                document.getElementById("birthday").setAttribute("max", minAge())
+
+                function minAge() {
+                    let today = new Date();
+                    let dd = today.getDate();
+                    let mm = today.getMonth() + 1;
+                    let yyyy = today.getFullYear() - 18; //minimum van 18 jaar.
+                    if (dd < 10) {
+                        dd = '0' + dd;
+                    }
+
+                    if (mm < 10) {
+                        mm = '0' + mm;
+                    }
+
+                    return yyyy + "-" + mm + "-" + dd;
                 }
 
-                if (mm < 10) {
-                    mm = '0' + mm;
-                }
-                let minAge = yyyy + '-' + mm + '-' + dd;
-                document.getElementById("birthday").setAttribute("max", minAge);
-            }
-        </script>
+
+                let inputValue = document.getElementById("socialSecurityNumber");
+                inputValue.addEventListener("input", function () {
+                    let ssn = inputValue.value;
+
+                    if (ssn.length == 9) {
+
+                        let URL = `http://localhost:8080/api/ssn_check/${ssn}`; // API URL voor de request
+
+                        fetch(URL) // API URL
+                            .then((response) => {
+                                if (!response.ok) {// Methode is een boolean en geeft true bij een een status 200-299
+                                    throw new Error("Error with respons"); // gooit een error met een message
+                                }
+                                return response.json(); // Zet de JSON promise om in een javascript object
+                            })
+                            .then((data) => { // promise => Javascript object met data.
+                                console.log(data)
+                                if (data == true) {
+                                    document.querySelector("#ssnAlert").setAttribute("class", "alert alert-danger", "role", "alert");
+                                    document.querySelector("#ssnError").textContent = "Account met BSN is al bekend.";
+                                }
+
+                                // template string en zet hem in de html
+                            })
+                            .catch((error) => {
+                                console.log(error); // handelt de errors af en drukt ze af in de console
+                            })
+                    } else {
+                        document.querySelector("#ssnAlert").removeAttribute("class", "role");
+                        document.querySelector("#ssnError").textContent = "";
+                    }
+                });
+
+            </script>
+        </div><!-- /.container -->
     </div>
 </body>
 
