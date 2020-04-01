@@ -25,8 +25,8 @@ public class LoginServiceTest {
         }
     }
 
-    @Autowired
-    private LoginService loginService;
+    //@Autowired
+    private LoginService loginService = new LoginService();
 
     @Test
     public void passwordCheckTest() {

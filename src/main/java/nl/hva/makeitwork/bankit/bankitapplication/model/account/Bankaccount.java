@@ -72,20 +72,17 @@ public abstract class Bankaccount {
     }
 
     public static String constructIBAN(int accountID) {
-        String result = "";
         String preIban = num(accountID);
-        int checkD = generateCheckDigits(preIban);
-        if (checkD > 9) {
-            result = "NL" + checkD + "BAIT" + preIban;
-        } else {
-            result = "NL0" + checkD + "BAIT" + preIban;
-        } // ensure the 01 .. 09
-        return result;
+        return buildIBAN(preIban);
     }
 
     public static String constructIBANBiz(int accountID) {
-        String result = "";
         String preIban = numBiz(accountID);
+        return buildIBAN(preIban);
+    }
+
+    private static String buildIBAN(String preIban) {
+        String result;
         int checkD = generateCheckDigits(preIban);
         if (checkD > 9) {
             result = "NL" + checkD + "BAIT" + preIban;
