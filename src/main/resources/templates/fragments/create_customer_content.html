@@ -153,7 +153,7 @@
 
                     if (ssn.length == 9) {
 
-                        let URL = `http://localhost:8080/api/ssn_check/${ssn}`; // API URL voor de request
+                        let URL = `http://miw-team-2.nl/api/ssn_check/${ssn}`; // API URL voor de request
 
                         fetch(URL) // API URL
                             .then((response) => {
@@ -168,8 +168,6 @@
                                     document.querySelector("#ssnAlert").setAttribute("class", "alert alert-danger", "role", "alert");
                                     document.querySelector("#ssnError").textContent = "Account met BSN is al bekend.";
                                 }
-
-                                // template string en zet hem in de html
                             })
                             .catch((error) => {
                                 console.log(error); // handelt de errors af en drukt ze af in de console
