@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/base :: head">
+
+</head>
+<body class="errorpage ">
+<div class="container text-center">
+    <h2 class="errorh2" th:text="${status + ' ' + error}"></h2><br/>
+    <h1 class="errorh1" >Nothing to see here</h1>
+
+    <a class="try" th:href="index"><h3 class="errorh3">Go back</h3></a>
+
+</div>
+<div th:insert="fragments/base :: script"></div>
+</body>
+</html>
