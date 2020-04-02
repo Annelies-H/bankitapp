@@ -46,4 +46,30 @@
     width: 134px;
     margin: auto
 }
+.errorpage{
+    background-image: url("img/error2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.errorh1{
+    color:white;
+    font-size: 600%;
+    margin-bottom:5%;
+}
 
+.errorh2{
+color:white;
+margin-top:30%;
+font-size:400%;
+}
+
+.errorh3{
+
+    color:white;
+    font-size: 200%;
+}
+
+.try{
+    text-decoration: none;
+    color: white;
+}
