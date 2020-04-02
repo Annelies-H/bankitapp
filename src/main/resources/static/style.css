@@ -47,7 +47,7 @@
     margin: auto
 }
 .errorpage{
-    background-image: url("img/error.jpg");
+    background-image: url("img/error2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -64,6 +64,7 @@ font-size:400%;
 }
 
 .errorh3{
+
     color:white;
     font-size: 200%;
 }
