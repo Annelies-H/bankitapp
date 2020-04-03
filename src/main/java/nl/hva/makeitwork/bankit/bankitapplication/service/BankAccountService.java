@@ -5,12 +5,8 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Transaction;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
-
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +24,7 @@ public class BankAccountService {
     @Autowired
     private PrivateAccountDAO pdao;
     @Autowired
-    private CustomerDAO cdao;
+    private CompanyDAO cdao;
     @Autowired
     private TransactionService tService;
     @Autowired
@@ -54,6 +50,7 @@ public class BankAccountService {
      * @return new business account
      */
     public BusinessAccount newBusinessAccount(Customer customer, Company company) {
+        cdao.save(company);
         BusinessAccount newAccount = new BusinessAccount();
         newAccount.setCompany(company);
         return (BusinessAccount) newAccountHelper(newAccount, customer);
