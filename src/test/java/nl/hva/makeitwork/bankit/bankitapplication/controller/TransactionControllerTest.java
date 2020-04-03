@@ -1,13 +1,19 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Transaction;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.TransactionDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -46,16 +53,15 @@ class TransactionControllerTest {
 
     @Test
     void testNewTransactionOverviewHandler() throws Exception{
-        int id = 1;
 
-/*
-        Mockito.doNothing().when(bService).addAccountToModelByIdWithoutTransactions(Mockito.anyInt(),Mockito.any(Model.class));
-*/
+        Transaction transaction = new Transaction();
 
-        mockMvc.perform(get("/transaction/new_transaction${id}", id)
-                .contentType("application"))
+        mockMvc.perform(get("/transaction/new_transaction").queryParam("id","1")
+                .contentType("application")
+               // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
+                .flashAttr("account", mock(Bankaccount.class)))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("transaction", Mockito.any(Transaction.class)))
+               /* .andExpect(model().attribute("transaction", transaction))*/
                 .andExpect(view().name("new_transaction"));
     }
 
