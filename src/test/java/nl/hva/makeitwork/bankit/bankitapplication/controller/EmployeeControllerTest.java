@@ -1,6 +1,5 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
@@ -24,9 +23,6 @@ public class EmployeeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     EmployeeService employeeService;
