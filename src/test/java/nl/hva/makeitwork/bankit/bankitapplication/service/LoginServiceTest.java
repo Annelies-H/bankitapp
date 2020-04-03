@@ -8,7 +8,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +60,6 @@ public class LoginServiceTest {
         predicted = true;
         assertEquals(actual, predicted);
 
-
     }
 
     @Test
@@ -84,7 +82,5 @@ public class LoginServiceTest {
         predicted = "a8c0f18e0bd50d6d28237d0d4ff3d565d25ea12245f192c61385af39d93bea04bc738a39150cad081aaba22a2df7baa41ad9593c895f0b845f080fca9f95ef34";
         assertThat(actual.equals(predicted));
     }
-
-
 
 }
