@@ -46,12 +46,13 @@ class TransactionControllerTest {
 
     @Test
     void testNewTransactionOverviewHandler() throws Exception{
-        int id = Mockito.anyByte();
-        Model model = Mockito.any(Model.class);
-        Mockito.when(bService.addAccountToModelByIdWithoutTransactions(id, model)).thenReturn();
+        int id = 1;
 
-        
-        mockMvc.perform(get("/transaction/new_transaction/{id}", id )
+/*
+        Mockito.doNothing().when(bService).addAccountToModelByIdWithoutTransactions(Mockito.anyInt(),Mockito.any(Model.class));
+*/
+
+        mockMvc.perform(get("/transaction/new_transaction${id}", id)
                 .contentType("application"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("transaction", Mockito.any(Transaction.class)))
