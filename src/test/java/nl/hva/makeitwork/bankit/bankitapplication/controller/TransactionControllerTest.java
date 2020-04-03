@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -52,24 +53,27 @@ class TransactionControllerTest {
 
 
     @Test
-    void testNewTransactionOverviewHandler() throws Exception{
+    void testNewTransactionOverviewHandler() throws Exception {
 
-        Transaction transaction = new Transaction();
-
-        mockMvc.perform(get("/transaction/new_transaction").queryParam("id","1")
+        mockMvc.perform(get("/transaction/new_transaction").queryParam("id", "1")
                 .contentType("application")
-               // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
+                // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
                 .flashAttr("account", mock(Bankaccount.class)))
                 .andExpect(status().isOk())
-               /* .andExpect(model().attribute("transaction", transaction))*/
+                .andExpect(model().attributeExists("transaction"))
                 .andExpect(view().name("new_transaction"));
     }
 
-   /* @Test
-    void newTransactionHandler() throws Exception{
-    }
-
     @Test
-    void saveTransaction() throws Exception{
-    }*/
+    void saveTransaction() throws Exception {
+
+        mockMvc.perform(post("/transaction/save_transaction").queryParam("id", "1")
+                .contentType("application")
+                // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
+                .flashAttr("account", mock(Bankaccount.class)))
+                .andExpect(status().is3xxRedirection())
+              /*  .andExpect(model().attributeExists("transaction"))*/
+                .andExpect(redirectedUrl("/account/selected_bankaccount?id=1"));
+
+    }
 }
