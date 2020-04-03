@@ -100,11 +100,9 @@ public class BankAccountControllerTest {
         //Creer een bankaccount en daarmee de bankrekening
         //zorg dat deze in de controller gegenereerd wordt met de mockservice
         Company newCompany = new Company(12345678, "testbedrijf", Industry.INDUSTRY);
-        System.out.println(newCompany);
         BusinessAccount account = new BusinessAccount();
         account.setCompany(newCompany);
         account.setIban("NL33BAIT0123456789");
-        System.out.println(account.getIban());
         //Onderstaande methode gebruikt de equals methodes van de klasses die als paramters worden megegeven
         //Heb je geen equals methode of heb je geen zin om een geheel object op te tuigen dan moet je de paramter mocken
         //In plaats van een object geef je als parameter Mockito.any(VulHierJeKlasseNaamIn.class) mee, zie volgende regel

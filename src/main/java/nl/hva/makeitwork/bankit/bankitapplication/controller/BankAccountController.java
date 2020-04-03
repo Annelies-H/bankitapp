@@ -59,7 +59,6 @@ public class BankAccountController {
     public String saveCompanyHandler(Model model, @ModelAttribute("company") Company newCompany) {
         Customer customer = (Customer) model.getAttribute("customer");
         cdao.save(newCompany);
-        System.out.println("ik ben ben opgeslagen" + newCompany);
         BusinessAccount account = bas.newBusinessAccount(customer, newCompany);
         cs.addBankAccount(customer, account);
         model.addAttribute("account", account);

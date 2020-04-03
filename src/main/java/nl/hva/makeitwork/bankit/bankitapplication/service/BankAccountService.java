@@ -47,21 +47,11 @@ public class BankAccountService {
         return (PrivateAccount) newAccountHelper(newAccount, accountHolder);
     }
 
-    public PrivateAccount findPrivateAccountByID(int id) {
-        Optional<PrivateAccount> selectedPrivateAccount = pdao.findByAccountID(id);
-        return selectedPrivateAccount.orElse(null);
-    }
-
-    public PrivateAccount findPrivateAccountByIbanWithoutTransactionHistory(String iban) {
-        Optional<PrivateAccount> selectedPrivateAccount = pdao.findPrivateAccountByIban(iban);
-        return selectedPrivateAccount.orElse(null);
-    }
-
     /**
-     * Create a new private bank account for the customer and update the database accordingly
+     * Create a new business bank account for the customer and update the database accordingly
      *
      * @param
-     * @return new private account
+     * @return new business account
      */
     public BusinessAccount newBusinessAccount(Customer customer, Company company) {
         BusinessAccount newAccount = new BusinessAccount();
@@ -79,14 +69,21 @@ public class BankAccountService {
         newAccount.setBalance(INIT_BALANCE);
         newAccount.setIban("");
         newAccount.addAccountHolder(accountHolder);
-        System.out.println(newAccount.getAccountID());
         badao.save(newAccount);
-        System.out.println(newAccount.getAccountID());
-        System.out.println(newAccount.getAccountID());
         String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
         newAccount.setIban(iban);
         badao.save(newAccount);
         return newAccount;
+    }
+
+    public PrivateAccount findPrivateAccountByID(int id) {
+        Optional<PrivateAccount> selectedPrivateAccount = pdao.findByAccountID(id);
+        return selectedPrivateAccount.orElse(null);
+    }
+
+    public PrivateAccount findPrivateAccountByIbanWithoutTransactionHistory(String iban) {
+        Optional<PrivateAccount> selectedPrivateAccount = pdao.findPrivateAccountByIban(iban);
+        return selectedPrivateAccount.orElse(null);
     }
 
     public BusinessAccount findBusinessAccountByID(int id) {

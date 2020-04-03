@@ -119,6 +119,16 @@ public abstract class Bankaccount {
     }
 
     @Override
+    public String toString() {
+        return "Bankaccount{" +
+                "accountID=" + accountID +
+                ", iban='" + iban + '\'' +
+                ", history=" + history +
+                ", balance=" + balance +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Bankaccount)) return false;
