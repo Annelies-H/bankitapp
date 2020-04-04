@@ -34,9 +34,6 @@ class TransactionControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private TransactionDAO tDAO;
 
@@ -72,7 +69,6 @@ class TransactionControllerTest {
                 // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
                 .flashAttr("account", mock(Bankaccount.class)))
                 .andExpect(status().is3xxRedirection())
-              /*  .andExpect(model().attributeExists("transaction"))*/
                 .andExpect(redirectedUrl("/account/selected_bankaccount?id=1"));
 
     }
