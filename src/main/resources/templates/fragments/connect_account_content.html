@@ -7,10 +7,39 @@
 <body>
 <div th:fragment="add_accountholder">
     <div class="container pt-3 plus">
-        <h2>Momenteel is het nog niet mogelijk om via de website een nieuwe accounthouder toe te voegen
-            op uw rekening. Neem contact op met uw lokale bank.</h2>
+        <h2>Under Construction</h2>
+        <br>
+
+        <form method="post">
+            <label for="username">Vul hier de gebruikersnaam in van de persoon die u toe wilt voegen als rekeninghouder</label>
+            <input type="text" id="username" name="username" onblur="checkExist()"/>
+            <p id="response"></p>
+
+        </form>
+
+
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
+        <script>
+            function checkExist() {
+                let xmlhttp = new XMLHttpRequest();
+                let username = document.getElementById("username").value;
+                let response = username + " is ingevoerd als gebruikersnaam";
+                document.getElementById("response").innerText = response;
+
+            }
+        </script>
+
+    </div>
+</div>
+<div th:fragment="not_available">
+    <div class="container pt-3 plus">
+            <h2>Momenteel is het nog niet mogelijk om via de website een nieuwe accounthouder toe te voegen
+                op uw rekening. Neem contact op met uw lokale bank.</h2>
+            <br>
+            <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
     </div>
 </div>
 </body>
