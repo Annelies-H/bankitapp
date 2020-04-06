@@ -11,8 +11,8 @@
         <br>
 
         <form method="post">
-            <label for="username">Vul hier de gebruikersnaam in van de persoon die u toe wilt voegen als rekeninghouder</label>
-            <input type="text" id="username" name="username" onblur="checkExist()"/>
+            <label for="bsn">Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder</label>
+            <input type="text" id="bsn" name="bsn" onblur="checkExist()"/>
             <p id="response"></p>
 
         </form>
@@ -24,10 +24,31 @@
         <script>
             function checkExist() {
                 let xmlhttp = new XMLHttpRequest();
-                let username = document.getElementById("username").value;
-                let response = username + " is ingevoerd als gebruikersnaam";
+                let bsn = document.getElementById("bsn").value;
+                let url = "http://miw-team-2.nl/api/ssn_check/" + bsn;
                 document.getElementById("response").innerText = response;
 
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        if(xmlhttp.response == "false") {
+                            document.getElementById("response").style.color = "red";
+                            message = bsn + " is niet bekend als klant.";
+                        }
+                        else {
+                            document.getElementById("response").style.color = "green";
+                            message = bsn + " geselecteerd als mederekeninghouder."
+                        }
+                        document.getElementById("response").innerText = message;
+                    }
+                };
+
+                try {
+                    xmlhttp.open("GET",url,true);
+                    xmlhttp.send();
+                }
+                catch(e) {
+                    alert("unable to connect to server");
+                }
             }
         </script>
 
