@@ -11,10 +11,13 @@
         <br>
 
         <form method="post" th:action="@{save_connect_request}" th:object="${request}">
-            <label for="iban">Kies de (prive)rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
+            <label for="iban">Kies de rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
             <select id="iban" name="iban" class="form-control">
+                <option disabled>Kies een rekening...</option>
                 <option th:each="privateAccount : ${customer.privateAccounts}"
                         th:value="${privateAccount.iban}" th:text="${privateAccount.iban}"></option>
+                <option th:each="businessAccount : ${customer.businessAccounts}"
+                        th:value="${businessAccount.iban}" th:text="${businessAccount.iban}"></option>
             </select>
             <label for="bsn"><br>Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
             <input type="text" id="bsn" name="bsn" class="form-control" onblur="checkExist()"
@@ -81,7 +84,14 @@
 </div>
 <div th:fragment="request_submitted">
     <div class="container pt-3 plus">
-        <h2>Uw verzoek is verstuurd.</h2>
+        <h2>Verzoek verstuurd</h2>
+        <p>Uw verzoek om onze klant met bsn <span th:text="${request.bsn}"></span> als mederekeninghouder toe te voegen voor
+            uw rekening met rekeningnummer <span th:text="${request.iban}"></span> is verstuurd naar uw bank. Wij zullen
+            contact opnemen met uw beoogd rekeninghouder om uw verzoek te bevestigen.
+        </p>
+        <p>Uw geheime code is: <span th:text="${request.secretCode}"></span><br>
+           Geef deze code door aan uw beoogd rekeninghouder. Zonder deze code kan het proces niet worden voltooid.
+        </p>
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
