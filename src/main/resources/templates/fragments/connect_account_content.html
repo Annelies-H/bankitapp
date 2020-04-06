@@ -26,21 +26,8 @@
                 let xmlhttp = new XMLHttpRequest();
                 let bsn = document.getElementById("bsn").value;
                 let url = "http://miw-team-2.nl/api/ssn_check/" + bsn;
-                document.getElementById("response").innerText = response;
 
-                xmlhttp.onreadystatechange = function(){
-                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                        if(xmlhttp.response == "false") {
-                            document.getElementById("response").style.color = "red";
-                            message = bsn + " is niet bekend als klant.";
-                        }
-                        else {
-                            document.getElementById("response").style.color = "green";
-                            message = bsn + " geselecteerd als mederekeninghouder."
-                        }
-                        document.getElementById("response").innerText = message;
-                    }
-                };
+                setOnReadyStateChange(xmlhttp);
 
                 try {
                     xmlhttp.open("GET",url,true);
@@ -49,6 +36,23 @@
                 catch(e) {
                     alert("unable to connect to server");
                 }
+            }
+
+            function setOnReadyStateChange(xmlhttp) {
+                let bsn = document.getElementById("bsn").value;
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        if(xmlhttp.response == "false") {
+                            document.getElementById("response").style.color = "red";
+                            message = "Er is bij ons geen klant met bsn " + bsn + " bij ons bekend.";
+                        }
+                        else {
+                            document.getElementById("response").style.color = "green";
+                            message = "Klant met bsn " + bsn + " geselecteerd als mederekeninghouder."
+                        }
+                        document.getElementById("response").innerText = message;
+                    }
+                };
             }
         </script>
 
