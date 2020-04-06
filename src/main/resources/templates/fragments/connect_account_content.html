@@ -7,10 +7,69 @@
 <body>
 <div th:fragment="add_accountholder">
     <div class="container pt-3 plus">
-        <h2>Momenteel is het nog niet mogelijk om via de website een nieuwe accounthouder toe te voegen
-            op uw rekening. Neem contact op met uw lokale bank.</h2>
+        <h2>Under Construction</h2>
+        <br>
+
+        <form method="post">
+            <label for="account">Kies de (prive)rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
+            <select id="account" class="form-control">
+                <option th:each="privateAccount : ${customer.privateAccounts}"
+                        th:value="${privateAccount}" th:text="${privateAccount.iban}"></option>
+            </select>
+            <label for="bsn">Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
+            <input type="text" id="bsn" name="bsn" onblur="checkExist()"/>
+            <p id="response"></p>
+
+        </form>
+
+
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
+        <script>
+            function checkExist() {
+                let xmlhttp = new XMLHttpRequest();
+                let bsn = document.getElementById("bsn").value;
+                let url = "http://miw-team-2.nl/api/ssn_check/" + bsn;
+
+                setOnReadyStateChange(xmlhttp);
+
+                try {
+                    xmlhttp.open("GET",url,true);
+                    xmlhttp.send();
+                }
+                catch(e) {
+                    alert("unable to connect to server");
+                }
+            }
+
+            function setOnReadyStateChange(xmlhttp) {
+                let bsn = document.getElementById("bsn").value;
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        if(xmlhttp.response == "false") {
+                            document.getElementById("response").style.color = "red";
+                            message = "Er is bij ons geen klant met bsn " + bsn + " bij ons bekend.";
+                        }
+                        else {
+                            document.getElementById("response").style.color = "green";
+                            message = "Klant met bsn " + bsn + " geselecteerd als mederekeninghouder."
+                        }
+                        document.getElementById("response").innerText = message;
+                    }
+                };
+            }
+        </script>
+
+    </div>
+</div>
+<div th:fragment="not_available">
+    <div class="container pt-3 plus">
+            <h2>Momenteel is het nog niet mogelijk om via de website een nieuwe accounthouder toe te voegen
+                op uw rekening. Neem contact op met uw lokale bank.</h2>
+            <br>
+            <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
     </div>
 </div>
 </body>
