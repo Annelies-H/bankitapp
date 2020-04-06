@@ -31,6 +31,7 @@
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
         <script>
+            let bsnExists = false;
             function checkExist() {
                 let xmlhttp = new XMLHttpRequest();
                 let bsn = document.getElementById("bsn").value;
@@ -54,16 +55,26 @@
                         if(xmlhttp.response == "false") {
                             document.getElementById("response").style.color = "red";
                             message = "Er is bij ons geen klant met bsn " + bsn + " bekend.";
+                            bsnExists = false;
                         }
                         else {
                             document.getElementById("response").style.color = "green";
                             message = "Klant met bsn " + bsn + " geselecteerd als mederekeninghouder."
+                            bsnExists = true;
                         }
                         document.getElementById("response").innerText = message;
                     }
                 };
             }
         </script>
+
+    </div>
+</div>
+<div th:fragment="request_submitted">
+    <div class="container pt-3 plus">
+        <h2>Uw verzoek is verstuurd.</h2>
+        <br>
+        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
     </div>
 </div>

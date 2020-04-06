@@ -9,7 +9,7 @@ public class AddAccountholderRequest {
     @Id
     @GeneratedValue
     @Column(nullable = false)
-    private int id;
+    private int id = 0;
     @Column(nullable = false)
     String iban;
     @Column(nullable = false)

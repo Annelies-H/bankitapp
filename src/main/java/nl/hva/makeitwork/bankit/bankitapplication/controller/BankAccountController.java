@@ -5,6 +5,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+import nl.hva.makeitwork.bankit.bankitapplication.service.AddAccountHolderService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class BankAccountController {
     private CustomerService cs;
     @Autowired
     private BankAccountService bas;
+    @Autowired
+    private AddAccountHolderService aahs;
 
     @GetMapping("selected_bankaccount")
     public String bankaccountOverviewHandler(@RequestParam int id, Model model) {
@@ -67,8 +70,9 @@ public class BankAccountController {
 
     @PostMapping(value="save_connect_request")
     public String saveConnectRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
+        aahs.saveRequest(request);
         System.out.println(request);
-        return "under_construction";
+        return "accountholder_request_submitted";
     }
 
     @GetMapping("overview")
