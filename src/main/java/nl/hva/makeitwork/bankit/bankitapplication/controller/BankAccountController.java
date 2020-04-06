@@ -1,5 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.AddAccountholderRequest;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
@@ -65,7 +66,8 @@ public class BankAccountController {
     }
 
     @PostMapping(value="save_connect_request")
-    public String saveConnectRequestHandler(Model model) {
+    public String saveConnectRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
+        System.out.println(request);
         return "under_construction";
     }
 
