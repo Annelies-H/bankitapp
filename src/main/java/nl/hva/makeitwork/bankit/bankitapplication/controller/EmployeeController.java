@@ -2,6 +2,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
@@ -91,15 +92,16 @@ public class EmployeeController {
             return "redirect:/intranet";
         }
 
+        List<Company> topCompanies = bankAccountService.getTop10Companies();
         Iterable<BusinessAccount> businessAccounts = businessAccountDAO.findAll();
         List<PrivateAccount> privateAccounts = bankAccountService.getTop10Private();
 
         if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
-            model.addAttribute("businessAccounts", businessAccounts);
+            model.addAttribute("topCompanies", topCompanies);
         } else if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
             model.addAttribute("privateAccounts", privateAccounts);
         } else {
-            model.addAttribute("businessAccounts", businessAccounts);
+            //model.addAttribute("businessAccounts", businessAccounts);
             model.addAttribute("privateAccounts", privateAccounts);
         }
         return "employee_dashboard";

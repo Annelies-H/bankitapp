@@ -150,19 +150,6 @@ public abstract class Bankaccount implements Comparable<Bankaccount>{
         return 0;
     }
 
-    static class BalanceComparator implements Comparator<Bankaccount> {
-        @Override
-        public int compare(Bankaccount account1, Bankaccount account2) {
-            if (account1.getBalance() > account2.getBalance()) {
-                return 1;
-            } else if (account1.getBalance() == account2.getBalance()) {
-                return 0;
-            }
-            return -1;
-        }
-    }
-
-
     @Override
     public int hashCode() {
         return Objects.hash(accountID, iban, history, balance);

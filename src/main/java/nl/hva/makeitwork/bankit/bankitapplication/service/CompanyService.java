@@ -15,20 +15,4 @@ public class CompanyService {
     @Autowired
     private CompanyDAO companyDAO;
 
-
-
-    public List<Company> getTop10Businesses() {
-
-        // Make a list with companies
-        Iterable<Company> iterable = companyDAO.findAll();
-        Iterator<Company> iterator = iterable.iterator();
-        List<Company> companies = new ArrayList<>();
-        while (iterator.hasNext()) {
-            companies.add(iterator.next());
-        }
-
-
-        return companies;
-    }
-
 }

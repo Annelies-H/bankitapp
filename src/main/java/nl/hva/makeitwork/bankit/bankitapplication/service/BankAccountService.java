@@ -175,11 +175,16 @@ public class BankAccountService {
         return privateAccounts;
     }
 
-    public List<BusinessAccount> getTotalBalanceCompany(Company company) {
-        return bdao.findAllByCompany(company);
+    public double getTotalBalanceCompany(Company company) {
+        List<BusinessAccount> companyAccounts = bdao.findAllByCompany(company);
+        double balance = 0.0;
+        for (BusinessAccount companyAccount : companyAccounts) {
+            balance += companyAccount.getBalance();
+        }
+        return balance;
     }
 
-    /*public List<Company> getTop10Businesses() {
+    public List<Company> getTop10Companies() {
 
         // Make a list with companies
         Iterable<Company> iterable = cdao.findAll();
@@ -189,11 +194,17 @@ public class BankAccountService {
             companies.add(iterator.next());
         }
 
+        for (Company company : companies) {
+            company.setTotalBalance(getTotalBalanceCompany(company));
+        }
 
-        return null;
-    }*/
+        Collections.sort(companies);
 
+        if (companies.size() > 10) {
+            companies.subList(0,9);
+        }
 
-
+        return companies;
+    }
 
 }
