@@ -11,7 +11,12 @@
         <br>
 
         <form method="post">
-            <label for="bsn">Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder</label>
+            <label for="account">Kies de (prive)rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
+            <select id="account" class="form-control">
+                <option th:each="privateAccount : ${customer.privateAccounts}"
+                        th:value="${privateAccount}" th:text="${privateAccount.iban}"></option>
+            </select>
+            <label for="bsn">Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
             <input type="text" id="bsn" name="bsn" onblur="checkExist()"/>
             <p id="response"></p>
 
