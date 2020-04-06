@@ -10,13 +10,13 @@ public enum Position {
     HEAD_BUSINESS {
         @Override
         public String toString() {
-            return "Head Business";
+            return "Hoofd MKB";
         }
     },
     HEAD_PRIVATE {
         @Override
         public String toString() {
-            return "Head Private";
+            return "Hoofd Particulieren";
         }
     }
 

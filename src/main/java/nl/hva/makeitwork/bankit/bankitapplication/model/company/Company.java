@@ -1,5 +1,8 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model.company;
 
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -20,6 +23,13 @@ public class Company {
         this.companyId = companyId;
         this.name = name;
         this.industry = industry;
+    }
+
+
+    public double getTotalBalance() {
+
+
+        return 0;
     }
 
     @Override

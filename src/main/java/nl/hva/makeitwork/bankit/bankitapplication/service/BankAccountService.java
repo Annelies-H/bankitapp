@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BankAccountService {
@@ -158,4 +158,42 @@ public class BankAccountService {
             bdao.save(bAccountFrom);
         }
     }
+
+    public List<PrivateAccount> getTop10Private() {
+        Iterable<PrivateAccount> iterableAccounts = pdao.findAll();
+        Iterator<PrivateAccount> iterator = iterableAccounts.iterator();
+        List<PrivateAccount> privateAccounts = new ArrayList<>();
+        while (iterator.hasNext()) {
+            privateAccounts.add(iterator.next());
+        }
+
+        Collections.sort(privateAccounts);
+        if (privateAccounts.size() > 10) {
+            privateAccounts.subList(0,9);
+        }
+
+        return privateAccounts;
+    }
+
+    public List<BusinessAccount> getTotalBalanceCompany(Company company) {
+        return bdao.findAllByCompany(company);
+    }
+
+    /*public List<Company> getTop10Businesses() {
+
+        // Make a list with companies
+        Iterable<Company> iterable = cdao.findAll();
+        Iterator<Company> iterator = iterable.iterator();
+        List<Company> companies = new ArrayList<>();
+        while (iterator.hasNext()) {
+            companies.add(iterator.next());
+        }
+
+
+        return null;
+    }*/
+
+
+
+
 }

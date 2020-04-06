@@ -4,11 +4,12 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class Bankaccount {
+public abstract class Bankaccount implements Comparable<Bankaccount>{
     @Id
     @GeneratedValue
     int accountID = 0;
@@ -138,6 +139,29 @@ public abstract class Bankaccount {
                 Objects.equals(iban, that.iban) &&
                 Objects.equals(history, that.history);
     }
+
+    @Override
+    public int compareTo(Bankaccount o) {
+        if (this.getBalance() > o.getBalance() ) {
+            return -1;
+        } else if (this.getBalance() < o.getBalance() ) {
+            return 1;
+        }
+        return 0;
+    }
+
+    static class BalanceComparator implements Comparator<Bankaccount> {
+        @Override
+        public int compare(Bankaccount account1, Bankaccount account2) {
+            if (account1.getBalance() > account2.getBalance()) {
+                return 1;
+            } else if (account1.getBalance() == account2.getBalance()) {
+                return 0;
+            }
+            return -1;
+        }
+    }
+
 
     @Override
     public int hashCode() {

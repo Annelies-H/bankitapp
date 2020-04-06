@@ -7,6 +7,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
+import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.EmployeeService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
+
+import java.util.List;
 
 @RequestMapping(value = "/intranet")
 @Controller
@@ -35,6 +38,9 @@ public class EmployeeController {
 
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    BankAccountService bankAccountService;
 
     public EmployeeController() {
         super();
@@ -86,7 +92,7 @@ public class EmployeeController {
         }
 
         Iterable<BusinessAccount> businessAccounts = businessAccountDAO.findAll();
-        Iterable<PrivateAccount> privateAccounts = privateAccountDAO.findAll();
+        List<PrivateAccount> privateAccounts = bankAccountService.getTop10Private();
 
         if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
             model.addAttribute("businessAccounts", businessAccounts);
