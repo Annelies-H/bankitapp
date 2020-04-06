@@ -64,6 +64,11 @@ public class BankAccountController {
         return "add_accountholder";
     }
 
+    @PostMapping(value="save_connect_request")
+    public String saveConnectRequestHandler(Model model) {
+        return "under_construction";
+    }
+
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");

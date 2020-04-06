@@ -10,16 +10,20 @@
         <h2>Under Construction</h2>
         <br>
 
-        <form method="post">
+        <form method="post" th:action="@{save_connect_request}" th:object="${request}">
             <label for="account">Kies de (prive)rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
             <select id="account" class="form-control">
                 <option th:each="privateAccount : ${customer.privateAccounts}"
                         th:value="${privateAccount}" th:text="${privateAccount.iban}"></option>
             </select>
-            <label for="bsn">Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
-            <input type="text" id="bsn" name="bsn" onblur="checkExist()"/>
+            <label for="bsn"><br>Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
+            <input type="text" id="bsn" name="bsn" class="form-control" onblur="checkExist()"
+                   required pattern="[0-9]{9}" title="Een bsn moet uit 9 cijfers bestaan"/>
             <p id="response"></p>
-
+            <label for="code">Vul hier een vijfcijferige geheime code in:</label>
+            <input type="text" id="code" name="code" class="form-control"
+                   required pattern="[0-9]{5}" title="Uw geheime code moet uit 5 cijfers bestaan.">
+            <br><input type="submit" value="Voeg rekeninghouder toe" class="btn btn-primary">
         </form>
 
 
@@ -49,7 +53,7 @@
                     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
                         if(xmlhttp.response == "false") {
                             document.getElementById("response").style.color = "red";
-                            message = "Er is bij ons geen klant met bsn " + bsn + " bij ons bekend.";
+                            message = "Er is bij ons geen klant met bsn " + bsn + " bekend.";
                         }
                         else {
                             document.getElementById("response").style.color = "green";
