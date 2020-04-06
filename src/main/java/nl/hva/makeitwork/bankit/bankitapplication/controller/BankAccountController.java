@@ -71,7 +71,6 @@ public class BankAccountController {
     @PostMapping(value="save_connect_request")
     public String saveConnectRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
         aahs.saveRequest(request);
-        System.out.println(request);
         return "accountholder_request_submitted";
     }
 
