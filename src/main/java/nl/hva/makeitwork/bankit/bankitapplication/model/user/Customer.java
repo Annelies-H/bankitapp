@@ -7,6 +7,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,6 +88,7 @@ public class Customer extends User {
             businessAccounts.add((BusinessAccount) account);
         }
     }
+
 
     @Override
     public String toString() {

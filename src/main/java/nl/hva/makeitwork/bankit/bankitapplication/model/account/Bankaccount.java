@@ -4,6 +4,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -148,6 +149,8 @@ public abstract class Bankaccount implements Comparable<Bankaccount>{
         }
         return 0;
     }
+
+
 
     @Override
     public int hashCode() {
