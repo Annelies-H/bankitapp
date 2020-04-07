@@ -70,7 +70,7 @@
                     ibancheck = false;
                 } else {
 
-                    let URL = `http://localhost:8080/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
+                    let URL = `http://miw-team-2.nl/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
                     if (ibanToInput.length != 0) {
                         fetch(URL) // API URL
                             .then((response) => {
