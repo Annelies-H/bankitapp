@@ -36,6 +36,7 @@ public class LoginController {
             Model model) {
         Customer customer = customerService.findCustomer(username);
         if (customer != null && loginService.passwordCheck(password, customer)) {
+            customer.sortAccountsOnAccountnr();
             model.addAttribute("customer", customer);
             return "product_overview";
         } else {

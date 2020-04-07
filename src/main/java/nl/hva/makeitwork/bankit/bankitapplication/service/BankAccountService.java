@@ -39,8 +39,11 @@ public class BankAccountService {
      * @return new private account
      */
     public PrivateAccount newPrivateAccount(Customer accountHolder) {
-        PrivateAccount newAccount = new PrivateAccount();
-        return (PrivateAccount) newAccountHelper(newAccount, accountHolder);
+        PrivateAccount newAccount = (PrivateAccount) newAccountHelper(new PrivateAccount(), accountHolder);
+        String iban = Bankaccount.constructIBAN(newAccount.getAccountID());
+        newAccount.setIban(iban);
+        badao.save(newAccount);
+        return newAccount;
     }
 
     /**
@@ -50,10 +53,12 @@ public class BankAccountService {
      * @return new business account
      */
     public BusinessAccount newBusinessAccount(Customer customer, Company company) {
+        BusinessAccount newAccount = (BusinessAccount) newAccountHelper(new BusinessAccount(), customer);
         cdao.save(company);
-        BusinessAccount newAccount = new BusinessAccount();
         newAccount.setCompany(company);
-        return (BusinessAccount) newAccountHelper(newAccount, customer);
+        String iban = Bankaccount.constructIBANBiz(newAccount.getAccountID());
+        newAccount.setIban(iban);
+        return newAccount;
     }
 
     /**

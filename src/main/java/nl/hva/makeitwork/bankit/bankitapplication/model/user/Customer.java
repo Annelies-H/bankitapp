@@ -88,6 +88,11 @@ public class Customer extends User {
         }
     }
 
+    public void sortAccountsOnAccountnr() {
+        privateAccounts.sort(Bankaccount.accountnrComperator);
+        businessAccounts.sort(Bankaccount.accountnrComperator);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

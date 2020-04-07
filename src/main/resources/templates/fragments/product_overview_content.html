@@ -29,7 +29,7 @@
                 <tr th:each="privateaccount: ${customer.privateAccounts}">
                     <td><a th:href="@{~/account/selected_bankaccount(id=${privateaccount.accountID})}">
                         <span th:text="${privateaccount.iban}"></span></a></td>
-                    <td align="right" th:text="${#numbers.formatDecimal(privateaccount.balance, 1, 2, 'COMMA')}"></td>
+                    <td align="right" th:text="'€ ' + ${#numbers.formatDecimal(privateaccount.balance, 1, 2, 'COMMA')}"></td>
                 </tr>
             </table>
         </div>
