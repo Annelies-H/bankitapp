@@ -70,8 +70,11 @@ public class BankAccountController {
 
     @PostMapping(value="save_connect_request")
     public String saveConnectRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
-        aahs.saveRequest(request);
-        return "accountholder_request_submitted";
+        boolean requestSaved = aahs.saveRequest(request);
+        if (requestSaved) {
+            return "accountholder_request_submitted";
+        }
+        return "under_construction";
     }
 
     @GetMapping("overview")
