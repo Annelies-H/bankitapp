@@ -66,6 +66,8 @@ public class BankAccountController {
 
     @GetMapping("connect_account")
     public String connectAccountHandler(Model model) {
+        Customer customer = (Customer) model.getAttribute("customer");
+        customer.sortAccountsOnAccountnr();
         return "add_accountholder";
     }
 
@@ -86,6 +88,7 @@ public class BankAccountController {
         }
         // update customer info
         customer = cs.findCustomer(customer.getUsername());
+        customer.sortAccountsOnAccountnr();
         model.addAttribute("customer", customer);
         return "product_overview";
     }

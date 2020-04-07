@@ -150,6 +150,17 @@ public abstract class Bankaccount implements Comparable<Bankaccount>{
         return 0;
     }
 
+    /**
+     * Comperator object die de iban als vergelijker gebruikt
+     */
+    public static Comparator<Bankaccount> accountnrComperator = new Comparator<Bankaccount>() {
+        @Override
+        public int compare(Bankaccount b1, Bankaccount b2) {
+            String accountNr1 = b1.iban.substring(8);
+            String accountNr2 = b2.iban.substring(8);
+            return accountNr1.compareTo(accountNr2);
+        }
+    };
 
 
     @Override

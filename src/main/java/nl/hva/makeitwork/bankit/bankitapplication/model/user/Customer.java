@@ -7,7 +7,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,6 +88,10 @@ public class Customer extends User {
         }
     }
 
+    public void sortAccountsOnAccountnr() {
+        privateAccounts.sort(Bankaccount.accountnrComperator);
+        businessAccounts.sort(Bankaccount.accountnrComperator);
+    }
 
     @Override
     public String toString() {
