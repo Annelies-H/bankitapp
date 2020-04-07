@@ -212,4 +212,8 @@ public class BankAccountService {
         return companies;
     }
 
+    public boolean doIbanCheck(String iban) { // returns boolean als iban in database bestaat.
+        return bdao.findBusinessAccountByIban(iban).isPresent() || pdao.findPrivateAccountByIban(iban).isPresent();
+    }
+
 }
