@@ -8,7 +8,6 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +54,6 @@ public class LoginServiceTest {
         actual = loginService.passwordCheck("^412jk8Gdas2", user);
         assertTrue(actual);
 
-
     }
 
     @Test
@@ -78,7 +76,5 @@ public class LoginServiceTest {
         predicted = "OkTtOQqk7LAkkmcCeEGysv8F52UDtK1kJCOaYlfWU4G8OfZW/7CaKuYNWv9AAnPYDmw+G/6QYM+84zE55FK62Q==";
         assertEquals(actual, predicted);
     }
-
-
 
 }
