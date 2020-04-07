@@ -91,6 +91,7 @@
         </p>
         <p>Uw geheime code is: <span th:text="${request.secretCode}"></span><br>
            Geef deze code door aan uw beoogd rekeninghouder. Zonder deze code kan het proces niet worden voltooid.
+           Deze code vervangt eventueel eerder gemaakte codes voor dezelfde rekening-mederekeninghouder combinatie.
         </p>
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>

@@ -49,6 +49,10 @@ public class AddAccountholderRequest {
         return Objects.hash(iban, bsn, secretCode);
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getIban() {
         return iban;
     }
@@ -59,6 +63,11 @@ public class AddAccountholderRequest {
 
     public int getBsn() {
         return bsn;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setBsn(int accountholder) {
