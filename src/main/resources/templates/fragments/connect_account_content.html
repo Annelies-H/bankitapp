@@ -98,6 +98,16 @@
 
     </div>
 </div>
+<div th:fragment="already_exists">
+    <div class="container pt-3 plus">
+        <h2>Verzoek niet verstuurd</h2>
+        <p>Onze klant met bsn <span th:text="${request.bsn}"></span> is al als mederekeninghouder op uw rekening met
+        rekeningnummer <span th:text="${request.iban}"></span> toegevoegd.</p>
+        <br>
+        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
+    </div>
+</div>
 <div th:fragment="not_available">
     <div class="container pt-3 plus">
             <h2>Momenteel is het nog niet mogelijk om via de website een nieuwe accounthouder toe te voegen

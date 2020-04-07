@@ -15,11 +15,11 @@ public class AddAccountholderRequest {
     @Column(nullable = false)
     private int bsn;
     @Column(nullable = false)
-    private int secretCode;
+    private String secretCode;
 
     public AddAccountholderRequest() {}
 
-    public AddAccountholderRequest(String iban, int bsn, int secretCode) {
+    public AddAccountholderRequest(String iban, int bsn, String secretCode) {
         this.iban = iban;
         this.bsn = bsn;
         this.secretCode = secretCode;
@@ -74,11 +74,11 @@ public class AddAccountholderRequest {
         this.bsn = accountholder;
     }
 
-    public int getSecretCode() {
+    public String getSecretCode() {
         return secretCode;
     }
 
-    public void setSecretCode(int secretCode) {
+    public void setSecretCode(String secretCode) {
         this.secretCode = secretCode;
     }
 }

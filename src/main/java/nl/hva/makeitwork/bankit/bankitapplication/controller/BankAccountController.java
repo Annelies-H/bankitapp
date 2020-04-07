@@ -74,7 +74,7 @@ public class BankAccountController {
         if (requestSaved) {
             return "accountholder_request_submitted";
         }
-        return "under_construction";
+        return "accountholder_exists";
     }
 
     @GetMapping("overview")
