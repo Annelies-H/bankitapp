@@ -14,7 +14,7 @@ public class Transaction {
     @Column(nullable = false)
     String ibanTo;
     @Column(nullable = false)
-    double amount;
+    Double amount;
     String description;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,7 +26,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String ibanFrom, String ibanTo, double amount, String description, Calendar date, PaymentMethod paymentMethod) {
+    public Transaction(String ibanFrom, String ibanTo, Double amount, String description, Calendar date, PaymentMethod paymentMethod) {
         this.ibanFrom = ibanFrom;
         this.ibanTo = ibanTo;
         this.amount = amount;
@@ -70,11 +70,11 @@ public class Transaction {
         this.ibanTo = ibanTo;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double ammount) {
+    public void setAmount(Double ammount) {
         this.amount = ammount;
     }
 
