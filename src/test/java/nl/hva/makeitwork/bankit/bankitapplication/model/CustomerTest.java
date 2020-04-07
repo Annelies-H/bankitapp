@@ -1,7 +1,6 @@
 package nl.hva.makeitwork.bankit.bankitapplication.model;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
-import nl.hva.makeitwork.bankit.bankitapplication.model.user.User;
 
 import org.junit.jupiter.api.Test;
 
