@@ -4,10 +4,12 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccou
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
 public class Company implements Comparable<Company>{
+    public static Object TransactionComparator;
     @Id
     private Integer companyId; //dutch kvk number
     @Column(nullable = false)
@@ -17,6 +19,8 @@ public class Company implements Comparable<Company>{
     private Industry industry;
     @Transient
     private double totalBalance;
+    @Transient
+    private int numberOfTransactions;
 
     public Company() {
     }
@@ -56,6 +60,13 @@ public class Company implements Comparable<Company>{
         return 0;
     }
 
+    public static class TransactionComparator implements Comparator<Company> {
+        @Override
+        public int compare(Company company1, Company company2) {
+            return company1.getNumberOfTransactions() - company2.getNumberOfTransactions();
+        }
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(companyId, name, industry);
@@ -91,5 +102,13 @@ public class Company implements Comparable<Company>{
 
     public void setTotalBalance(double totalBalance) {
         this.totalBalance = totalBalance;
+    }
+
+    public int getNumberOfTransactions() {
+        return numberOfTransactions;
+    }
+
+    public void setNumberOfTransactions(int numberOfTransactions) {
+        this.numberOfTransactions = numberOfTransactions;
     }
 }
