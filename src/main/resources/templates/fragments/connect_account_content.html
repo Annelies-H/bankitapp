@@ -127,13 +127,17 @@
     <div class="container pt-3 plus">
         <h2>Verzoek tot mederekeninghouderschap </h2>
         <p>U heeft een verzoek gekregen om mederekeninghouder te worden voor de rekening <span th:text=${request.iban}></span>.
+            Om het verzoek te kunnen accepteren heeft u de geheime code nodig die u van de rekeninghouder hebt gekregen.
         Als u dit verzoek accepteer wordt u mederekeninghouder op deze rekening. Hierop zijn onze voorwaarden van toepassing.</p>
 
         <form method = "post" th:action="@{accept_request}" th:object="${request}">
             <input type="hidden" id="id" name="id" value=""></input>
+            <label for="secretCode">Vul hier uw geheime code in:</label>
+            <input type="text" id="secretCode" name="secretCode" class="form-control">
+            <br>
             <input type="submit" value="Accepteer verzoek" class="btn btn-primary">
+            <input type="button" align="right" name="button" value="Terug naar productoverzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
         </form>
-        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
         <script>
             let requestId = [[${request.id}]]

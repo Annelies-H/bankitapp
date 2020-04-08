@@ -26,6 +26,12 @@ public class AddAccountHolderService {
     @Autowired
     PrivateAccountDAO pdao;
 
+    public boolean checkSecretCode(AddAccountholderRequest request) {
+        String providedCode = request.getSecretCode();
+        String actualCode = dao.findById(request.getId()).get().getSecretCode();
+        return providedCode.equals(actualCode);
+    }
+
     public void acceptRequest(AddAccountholderRequest rq, Customer customer) {
         int id = rq.getId();
         AddAccountholderRequest request = dao.findById(id).get();

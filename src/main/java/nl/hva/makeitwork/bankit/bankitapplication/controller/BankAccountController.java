@@ -98,7 +98,12 @@ public class BankAccountController {
     @PostMapping("accept_request")
     public String acceptRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
         Customer customer = (Customer) model.getAttribute("customer");
+        if (!aahs.checkSecretCode(request)) {
+            model.addAttribute("request", aahs.getRequestById(request.getId()));
+            return "add_accountholder_wrongcode";
+        }
         aahs.acceptRequest(request, customer);
+        customer.sortAccountsOnAccountnr();
         return "product_overview";
     }
 
