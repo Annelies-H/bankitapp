@@ -9,6 +9,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccoun
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Employee;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Position;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
+import nl.hva.makeitwork.bankit.bankitapplication.service.CompanyService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.EmployeeService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class EmployeeController {
 
     @Autowired
     BankAccountService bankAccountService;
+
+    @Autowired
+    CompanyService companyService;
 
     public EmployeeController() {
         super();
@@ -92,7 +96,7 @@ public class EmployeeController {
             return "redirect:/intranet";
         }
 
-        List<Company> topCompanies = bankAccountService.getTop10Companies();
+        List<Company> topCompanies = companyService.getTop10CompaniesBalance();
         Iterable<BusinessAccount> businessAccounts = businessAccountDAO.findAll();
         List<PrivateAccount> privateAccounts = bankAccountService.getTop10Private();
 

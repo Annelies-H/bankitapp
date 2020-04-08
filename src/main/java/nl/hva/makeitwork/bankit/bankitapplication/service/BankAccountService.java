@@ -29,6 +29,8 @@ public class BankAccountService {
     private TransactionService tService;
     @Autowired
     private BankAccountDAO badao;
+    @Autowired
+    private CompanyService companyService;
 
 
 
@@ -189,27 +191,19 @@ public class BankAccountService {
         return balance;
     }
 
-    public List<Company> getTop10Companies() {
-
-        // Make a list with companies
-        Iterable<Company> iterable = cdao.findAll();
-        Iterator<Company> iterator = iterable.iterator();
-        List<Company> companies = new ArrayList<>();
-        while (iterator.hasNext()) {
-            companies.add(iterator.next());
+    public List<BusinessAccount> getAllBusinessAccounts() {
+        Iterable<BusinessAccount> accountIterable = bdao.findAll();
+        Iterator<BusinessAccount> accountIterator = accountIterable.iterator();
+        List<BusinessAccount> businessAccounts = new ArrayList<>();
+        while (accountIterator.hasNext()) {
+            businessAccounts.add(accountIterator.next());
         }
 
-        for (Company company : companies) {
-            company.setTotalBalance(getTotalBalanceCompany(company));
+        for (BusinessAccount businessAccount : businessAccounts) {
+            tService.addTransactionsToBankaccountService(businessAccount);
         }
 
-        Collections.sort(companies);
-
-        if (companies.size() > 10) {
-            companies = companies.subList(0,10);
-        }
-
-        return companies;
+        return businessAccounts;
     }
 
     public boolean doIbanCheck(String iban) { // returns boolean als iban in database bestaat.
