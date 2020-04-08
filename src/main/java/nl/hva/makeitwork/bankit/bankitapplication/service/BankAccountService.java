@@ -174,7 +174,7 @@ public class BankAccountService {
 
         Collections.sort(privateAccounts);
         if (privateAccounts.size() > 10) {
-            privateAccounts.subList(0,9);
+            privateAccounts = privateAccounts.subList(0,10);
         }
 
         return privateAccounts;
@@ -206,7 +206,7 @@ public class BankAccountService {
         Collections.sort(companies);
 
         if (companies.size() > 10) {
-            companies.subList(0,9);
+            companies = companies.subList(0,10);
         }
 
         return companies;
