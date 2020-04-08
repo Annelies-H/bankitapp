@@ -1,24 +1,62 @@
 package nl.hva.makeitwork.bankit.bankitapplication.service;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.AddAccountholderRequest;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.AddAccountHolderRequestDAO;
-import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.*;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class AddAccountHolderService {
     @Autowired
     AddAccountHolderRequestDAO dao;
     @Autowired
     CustomerDAO cdao;
+    @Autowired
+    BusinessAccountDAO bdao;
+    @Autowired
+    PrivateAccountDAO pdao;
+
+    public void acceptRequest(AddAccountholderRequest rq, Customer customer) {
+        int id = rq.getId();
+        AddAccountholderRequest request = dao.findById(id).get();
+        updatePrivateAccount(request.getIban(), customer);
+        updateBusinessAccount(request.getIban(), customer);
+        dao.deleteAddAccountholderRequestById(id);
+    }
+
+    private void updatePrivateAccount(String iban, Customer customer) {
+        Optional<PrivateAccount> optional = pdao.findPrivateAccountByIban(iban);
+        if (optional.isEmpty()) {
+            return;
+        }
+        PrivateAccount account = optional.get();
+        account.addAccountHolder(customer);
+        pdao.save(account);
+        customer.addAccount(account);
+        cdao.save(customer);
+    }
+
+    private void updateBusinessAccount(String iban, Customer customer) {
+        Optional<BusinessAccount> optional = bdao.findBusinessAccountByIban(iban);
+        if (optional.isEmpty()) {
+            return;
+        }
+        BusinessAccount account = optional.get();
+        account.addAccountHolder(customer);
+        bdao.save(account);
+        customer.addAccount(account);
+        cdao.save(customer);
+    }
 
     public List<AddAccountholderRequest> getReceivedRequests(int bsn) {
         List<AddAccountholderRequest> result = dao.findAllByBsn(bsn);

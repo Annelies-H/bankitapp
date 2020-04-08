@@ -14,4 +14,6 @@ public interface AddAccountHolderRequestDAO  extends CrudRepository<AddAccountho
 
     public List<AddAccountholderRequest> findAllByBsn(int bsn);
 
+    public void deleteAddAccountholderRequestById(int id);
+
 }

@@ -125,10 +125,21 @@
 </div>
 <div th:fragment="request">
     <div class="container pt-3 plus">
-        <h2>Id van het verzoek: <span th:text="${request.id}"></span></h2>
-        <br>
+        <h2>Verzoek tot mederekeninghouderschap </h2>
+        <p>U heeft een verzoek gekregen om mederekeninghouder te worden voor de rekening <span th:text=${request.iban}></span>.
+        Als u dit verzoek accepteer wordt u mederekeninghouder op deze rekening. Hierop zijn onze voorwaarden van toepassing.</p>
+
+        <form method = "post" th:action="@{accept_request}" th:object="${request}">
+            <input type="hidden" id="id" name="id" value=""></input>
+            <input type="submit" value="Accepteer verzoek" class="btn btn-primary">
+        </form>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
+        <script>
+            let requestId = [[${request.id}]]
+            console.log(requestId);
+            document.getElementById("id").value = requestId;
+        </script>
     </div>
 </div>
 <div th:fragment="not_available">

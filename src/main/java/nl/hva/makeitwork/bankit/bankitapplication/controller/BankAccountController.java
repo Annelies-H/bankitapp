@@ -95,6 +95,13 @@ public class BankAccountController {
         return "add_accountholder_request";
     }
 
+    @PostMapping("accept_request")
+    public String acceptRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
+        Customer customer = (Customer) model.getAttribute("customer");
+        aahs.acceptRequest(request, customer);
+        return "product_overview";
+    }
+
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");
