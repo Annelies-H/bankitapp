@@ -73,3 +73,7 @@ font-size:400%;
     text-decoration: none;
     color: white;
 }
+
+.alert{
+    padding: 6px 15px 6px 15px;
+}

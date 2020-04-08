@@ -12,9 +12,6 @@
           <h1 class="display-4">Word nu klant</h1>
 
           <p class="lead">Voer uw gegevens in om een account aan te maken.</p>
-          <div id="ssnAlert">
-            <p id="ssnError"></p>
-          </div>
 
           <form
             id="createCustomerForm"
@@ -26,18 +23,27 @@
           >
             <div class="row">
               <div class="col-sm-3">
-                <label for="socialSecurityNumber">Burgerservicenummer:</label>
-                <input
-                  type="text"
-                  id="socialSecurityNumber"
-                  th:field="*{socialSecurityNumber}"
-                  class="form-control"
-                  placeholder="...5789"
-                  required
-                  pattern="[0-9]{9}"
-                  title="Het burgerservicenummer moet uit negen cijfers bestaan."
-                />
+                <div class="form-group">
+                  <label for="socialSecurityNumber">Burgerservicenummer:</label>
+                  <input
+                    type="text"
+                    id="socialSecurityNumber"
+                    th:field="*{socialSecurityNumber}"
+                    class="form-control"
+                    placeholder="...5789"
+                    required
+                    pattern="[0-9]{9}"
+                    title="Het burgerservicenummer moet uit negen cijfers bestaan."
+                  />
+                </div>
               </div>
+
+              <div style="padding-top: 32px" class="col-sm-4">
+                <div id="ssnAlert">
+                  <span id="ssnError"></span>
+                </div>
+              </div>
+
             </div>
             <div class="row">
               <div class="col-sm-3">
@@ -204,7 +210,14 @@
                   />
                 </div>
               </div>
+
+              <div style="padding-top: 32px" class="col-sm-4">
+                <div id="usernameAlert">
+                  <span id="usernameError"></span>
+                </div>
+              </div>
             </div>
+
             <input type="submit" value="Maak account" class="btn btn-primary" />
           </form>
         </div>
@@ -278,6 +291,61 @@
                 });
             }
           }
+
+          let userNameInput = document.getElementById("username");
+          userNameInput.addEventListener("input", function () {
+            let userName = userNameInput.value;
+            let apiUrl = `http://localhost:8080/api/check_username/${userName}`;
+            const alertField = document.querySelector("#usernameAlert");
+            const message = document.querySelector("#usernameError");
+            const form = document.querySelector("form");
+            fetch(apiUrl)
+                    .then((response) => {
+                      if (!response.ok) {
+                        throw new Error("Response error");
+                      }
+                      return response.json();
+                    })
+                    .then((data) => {
+                      console.log(data)
+                      if (userName.length > 1) {
+                        if (data === true) {
+
+
+                          alertField.setAttribute(
+                                  "class",
+                                  "alert alert-danger",
+                                  "role",
+                                  "alert"
+                          );
+                          message.textContent = "Kies een andere gebruikersnaam.";
+                          form.onsubmit = () => {
+                            return false;
+                          };
+
+
+                        } else {
+                          alertField.setAttribute("class", "alert alert-success");
+                          message.textContent = "Gebruikersnaam beschikbaar.";
+                          form.onsubmit = () => {
+                            return true;
+                          };
+
+                        }
+
+                      } else {
+                        const alertField = document.querySelector("#usernameAlert");
+                        const message = document.querySelector("#usernameError");
+                        alertField.removeAttribute("class", "role");
+                        message.textContent = "";
+                      }
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    })
+          });
+
+
         </script>
       </div>
       <!-- /.container -->

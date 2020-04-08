@@ -32,4 +32,8 @@ public class CustomerService {
         return customerDAO.findBySocialSecurityNumber(ssn).isPresent();
     }
 
+    public boolean doesUserExist(String username) {
+        return customerDAO.findByUsername(username).isPresent();
+    }
+
 }

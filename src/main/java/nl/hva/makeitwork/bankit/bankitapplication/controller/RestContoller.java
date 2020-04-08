@@ -24,4 +24,11 @@ public class RestContoller {// RESTapi
         return customerService.doesSocialSecurityNumberExists(ssn);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+    @GetMapping("check_username/{username}")
+    public boolean checkPlayerNameHandler(@PathVariable String username) {
+        return customerService.doesUserExist(username);
+    }
+
+
 }
