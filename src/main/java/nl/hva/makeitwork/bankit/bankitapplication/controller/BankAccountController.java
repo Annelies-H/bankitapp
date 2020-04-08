@@ -73,11 +73,10 @@ public class BankAccountController {
         customer.sortAccountsOnAccountnr();
         List<AddAccountholderRequest> requests = aahs.getReceivedRequests(customer.getSocialSecurityNumber());
         if (requests.size() == 0) {
-            model.addAttribute("receivedRequests", requests);
             return "add_accountholder";
         }
+        model.addAttribute("receivedrequests", requests);
         return "add_accept_accountholder";
-
     }
 
     @PostMapping(value="save_connect_request")

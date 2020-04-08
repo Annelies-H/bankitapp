@@ -110,7 +110,16 @@
         <h2>Ontvangen verzoeken</h2>
         <p>U heeft één of meer verzoeken om als mederekeninghouder toegevoegd te worden op een rekening van één van onze
             andere klanten. Klik hieronder op het rekeningnummer om het verzoek te accepteren of te weigeren.</p>
+        <table>
+            <tr><th>Rekening</th></tr>
+            <tr th:each="request: ${receivedrequests}">
+                <td>
+                    <a th:href="@{~/account/overview}">
+                    <span th:text=${request.iban}></span></a>
+                </td>
+            </tr>
 
+        </table>
 
     </div>
 </div>
