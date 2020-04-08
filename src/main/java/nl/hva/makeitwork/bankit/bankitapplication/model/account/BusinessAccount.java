@@ -26,6 +26,16 @@ public class BusinessAccount extends Bankaccount {
         accountHolders.add(accountHolder);
     }
 
+    public String showAccountHolders() {
+        if (accountHolders.size() == 0) {return "";}
+        String result = "";
+        result += accountHolders.get(0).getFullName();
+        for (int i = 1; i < accountHolders.size(); i++) {
+            result = result + ", " + accountHolders.get(i).getFullName();
+        }
+        return result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

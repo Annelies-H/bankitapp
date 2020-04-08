@@ -88,6 +88,13 @@ public class Customer extends User {
         }
     }
 
+    public String getFullName() {
+        if (prefix != null && prefix.length() > 0) {
+            return firstName + " " + prefix + " " + lastName;
+        }
+        return firstName + " " + lastName;
+    }
+
     public void sortAccountsOnAccountnr() {
         privateAccounts.sort(Bankaccount.accountnrComperator);
         businessAccounts.sort(Bankaccount.accountnrComperator);

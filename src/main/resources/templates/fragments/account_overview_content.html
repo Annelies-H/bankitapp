@@ -7,21 +7,9 @@
 <body>
 <div th:fragment="content">
     <div class="container plus" th:object="${account}">
-        <h1>Overzicht van rekening <span th:text="*{iban}"></span>
-            <wbr>
-            <span th:if="${company != 'null'}" th:text="${' voor ' + account.company.name}"></span>
-            <wbr>
-        </h1>
-        <br>
-
-        <div th:if="${!#lists.isEmpty(account.accountHolders)}">
-            <h2 th:each="accountholder: ${account.accountHolders}">
-                <wbr>
-                <span th:text="'Beheerders: ' + ${accountholder.firstName + ' '
-                + accountholder.prefix + ' ' + accountholder.lastName}"></span>
-                <wbr>
-            </h2>
-        </div>
+        <h2>Rekeningoverzicht <span th:text="*{iban}"></span></h2>
+        <h4> <span th:if="${company != 'null'}" th:text="${'Bedrijfsnaam: ' + account.company.name}"></span></h4>
+        <p>Rekeninghouder(s): <span th:text="${account.showAccountHolders()}"></span></p>
         <br>
         <div th:if="${#lists.isEmpty(account.history)}">
             <h3>U heeft nog geen transacties op deze rekening.</h3>
@@ -63,7 +51,7 @@
         <input type="button" th:onclick="|window.location.href='@{~/transaction/new_transaction(id=${account.accountID})}'|"
                value="Nieuwe overboeking" class="btn btn-primary" />
         <span th:if="${company != 'null'}">
-        <input type="button" onclick="window.location.href = '/POS/request_POS';"
+        <input type="hidden" onclick="window.location.href = '/POS/request_POS';"
                value="Pin automaat aanvragen"
                class="btn btn-primary"/>
         </span>
