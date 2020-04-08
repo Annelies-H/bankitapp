@@ -21,10 +21,12 @@
                         th:value="${businessAccount.iban}" th:text="${businessAccount.iban}"></option>
             </select>
             <label for="bsn"><br>Vul hier het bsn in van de persoon die u toe wilt voegen als rekeninghouder:</label>
+            <div id="ssnAlert">
+                <span id="ssnMessage"></span>
+            </div>
             <input type="text" id="bsn" name="bsn" class="form-control" onblur="checkExist()"
                    required pattern="[0-9]{9}" title="Een bsn moet uit 9 cijfers bestaan"/>
-            <p id="response"></p>
-            <label for="secretCode">Vul hier een vijfcijferige geheime code in:</label>
+            <label for="secretCode"><br>Vul hier een vijfcijferige geheime code in:</label>
             <input type="text" id="secretCode" name="secretCode" class="form-control"
                    required pattern="[0-9]{5}" title="Uw geheime code moet uit 5 cijfers bestaan.">
             <br><input type="submit" value="Voeg rekeninghouder toe" class="btn btn-primary">
@@ -51,15 +53,17 @@
             function setOnReadyStateChange(xmlhttp) {
                 let bsn = document.getElementById("bsn").value;
                 xmlhttp.onreadystatechange = function(){
+                    const alertField = document.querySelector("#ssnAlert");
+                    const alertMessage = document.querySelector("#ssnMessage");
                     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
                         if(xmlhttp.response == "false") {
-                            document.getElementById("response").style.color = "red";
-                            message = "Er is bij ons geen klant met bsn " + bsn + " bekend.";
+                            alertField.setAttribute("class", "alert alert-danger");
+                            alertMessage.textContent = "Er is bij ons geen klant met bsn " + bsn + " bekend.";
                             bsnExists = false;
                         }
                         else {
-                            document.getElementById("response").style.color = "green";
-                            message = "Klant met bsn " + bsn + " geselecteerd als mederekeninghouder."
+                            alertField.setAttribute("class", "alert alert-success");
+                            alertMessage.textContent = "Klant met bsn " + bsn + " geselecteerd als mederekeninghouder.";
                             bsnExists = true;
                         }
                         document.getElementById("response").innerText = message;
