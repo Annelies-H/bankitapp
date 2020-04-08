@@ -112,7 +112,7 @@ public class FillDatabaseService {
         List<BusinessAccount> businessAccounts = new ArrayList<>();
 
         businessAccounts.add(newBusinessAccount(companies.get(0), 358, "NL03BAIT0325489621", new Customer[]{customers.get(0)}));
-        businessAccounts.add(newBusinessAccount(companies.get(1), 194687164.23, "NL29BAIT0201460006", new Customer[]{customers.get(2)}));
+        businessAccounts.add(newBusinessAccount(companies.get(1), 4946464.23, "NL29BAIT0201460006", new Customer[]{customers.get(2)}));
         businessAccounts.add(newBusinessAccount(companies.get(1), 213070, "NL29BAIT0201460007", new Customer[]{customers.get(1), customers.get(2)}));
         businessAccounts.add(newBusinessAccount(companies.get(2), 3156743, "NL72BAIT0201460051", new Customer[]{customers.get(1)}));
 
@@ -152,7 +152,7 @@ public class FillDatabaseService {
         privateAccounts.add(account);
 
         account = new PrivateAccount();
-        account.setBalance(1947616467.62);
+        account.setBalance(19476467.62);
         account.setIban("NL02BAIT0201460007");
         account.getAccountHolders().add(customers.get(2));
         privateAccountDAO.save(account);

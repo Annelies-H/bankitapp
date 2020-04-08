@@ -63,7 +63,7 @@ public class Company implements Comparable<Company>{
     public static class TransactionComparator implements Comparator<Company> {
         @Override
         public int compare(Company company1, Company company2) {
-            return company1.getNumberOfTransactions() - company2.getNumberOfTransactions();
+            return company2.getNumberOfTransactions() - company1.getNumberOfTransactions();
         }
     }
 

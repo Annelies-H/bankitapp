@@ -103,8 +103,9 @@ public class EmployeeController {
         List<PrivateAccount> privateAccounts = bankAccountService.getTop10Private();
 
         if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
-            model.addAttribute("topCompanies", topCompanies);
+            model.addAttribute("topCompaniesBalance", topCompanies);
             model.addAttribute("industrybalances", employeeService.getAverageBalanceForAllIndustries());
+            model.addAttribute("topCompaniesTransactions", companyService.getTop10CompaniesTransactions());
         } else if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
             model.addAttribute("privateAccounts", privateAccounts);
         } else {

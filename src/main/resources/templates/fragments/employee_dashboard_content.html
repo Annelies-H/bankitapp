@@ -24,21 +24,30 @@
                 </div>
 
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_BUSINESS}">
-                    <h3>Top 10 bedrijven</h3>
+                    <h3>Top 10 bedrijven (saldo)</h3>
                     <table>
                         <tr><th>#</th><th>Bedrijf</th><th>Totaalsaldo</th></tr>
-                        <tr th:each="company, custStat: ${topCompanies}">
+                        <tr th:each="company, custStat: ${topCompaniesBalance}">
                             <td style="font-weight: bold; width: 30px" th:text="${custStat.count}"></td>
-                            <td style="width: 190px" th:text="${company.name}"></td>
+                            <td style="width: 400px" th:text="${company.name}"></td>
                             <td style="width: 160px">&euro; <span th:text="${company.totalBalance}"></span></td>
+                    </table>
+                    <br>
+                    <h3>Top 10 bedrijven (transacties)</h3>
+                    <table>
+                        <tr><th>#</th><th>Bedrijf</th><th>Transacties</th></tr>
+                        <tr th:each="company, custStat: ${topCompaniesTransactions}">
+                            <td style="font-weight: bold; width: 30px" th:text="${custStat.count}"></td>
+                            <td style="width: 400px" th:text="${company.name}"></td>
+                            <td style="width: 160px"><span th:text="${company.numberOfTransactions}"></span></td>
                     </table>
                     <br>
                     <h3>Gemiddelde rekeningsaldo per bedrijfstak</h3>
                     <table>
                         <tr><th>Bedrijfstak</th><th>Gemiddelde saldo per rekening</th></tr>
                         <tr th:each="mapEntry : ${industrybalances}">
-                            <td th:text="${mapEntry.key}"><span></span></td>
-                            <td th:text="${mapEntry.value}"></td>
+                            <td style="width: 300px"><span th:text="${mapEntry.key}"></span></td>
+                            <td>&euro; <span th:text="${mapEntry.value}"></span></td>
                         </tr>
                     </table>
                 </div>
