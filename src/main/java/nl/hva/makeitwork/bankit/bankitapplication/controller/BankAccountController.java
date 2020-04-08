@@ -88,6 +88,13 @@ public class BankAccountController {
         return "accountholder_exists";
     }
 
+    @GetMapping("received_request")
+    public String receivedRequestHandler(@RequestParam int id, Model model) {
+        AddAccountholderRequest request = aahs.getRequestById(id);
+        model.addAttribute("request", request);
+        return "add_accountholder_request";
+    }
+
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");

@@ -10,6 +10,8 @@ public interface AddAccountHolderRequestDAO  extends CrudRepository<AddAccountho
 
     public Optional<AddAccountholderRequest> findByIbanAndAndBsn(String iban, int bsn);
 
+    public Optional<AddAccountholderRequest> findById(int id);
+
     public List<AddAccountholderRequest> findAllByBsn(int bsn);
 
 }

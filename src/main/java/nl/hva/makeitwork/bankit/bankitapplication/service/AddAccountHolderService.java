@@ -25,6 +25,14 @@ public class AddAccountHolderService {
         return result;
     }
 
+    public AddAccountholderRequest getRequestById(int id) {
+        Optional<AddAccountholderRequest> optRequest = dao.findById(id);
+        if (optRequest.isEmpty()) {
+            return new AddAccountholderRequest();
+        }
+        return optRequest.get();
+    }
+
     /**
      * Slaat een nieuwe request op indien de klant niet al rekeninghouder is.
      * Als er al een bestaand verzoek is voor deze specifieke rekening en klant
