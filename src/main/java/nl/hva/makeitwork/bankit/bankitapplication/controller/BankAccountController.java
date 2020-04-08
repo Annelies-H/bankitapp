@@ -107,6 +107,12 @@ public class BankAccountController {
         return "product_overview";
     }
 
+    @PostMapping("delete_request")
+    public String deleteRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
+        aahs.deleteRequest(request);
+        return "add_accountholder_request_deleted";
+    }
+
     @GetMapping("overview")
     public String accountOverviewHandler(Model model) {
         Customer customer = (Customer)model.getAttribute("customer");

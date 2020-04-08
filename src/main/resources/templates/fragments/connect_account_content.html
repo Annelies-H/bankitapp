@@ -128,7 +128,9 @@
         <h2>Verzoek tot mederekeninghouderschap </h2>
         <p>U heeft een verzoek gekregen om mederekeninghouder te worden voor de rekening <span th:text=${request.iban}></span>.
             Om het verzoek te kunnen accepteren heeft u de geheime code nodig die u van de rekeninghouder hebt gekregen.
-        Als u dit verzoek accepteer wordt u mederekeninghouder op deze rekening. Hierop zijn onze voorwaarden van toepassing.</p>
+        Als u dit verzoek accepteer wordt u mederekeninghouder op deze rekening. Hierop zijn onze voorwaarden van toepassing.
+        Indien u geen mederekeninghouder voor deze rekening wilt worden kunt u het verzoek verwijderen. Mocht u
+        het verzoek onverhoopt verwijderen vraag dan de rekeninghouder om het verzoek opnieuw in te dienen.</p>
 
         <form method = "post" th:action="@{accept_request}" th:object="${request}">
             <input type="hidden" id="id" name="id" value=""></input>
@@ -136,6 +138,7 @@
             <input type="text" id="secretCode" name="secretCode" class="form-control">
             <br>
             <input type="submit" value="Accepteer verzoek" class="btn btn-primary">
+            <input type="submit" th:formaction="@{delete_request}" value="Verwijder verzoek" class="btn btn-primary">
             <input type="button" align="right" name="button" value="Terug naar productoverzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
         </form>
 
@@ -144,6 +147,15 @@
             console.log(requestId);
             document.getElementById("id").value = requestId;
         </script>
+    </div>
+</div>
+<div th:fragment="request_deleted">
+    <div class="container pt-3 plus">
+        <h2>Verzoek verwijderd</h2>
+        <p>Mocht u het verzoek tot mederekeninghouderschap onverhoopt perongeluk verwijderd hebben neem dan contact op
+        met de rekeninghouder. Zij kan dan het verzoek opnieuw indienen.</p>
+        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
     </div>
 </div>
 <div th:fragment="not_available">

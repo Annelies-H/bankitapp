@@ -32,6 +32,10 @@ public class AddAccountHolderService {
         return providedCode.equals(actualCode);
     }
 
+    public void deleteRequest(AddAccountholderRequest request) {
+        dao.deleteAddAccountholderRequestById(request.getId());
+    }
+
     public void acceptRequest(AddAccountholderRequest rq, Customer customer) {
         int id = rq.getId();
         AddAccountholderRequest request = dao.findById(id).get();
