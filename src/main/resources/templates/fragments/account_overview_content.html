@@ -58,7 +58,7 @@
         <br>
         <input type="button" th:onclick="|window.location.href='@{~/account/overview}'|" value="Terug naar overzicht"
                class="btn btn-primary"/>
-        <input type="button" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
+        <input type="hidden" onclick="window.location.href = '/account/connect_account';" value="Koppel rekening"
                class="btn btn-primary"/>
         <input type="button" th:onclick="|window.location.href='@{~/transaction/new_transaction(id=${account.accountID})}'|"
                value="Nieuwe overboeking" class="btn btn-primary" />

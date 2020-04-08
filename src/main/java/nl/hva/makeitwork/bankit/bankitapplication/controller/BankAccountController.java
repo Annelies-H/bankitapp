@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @SessionAttributes("customer")
 @RequestMapping(value = "account")
@@ -68,7 +71,12 @@ public class BankAccountController {
     public String connectAccountHandler(Model model) {
         Customer customer = (Customer) model.getAttribute("customer");
         customer.sortAccountsOnAccountnr();
-        return "add_accountholder";
+        List<AddAccountholderRequest> requests = aahs.getReceivedRequests(customer.getSocialSecurityNumber());
+        if (requests.size() == 0) {
+            return "add_accountholder";
+        }
+        model.addAttribute("receivedrequests", requests);
+        return "add_accept_accountholder";
     }
 
     @PostMapping(value="save_connect_request")
@@ -78,6 +86,25 @@ public class BankAccountController {
             return "accountholder_request_submitted";
         }
         return "accountholder_exists";
+    }
+
+    @GetMapping("received_request")
+    public String receivedRequestHandler(@RequestParam int id, Model model) {
+        AddAccountholderRequest request = aahs.getRequestById(id);
+        model.addAttribute("request", request);
+        return "add_accountholder_request";
+    }
+
+    @PostMapping("accept_request")
+    public String acceptRequestHandler(Model model, @ModelAttribute("request") AddAccountholderRequest request) {
+        Customer customer = (Customer) model.getAttribute("customer");
+        if (!aahs.checkSecretCode(request)) {
+            model.addAttribute("request", aahs.getRequestById(request.getId()));
+            return "add_accountholder_wrongcode";
+        }
+        aahs.acceptRequest(request, customer);
+        customer.sortAccountsOnAccountnr();
+        return "product_overview";
     }
 
     @GetMapping("overview")

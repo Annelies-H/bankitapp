@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <div th:fragment="add_accountholder">
     <div class="container pt-3 plus">
         <h2>Mederekeninghouder toevoegen</h2>
@@ -28,10 +29,6 @@
                    required pattern="[0-9]{5}" title="Uw geheime code moet uit 5 cijfers bestaan.">
             <br><input type="submit" value="Voeg rekeninghouder toe" class="btn btn-primary">
         </form>
-
-
-        <br>
-        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
         <script>
             let bsnExists = false;
@@ -106,6 +103,47 @@
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
+    </div>
+</div>
+<div th:fragment="received_requests">
+    <div class="container pt-3 plus">
+        <h2>Ontvangen verzoeken</h2>
+        <p>U heeft één of meer verzoeken om als mederekeninghouder toegevoegd te worden op een rekening van één van onze
+            andere klanten. Klik hieronder op het rekeningnummer om het verzoek te accepteren of te weigeren.</p>
+        <table>
+            <tr><th>Rekening</th></tr>
+            <tr th:each="request: ${receivedrequests}">
+                <td>
+                    <a th:href="@{~/account/received_request(id=${request.id})}">
+                    <span th:text=${request.iban}></span></a>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div th:fragment="request">
+    <div class="container pt-3 plus">
+        <h2>Verzoek tot mederekeninghouderschap </h2>
+        <p>U heeft een verzoek gekregen om mederekeninghouder te worden voor de rekening <span th:text=${request.iban}></span>.
+            Om het verzoek te kunnen accepteren heeft u de geheime code nodig die u van de rekeninghouder hebt gekregen.
+        Als u dit verzoek accepteer wordt u mederekeninghouder op deze rekening. Hierop zijn onze voorwaarden van toepassing.</p>
+
+        <form method = "post" th:action="@{accept_request}" th:object="${request}">
+            <input type="hidden" id="id" name="id" value=""></input>
+            <label for="secretCode">Vul hier uw geheime code in:</label>
+            <input type="text" id="secretCode" name="secretCode" class="form-control">
+            <br>
+            <input type="submit" value="Accepteer verzoek" class="btn btn-primary">
+            <input type="button" align="right" name="button" value="Terug naar productoverzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+        </form>
+
+        <script>
+            let requestId = [[${request.id}]]
+            console.log(requestId);
+            document.getElementById("id").value = requestId;
+        </script>
     </div>
 </div>
 <div th:fragment="not_available">
