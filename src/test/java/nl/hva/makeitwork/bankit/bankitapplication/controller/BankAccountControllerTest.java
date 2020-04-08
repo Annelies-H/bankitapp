@@ -1,6 +1,7 @@
 package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
@@ -8,6 +9,7 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BankAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
+import nl.hva.makeitwork.bankit.bankitapplication.service.AddAccountHolderService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.BankAccountService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.CustomerService;
 
@@ -17,6 +19,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //Met de @WebMvcTest geef je aan welke controller je gaat testen
 @WebMvcTest(BankAccountController.class)
-public class BankAccountControllerTest {
+class BankAccountControllerTest {
 
     @Autowired
     //Mock Mvc wordt gebruikt om de http request te kunnen mocken
@@ -40,9 +43,7 @@ public class BankAccountControllerTest {
     @MockBean
     private CustomerService cservice;
     @MockBean
-    private CompanyDAO cdao;
-    @MockBean
-    private BankAccountDAO bdao;
+    private AddAccountHolderService aahs;
 
 
     @Test
@@ -50,7 +51,9 @@ public class BankAccountControllerTest {
     void whenConnectAccountRequest_thenReturns200() throws Exception {
         //De mockMvc 'performed' een get request voor de gegeven url met het gegeven content type
         mockMvc.perform(get("/account/connect_account")
-                .contentType("application/json"))
+                .contentType("application/json")
+                // handmatig account toevoegen aan model, wordt normaal door void methode gedaan
+                .flashAttr("customer", mock(Customer.class)))
                 //De test verwacht de isOK status
                 .andExpect(status().isOk());
     }
