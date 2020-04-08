@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <div th:fragment="add_accountholder">
     <div class="container pt-3 plus">
         <h2>Mederekeninghouder toevoegen</h2>
@@ -28,10 +29,6 @@
                    required pattern="[0-9]{5}" title="Uw geheime code moet uit 5 cijfers bestaan.">
             <br><input type="submit" value="Voeg rekeninghouder toe" class="btn btn-primary">
         </form>
-
-
-        <br>
-        <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 
         <script>
             let bsnExists = false;
@@ -105,6 +102,15 @@
         rekeningnummer <span th:text="${request.iban}"></span> toegevoegd.</p>
         <br>
         <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+
+    </div>
+</div>
+<div th:fragment="received_requests">
+    <div class="container pt-3 plus">
+        <h2>Ontvangen verzoeken</h2>
+        <p>U heeft één of meer verzoeken om als mederekeninghouder toegevoegd te worden op een rekening van één van onze
+            andere klanten. Klik hieronder op het rekeningnummer om het verzoek te accepteren of te weigeren.</p>
+
 
     </div>
 </div>

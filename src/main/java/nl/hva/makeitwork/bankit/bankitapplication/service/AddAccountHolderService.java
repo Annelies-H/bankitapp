@@ -9,6 +9,8 @@ import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,11 @@ public class AddAccountHolderService {
     AddAccountHolderRequestDAO dao;
     @Autowired
     CustomerDAO cdao;
+
+    public List<AddAccountholderRequest> getReceivedRequests(int bsn) {
+        List<AddAccountholderRequest> result = dao.findAllByBsn(bsn);
+        return result;
+    }
 
     /**
      * Slaat een nieuwe request op indien de klant niet al rekeninghouder is.

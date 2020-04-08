@@ -6,8 +6,9 @@
 <body>
 <div th:insert="fragments/base :: header"></div>
 <div th:insert="fragments/connect_account_content :: add_accountholder"></div>
+<div th:insert="fragments/connect_account_content :: received_requests"></div>
 <div class="container pt-3 plus">
-<input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
+    <input type="button" align="right" name="button" value="Terug naar overzicht" class="btn btn-primary" onclick="window.location.href = '/account/overview';" style="align-content:end; width: auto; margin: auto"/>
 </div>
 <div th:insert="fragments/base :: script"></div>
 </body>

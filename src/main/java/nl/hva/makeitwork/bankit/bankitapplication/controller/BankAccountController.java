@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @SessionAttributes("customer")
 @RequestMapping(value = "account")
@@ -68,7 +71,13 @@ public class BankAccountController {
     public String connectAccountHandler(Model model) {
         Customer customer = (Customer) model.getAttribute("customer");
         customer.sortAccountsOnAccountnr();
-        return "add_accountholder";
+        List<AddAccountholderRequest> requests = aahs.getReceivedRequests(customer.getSocialSecurityNumber());
+        if (requests.size() == 0) {
+            model.addAttribute("receivedRequests", requests);
+            return "add_accountholder";
+        }
+        return "add_accept_accountholder";
+
     }
 
     @PostMapping(value="save_connect_request")
