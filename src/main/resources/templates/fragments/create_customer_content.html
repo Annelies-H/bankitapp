@@ -295,7 +295,7 @@
           let userNameInput = document.getElementById("username");
           userNameInput.addEventListener("input", function () {
             let userName = userNameInput.value;
-            let apiUrl = `http://localhost:8080/api/check_username/${userName}`;
+            let apiUrl = `http://miw-team-2.nl/api/check_username/${userName}`;
             const alertField = document.querySelector("#usernameAlert");
             const message = document.querySelector("#usernameError");
             const form = document.querySelector("form");
