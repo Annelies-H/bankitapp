@@ -60,15 +60,28 @@ public class CompanyService {
     public List<Company> getTop10CompaniesTransactions() {
         List<BusinessAccount> businessAccounts = bankAccountService.getAllBusinessAccounts();
         List<Company> companies = getAllCompanies();
+        Iterable<Transaction> transactionIterable = transactionDAO.findAll();
+        Iterator<Transaction> transactionIterator = transactionIterable.iterator();
+        List<Transaction> transactions = new ArrayList<>();
+        while (transactionIterator.hasNext()) {
+            transactions.add(transactionIterator.next());
+        }
+
         int count = 0;
 
         for(Company company : companies) {
+            count = 0;
+
             for (BusinessAccount businessAccount : businessAccounts) {
-                count = 0;
                 if (businessAccount.getCompany().equals(company)) {
-                    count++;
+                    for (Transaction transaction : transactions) {
+                        if (transaction.getIbanTo().equals(businessAccount.getIban()) || transaction.getIbanFrom().equals(businessAccount.getIban())) {
+                            count++;
+                        }
+                    }
                 }
             }
+
             company.setNumberOfTransactions(count);
         }
 

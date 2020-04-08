@@ -70,6 +70,8 @@ public class FillDatabaseService {
                 "Laptop gekocht");
         addTransaction(pAccounts.get(2).getIban(), bAccounts.get(0).getIban(), 3.50, PaymentMethod.POS,
                 "Pijnboompit gekocht");
+        addTransaction(bAccounts.get(3).getIban(), bAccounts.get(2).getIban(), 100.90, PaymentMethod.BANKTRANSFER,
+                "subsidie");
 
         System.out.println("**** Database gevuld met testdata *****");
     }
