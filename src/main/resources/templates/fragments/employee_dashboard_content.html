@@ -30,7 +30,8 @@
                         <tr th:each="company, custStat: ${topCompaniesBalance}">
                             <td style="font-weight: bold; width: 30px" th:text="${custStat.count}"></td>
                             <td style="width: 400px" th:text="${company.name}"></td>
-                            <td style="width: 160px">&euro; <span th:text="${company.totalBalance}"></span></td>
+                            <td style="width: 160px">&euro; <span
+                                    th:text="${#numbers.formatDecimal(company.totalBalance, 1, 'POINT', 2, 'COMMA')}"></span></td>
                     </table>
                     <br>
                     <h3>Top 10 bedrijven (transacties)</h3>
@@ -47,7 +48,7 @@
                         <tr><th>Bedrijfstak</th><th>Gemiddelde saldo per rekening</th></tr>
                         <tr th:each="mapEntry : ${industrybalances}">
                             <td style="width: 300px"><span th:text="${mapEntry.key}"></span></td>
-                            <td>&euro; <span th:text="${mapEntry.value}"></span></td>
+                            <td>&euro; <span th:text="${#numbers.formatDecimal(mapEntry.value, 1, 'POINT', 2, 'COMMA')}"></span></td>
                         </tr>
                     </table>
                 </div>
@@ -61,7 +62,7 @@
                             <td style="font-weight: bold; width: 30px" th:text="${custStat.count}"></td>
                             <td style="width: 190px"><a th:href="@{~/account/selected_bankaccount(id=${account.accountID})}">
                                 <span th:text="${account.iban}"/></a></td>
-                            <td style="width: 160px">&euro; <span th:text="${account.balance}"></span></td>
+                            <td style="width: 160px">&euro; <span th:text="${#numbers.formatDecimal(account.balance, 1, 'POINT', 2, 'COMMA')}"></span></td>
                             <td th:text="${account.accountHolders}"></td>
                     </table>
                 </div>

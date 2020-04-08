@@ -17,7 +17,7 @@
         <div th:if="${#lists.isEmpty(account.history) != true}">
             <h3>Transactieoverzicht.
                 <span align="right">Uw Saldo <span
-                        th:text="'€ ' + ${#numbers.formatDecimal(account.balance, 1, 2, 'COMMA')}"></span></span>
+                        th:text="'€ ' + ${#numbers.formatDecimal(account.balance, 1,'POINT', 2, 'COMMA')}"></span></span>
             </h3>
             <table>
                 <tr>
@@ -31,7 +31,7 @@
                             th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
                     </td>
                     <td align="right"
-                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.amount, 1, 2, 'COMMA')}"></td>
+                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.amount, 1,'POINT', 2, 'COMMA')}"></td>
                     <td><span th:if="${transaction.ibanTo} == ${account.iban}" th:text="${transaction.ibanFrom}"></span>
                         <span th:if="${transaction.ibanFrom} == ${account.iban}" th:text="${transaction.ibanTo}"></span>
                     </td>
