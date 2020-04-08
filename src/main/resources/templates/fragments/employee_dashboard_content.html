@@ -32,6 +32,15 @@
                             <td style="width: 190px" th:text="${company.name}"></td>
                             <td style="width: 160px">&euro; <span th:text="${company.totalBalance}"></span></td>
                     </table>
+                    <br>
+                    <h3>Gemiddelde rekeningsaldo per bedrijfstak</h3>
+                    <table>
+                        <tr><th>Bedrijfstak</th><th>Gemiddelde saldo per rekening</th></tr>
+                        <tr th:each="mapEntry : ${industrybalances}">
+                            <td th:text="${mapEntry.key}"><span></span></td>
+                            <td th:text="${mapEntry.value}"></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).HEAD_PRIVATE}">

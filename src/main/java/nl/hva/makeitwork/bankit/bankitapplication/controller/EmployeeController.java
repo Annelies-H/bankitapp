@@ -3,6 +3,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
+import nl.hva.makeitwork.bankit.bankitapplication.model.company.Industry;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.EmployeeDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping(value = "/intranet")
 @Controller
@@ -98,6 +100,7 @@ public class EmployeeController {
 
         if (employee.getPosition().equals(Position.HEAD_BUSINESS)) {
             model.addAttribute("topCompanies", topCompanies);
+            model.addAttribute("industrybalances", employeeService.getAverageBalanceForAllIndustries());
         } else if (employee.getPosition().equals(Position.HEAD_PRIVATE)) {
             model.addAttribute("privateAccounts", privateAccounts);
         } else {
