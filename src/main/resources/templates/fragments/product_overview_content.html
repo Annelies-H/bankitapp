@@ -37,12 +37,14 @@
             <table>
                 <tr>
                     <th>Rekeningnummer</th>
+                    <th></th>
                     <th align="right">Saldo</th>
                 </tr>
                 <tr th:each="privateaccount: ${customer.privateAccounts}">
-                    <td><a th:href="@{~/account/selected_bankaccount(id=${privateaccount.accountID})}">
+                    <td th:width="175px"><a th:href="@{~/account/selected_bankaccount(id=${privateaccount.accountID})}">
                         <span th:text="${privateaccount.iban}"></span></a></td>
-                    <td align="right" th:text="'€ ' + ${#numbers.formatDecimal(privateaccount.balance, 1,'POINT', 2, 'COMMA')}"></td>
+                    <td th:text="'€ '"></td>
+                    <td align="right" th:text="${#numbers.formatDecimal(privateaccount.balance, 1,'POINT', 2, 'COMMA')}"></td>
                 </tr>
             </table>
         </div>
@@ -55,16 +57,17 @@
             <table>
                 <tr>
                     <th>Rekeningnummer</th>
+                    <th></th>
                     <th align="right">Saldo</th>
                     <th>Bedrijf</th>
                 </tr>
                 <tr th:each="businessaccount: ${customer.businessAccounts}">
-                    <td>
+                    <td th:width="175px">
                         <a th:href="@{~/account/selected_bankaccount(id=${businessaccount.accountID})}"><span
                                 th:text="${businessaccount.iban}"></span></a>
                     </td>
-                    <td align="right"
-                        th:text="'€ ' + ${#numbers.formatDecimal(businessaccount.balance, 1,'POINT', 2, 'COMMA')}"></td>
+                    <td th:text="'€ '"></td>
+                    <td align="right" th:text="${#numbers.formatDecimal(businessaccount.balance, 1,'POINT', 2, 'COMMA')}"></td>
                     <td th:text="${businessaccount.company.name}"></td>
                 </tr>
             </table>

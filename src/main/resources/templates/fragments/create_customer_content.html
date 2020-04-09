@@ -7,7 +7,7 @@
 
   <body>
     <div th:fragment="content">
-      <div class="container">
+      <div class="container pt-3 plus">
         <div style="background: transparent !important;" class="jumbotron">
           <h1 class="display-4">Word nu klant</h1>
 
@@ -271,7 +271,7 @@
                   let ssnExist = d; //data
                   if (!ssnExist) {
                     alertField.setAttribute("class", "alert alert-success");
-                    message.textContent = "Uw burgerservicenummer is juist.";
+                    message.textContent = "BSN is goedgekeurd.";
                     form.onsubmit = () => {
                       return true;
                     };
@@ -283,7 +283,7 @@
                       "alert"
                     );
                     message.textContent =
-                      "Voer een correct burgerservicenummer in.";
+                      "U bent al klant, wat fijn!";
                     form.onsubmit = () => {
                       return false;
                     };

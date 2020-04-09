@@ -15,6 +15,6 @@ public class IndexController {
 
     @GetMapping("about_us")
     public String aboutusHandler() {
-        return "under_construction";
+        return "about_us";
     }
 }
