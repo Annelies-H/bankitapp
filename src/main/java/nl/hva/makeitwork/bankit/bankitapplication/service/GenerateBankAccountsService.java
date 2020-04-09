@@ -2,10 +2,12 @@ package nl.hva.makeitwork.bankit.bankitapplication.service;
 
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.Bankaccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.account.BusinessAccount;
+import nl.hva.makeitwork.bankit.bankitapplication.model.account.PrivateAccount;
 import nl.hva.makeitwork.bankit.bankitapplication.model.company.Company;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.BusinessAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CompanyDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.repository.CustomerDAO;
+import nl.hva.makeitwork.bankit.bankitapplication.model.repository.PrivateAccountDAO;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.List;
 
 
 @Service
-public class GenerateBusinessAccountsService {
+public class GenerateBankAccountsService {
     @Autowired
     private CustomerDAO customerDAO;
     @Autowired
@@ -23,7 +25,7 @@ public class GenerateBusinessAccountsService {
     @Autowired
     private BusinessAccountDAO bAccountDAO;
     @Autowired
-    private BankAccountService bAccountService;
+    private PrivateAccountDAO pAccountDAO;
     @Autowired
     private CustomerService customerService;
 
@@ -31,6 +33,59 @@ public class GenerateBusinessAccountsService {
     List<Company> allCompanies;
 
 
+    public void createPrivateAccounts() {
+        allCustomers = customerDAO.findAll();
+        createLowBalancePrivateAccounts();
+        createMidBalancePrivateAccounts();
+    }
+
+    private void createLowBalancePrivateAccounts() {
+        for (int i = 350; i < 2000; i++) {
+            Customer customer = allCustomers.get(i);
+            PrivateAccount account = new PrivateAccount();
+            double randomBalance = ((int) (Math.random() * 150000)) / 100.0;
+            account.setBalance(randomBalance);
+            account.setIban("");
+            account.addAccountHolder(customer);
+            pAccountDAO.save(account);
+            String iban = Bankaccount.constructIBAN(account.getAccountID());
+            account.setIban(iban);
+            pAccountDAO.save(account);
+            customerService.addBankAccount(customer, account);
+        }
+    }
+
+    private void createMidBalancePrivateAccounts() {
+        for (int i = 1500; i < 3800; i++) {
+            Customer customer = allCustomers.get(i);
+            PrivateAccount account = new PrivateAccount();
+            double randomBalance = ((int) (Math.random() * 500000)) / 100.0;
+            account.setBalance(randomBalance);
+            account.setIban("");
+            account.addAccountHolder(customer);
+            pAccountDAO.save(account);
+            String iban = Bankaccount.constructIBAN(account.getAccountID());
+            account.setIban(iban);
+            pAccountDAO.save(account);
+            customerService.addBankAccount(customer, account);
+        }
+    }
+
+    private void createHighBalancePrivateAccounts() {
+        for (int i = 3500; i < allCustomers.size(); i++) {
+            Customer customer = allCustomers.get(i);
+            PrivateAccount account = new PrivateAccount();
+            double randomBalance = ((int) (Math.random() * 10000000)) / 100.0 + 10000;
+            account.setBalance(randomBalance);
+            account.setIban("");
+            account.addAccountHolder(customer);
+            pAccountDAO.save(account);
+            String iban = Bankaccount.constructIBAN(account.getAccountID());
+            account.setIban(iban);
+            pAccountDAO.save(account);
+            customerService.addBankAccount(customer, account);
+        }
+    }
 
     public void createBusinessAccounts() {
         allCustomers = customerDAO.findAll();
@@ -38,8 +93,8 @@ public class GenerateBusinessAccountsService {
         System.out.println(allCustomers.size());
         System.out.println(allCompanies.size());
         createOnForEachCompany();
-        createHighBalanceAccounts();
-        createLowBalanceAccounts();
+        createHighBalanceBusinessAccounts();
+        createLowBalanceBusinessAccounts();
     }
 
     private void createOnForEachCompany() {
@@ -59,7 +114,7 @@ public class GenerateBusinessAccountsService {
         }
     }
 
-    private void createHighBalanceAccounts() {
+    private void createHighBalanceBusinessAccounts() {
         for (int i = 200; i < 275; i++) {
             int randomCustomer = ((int) (Math.random() * allCustomers.size()));
             Customer customer = allCustomers.get(randomCustomer);
@@ -78,7 +133,7 @@ public class GenerateBusinessAccountsService {
         }
     }
 
-    private void createLowBalanceAccounts() {
+    private void createLowBalanceBusinessAccounts() {
         for (int i = 0; i < 75; i++) {
             int randomCustomer = ((int) (Math.random() * allCustomers.size()));
             Customer customer = allCustomers.get(randomCustomer);
