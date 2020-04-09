@@ -12,14 +12,14 @@
                 Hallo <span th:text="${employee.username}"/>!<br>
                 Welkom op het <span th:text="${employee.position}"/> Dashboard!<br>
                 Ben jij <span th:text="${employee.username}"/> niet?
-                <a href="/intranet/logout">Klik hier</a>
+                <a href="/intranet/logout">Logout</a>
             </div>
             <br>
 
             <div th:switch="${employee.position}">
                 <div th:case="${T(nl.hva.makeitwork.bankit.bankitapplication.model.user.Position).ACCOUNTMANAGER}">
 
-                    <h3>Hier komt nog iets</h3>
+                    <h3>Momenteel is er nog geen functionaliteit voor de Accountmanager in deze applicatie.</h3>
 
                 </div>
 
@@ -45,7 +45,7 @@
                     <br>
                     <h3>Gemiddelde rekeningsaldo per bedrijfstak</h3>
                     <table>
-                        <tr><th>Bedrijfstak</th><th>Gemiddelde saldo per rekening</th></tr>
+                        <tr><th>Bedrijfstak</th><th>Gemiddelde saldo</th></tr>
                         <tr th:each="mapEntry : ${industrybalances}">
                             <td style="width: 300px"><span th:text="${mapEntry.key}"></span></td>
                             <td>&euro; <span th:text="${#numbers.formatDecimal(mapEntry.value, 1, 'POINT', 2, 'COMMA')}"></span></td>
