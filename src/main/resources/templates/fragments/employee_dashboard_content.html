@@ -7,12 +7,22 @@
 <body>
     <div th:fragment="content">
         <div class="container plus pt-3">
-            <h1><span th:text="${employee.position}"/> Dashboard</h1>
+            <table>
+                <tr>
+                    <td style="width: 700px">
+                        <h1><span th:text="${employee.position}"/> Dashboard</h1>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/intranet/logout';">Logout</button>
+                        <!--<b><a href="/intranet/logout">Logout</a></b>-->
+                    </td>
+                </tr>
+            </table>
+
             <div>
-                Hallo <span th:text="${employee.username}"/>!<br>
-                Welkom op het <span th:text="${employee.position}"/> Dashboard!<br>
-                Ben jij <span th:text="${employee.username}"/> niet?
-                <a href="/intranet/logout">Logout</a>
+                Hallo <span th:text="${employee.username}"/>,
+                welkom op het <span th:text="${employee.position}"/> Dashboard!
+
             </div>
             <br>
 
