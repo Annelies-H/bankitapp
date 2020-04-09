@@ -7,7 +7,17 @@
 <body>
 <div th:fragment="content">
     <div class="container plus" th:object="${account}">
-        <h2>Rekeningoverzicht <span th:text="*{iban}"></span></h2>
+        <table>
+            <tr>
+                <td style="width: 700px">
+                    <h2>Rekeningoverzicht <span th:text="*{iban}"></span></h2>
+                </td>
+                <td>
+                    <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/logout';">Logout</button>
+                </td>
+            </tr>
+        </table>
+        
         <h4> <span th:if="${company != 'null'}" th:text="${'Bedrijfsnaam: ' + account.company.name}"></span></h4>
         <p>Rekeninghouder(s): <span th:text="${account.showAccountHolders()}"></span></p>
         <br>

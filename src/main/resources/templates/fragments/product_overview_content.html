@@ -7,15 +7,28 @@
 <body>
 <div th:fragment="content">
     <div class="container plus pt-3">
-        <h1>Welkom
-            <span th:switch="${customer.gender}">
+
+        <table>
+            <tr>
+                <td style="width: 700px">
+                    <h2>Welkom
+                        <span th:switch="${customer.gender}">
                     <span th:case="vrouw">mevrouw</span>
                     <span th:case="man">meneer</span>
                 </span>
-            <span th:text="${customer.firstName}"> </span>
-            <span th:text="${customer.prefix}"> </span>
-            <span th:text="${customer.lastName}"> </span>
-        </h1>
+                        <span th:text="${customer.firstName}"> </span>
+                        <span th:text="${customer.prefix}"> </span>
+                        <span th:text="${customer.lastName}"> </span>
+                    </h2>
+                </td>
+                <td>
+                    <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/logout';">Logout</button>
+                </td>
+            </tr>
+        </table>
+
+
+
         <br>
         <h2>Dit is uw Bank IT productoverzicht.</h2>
         <br>

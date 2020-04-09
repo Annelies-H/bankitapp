@@ -8,9 +8,17 @@
 <div th:fragment="new_transaction">
     <div class="container" th:value="${account}">
         <div style="background:transparent !important" class="jumbotron">
-
-            <h2 style="width: 750px; margin: auto">Overboeking van rekening <span id="ibanFrom"
-                                                                                  th:text="${account.iban}"></span></h2>
+            <table>
+                <tr>
+                    <td style="width: 700px">
+                        <h2 style="width: 750px; margin: auto">Overboeking van rekening <span id="ibanFrom" th:text="${account.iban}"></span></h2>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/logout';">Logout</button>
+                    </td>
+                </tr>
+            </table>
+            <h2 style="width: 750px; margin: auto">Overboeking van rekening <span id="ibanFrom" th:text="${account.iban}"></span></h2>
             <br>
             <div id="ibanAlert">
                 <p id="ibanError"></p>

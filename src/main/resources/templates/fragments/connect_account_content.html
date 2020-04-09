@@ -8,9 +8,17 @@
 
 <div th:fragment="add_accountholder">
     <div class="container pt-3 plus">
-        <h2>Mederekeninghouder toevoegen</h2>
+        <table>
+            <tr>
+                <td style="width: 700px">
+                    <h2>Mederekeninghouder toevoegen</h2>
+                </td>
+                <td>
+                    <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/logout';">Logout</button>
+                </td>
+            </tr>
+        </table>
         <br>
-
         <form method="post" th:action="@{save_connect_request}" th:object="${request}">
             <label for="iban">Kies de rekening waarvoor u een mederekeninghouder wilt toevoegen:</label>
             <select id="iban" name="iban" class="form-control">
