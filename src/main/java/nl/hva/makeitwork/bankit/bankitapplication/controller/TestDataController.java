@@ -2,6 +2,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 
 
 
+import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateBusinessAccountsService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateCompaniesService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateCustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class TestDataController {
 
   @Autowired
   private GenerateCompaniesService generateCompaniesService;
+  @Autowired
+  private GenerateBusinessAccountsService generateBusinessAccountsService;
 
   public TestDataController() {
     super();
@@ -31,6 +34,12 @@ public class TestDataController {
   public String createCompaniesHandler() {
     generateCompaniesService.createCompanies();
     return "redirect:/";
+  }
+
+  @GetMapping("create_businessAccounts")
+  public String createBusinessAccounts() {
+    generateBusinessAccountsService.createBusinessAccounts();
+    return "under_construction";
   }
 
 

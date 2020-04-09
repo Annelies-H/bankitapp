@@ -11,4 +11,6 @@ import java.util.List;
 public interface CompanyDAO extends CrudRepository<Company, Integer> {
 
     public List<Company> findAllByIndustry(Industry industry);
+
+    public List<Company> findAll();
 }
