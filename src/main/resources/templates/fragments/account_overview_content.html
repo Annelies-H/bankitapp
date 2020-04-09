@@ -32,16 +32,18 @@
             <table>
                 <tr>
                     <th>Datum</th>
+                    <th></th>
                     <th align="right">Bedrag</th>
                     <th>Tegenrekening</th>
                     <th>Omschrijving</th>
                 </tr>
                 <tr th:each="transaction: ${account.history}">
-                    <td><a th:href="@{../transaction/selected_transaction}"><span
+                    <td width="90px"><a th:href="@{../transaction/selected_transaction}"><span
                             th:text="${#dates.format(transaction.date, 'dd/MM/yyyy')}"></span></a>
                     </td>
+                    <td th:text="'€ '"></td>
                     <td align="right"
-                        th:text="'€ ' + ${#numbers.formatDecimal(transaction.amount, 1,'POINT', 2, 'COMMA')}"></td>
+                        th:text="${#numbers.formatDecimal(transaction.amount, 1,'POINT', 2, 'COMMA')}"></td>
                     <td><span th:if="${transaction.ibanTo} == ${account.iban}" th:text="${transaction.ibanFrom}"></span>
                         <span th:if="${transaction.ibanFrom} == ${account.iban}" th:text="${transaction.ibanTo}"></span>
                     </td>
