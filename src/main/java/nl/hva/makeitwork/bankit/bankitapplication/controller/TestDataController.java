@@ -5,6 +5,7 @@ package nl.hva.makeitwork.bankit.bankitapplication.controller;
 import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateBankAccountsService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateCompaniesService;
 import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateCustomersService;
+import nl.hva.makeitwork.bankit.bankitapplication.service.GenerateTransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ public class TestDataController {
   private GenerateCompaniesService generateCompaniesService;
   @Autowired
   private GenerateBankAccountsService generateBankAccountsService;
+  @Autowired
+  private GenerateTransactionsService generateTransactionsService;
 
   public TestDataController() {
     super();
@@ -48,6 +51,11 @@ public class TestDataController {
     return "under_construction";
   }
 
+  @GetMapping("create_business_transactions")
+  public String createBusinessTransactions() {
+    generateTransactionsService.createTransactionsForBusinessAccounts();
+    return "under_construction";
+  }
 
 
 }
