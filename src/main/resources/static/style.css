@@ -14,6 +14,9 @@
 .dropdowncolor{
                 color:#007bff;
 }
+.emp{
+    background-color:#ff974d;
+    }
 
 .lowerimage{
             background-image: url("img/index_img.png");
@@ -21,7 +24,12 @@
             height: 775px;
             background-size: 100% 100%;
 }
-
+.lowerEmployee{
+            background-image: url("img/index_img.png");
+            background-repeat:no-repeat;
+            height: 775px;
+            background-size: 100% 100%;
+}
 .plus{
     max-width:750px;
     margin:auto;
