@@ -14,4 +14,5 @@ public interface BusinessAccountDAO extends CrudRepository<BusinessAccount, Inte
     public Optional<BusinessAccount> findByAccountID(int id);
     public Optional<BusinessAccount> findBusinessAccountByIban(String iban);
     public List<BusinessAccount> findAllByCompany(Company company);
+    public List<BusinessAccount> findAll();
 }
