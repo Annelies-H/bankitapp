@@ -37,6 +37,7 @@ public class GenerateBankAccountsService {
         allCustomers = customerDAO.findAll();
         createLowBalancePrivateAccounts();
         createMidBalancePrivateAccounts();
+        createHighBalancePrivateAccounts();
     }
 
     private void createLowBalancePrivateAccounts() {
