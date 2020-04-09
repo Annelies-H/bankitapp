@@ -1,179 +1,232 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Overboeking</title>
-</head>
-<body>
-<div th:fragment="new_transaction">
-    <div class="container" th:value="${account}">
-        <div style="background:transparent !important" class="jumbotron">
-            <table>
-                <tr>
-                    <td style="width: 700px">
-                        <h2 style="width: 750px; margin: auto">Overboeking van rekening <span id="ibanFrom" th:text="${account.iban}"></span></h2>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary loginbuttons" onclick="window.location.href = '/logout';">Logout</button>
-                    </td>
-                </tr>
-            </table>
-            <h2 style="width: 750px; margin: auto">Overboeking van rekening <span id="ibanFrom" th:text="${account.iban}"></span></h2>
-            <br>
-            <div id="ibanAlert">
-                <p id="ibanError"></p>
+  </head>
+  <body>
+    <div th:fragment="new_transaction">
+      <div class="container" th:value="${account}">
+        <div style="background: transparent !important;" class="jumbotron">
+          <table>
+            <tr>
+              <td style="width: 700px;">
+                <h2 style="width: 750px; margin: auto;">
+                  Overboeking van rekening
+                  <span id="ibanFrom" th:text="${account.iban}"></span>
+                </h2>
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary loginbuttons"
+                  onclick="window.location.href = '/logout';"
+                >
+                  Logout
+                </button>
+              </td>
+            </tr>
+          </table>
+          <br />
+          <div id="ibanAlert">
+            <p id="ibanError"></p>
+          </div>
+          <div id="amountAlert">
+            <p id="amountError"></p>
+          </div>
+          <form
+            action="#"
+            th:action="@{~/transaction/save_transaction(id=${account.accountID})}"
+            th:object="${transaction}"
+            method="post"
+            class="main-form"
+          >
+            <div class="col-sm-6">
+              <div class="row">
+                <label for="ibanTo">Naar rekening:</label>
+                <input
+                  type="text"
+                  id="ibanTo"
+                  th:field="*{ibanTo}"
+                  class="form-control"
+                  placeholder="NL00BANK123456789"
+                  autofocus
+                  required
+                  pattern="^(?=[0-9A-Z]{18}$)NL\d{2}[A-Z]{4}\d{10}$"
+                  title="Vul een geldig bankrekeningnummer NL01BANK0123456789."
+                />
+              </div>
             </div>
-            <div id="amountAlert">
-                <p id="amountError"></p>
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="amount">Bedrag:</label>
+                  <input
+                    type="text"
+                    id="amount"
+                    th:field="*{amount}"
+                    class="form-control"
+                    th:placeholder="'0,00'"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-            <form action="#" th:action="@{~/transaction/save_transaction(id=${account.accountID})}"
-                  th:object="${transaction}" method="post" class="main-form">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <label for="ibanTo">Naar rekening:</label>
-                        <input type="text" id="ibanTo" th:field="*{ibanTo}" class="form-control"
-                               placeholder="NL00BANK123456789" autofocus required
-                               pattern="^(?=[0-9A-Z]{18}$)NL\d{2}[A-Z]{4}\d{10}$"
-                               title="Vul een geldig bankrekeningnummer NL01BANK0123456789.">
-                    </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="description">Omschrijving:</label>
+                  <input
+                    type="text"
+                    id="description"
+                    th:field="*{description}"
+                    class="form-control"
+                    maxlength="40"
+                    title="Omschrijving mag maximaal 40 leestekens bevatten."
+                  />
                 </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="amount">Bedrag:</label>
-                            <input
-                                    type="text"
-                                    id="amount"
-                                    th:field="*{amount}"
-                                    class="form-control"
-                                    th:placeholder="'0,00'"
-                                    required
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="description">Omschrijving:</label>
-                            <input type="text" id="description" th:field="*{description}" class="form-control"
-                                   maxlength="40" title="Omschrijving mag maximaal 40 leestekens bevatten.">
-                        </div>
-                    </div>
-                </div>
-                <input type="submit" value="Overboeken" class="btn btn-primary">
-                <input type="button"
-                       th:onclick="|window.location.href='@{~/account/selected_bankaccount(id=${account.accountID})}'|"
-                       value="Terug naar rekeningoverzicht" class="btn btn-primary"/>
-            </form>
+              </div>
+            </div>
+            <input type="submit" value="Overboeken" class="btn btn-primary" />
+            <input
+              type="button"
+              th:onclick="|window.location.href='@{~/account/selected_bankaccount(id=${account.accountID})}'|"
+              value="Terug naar rekeningoverzicht"
+              class="btn btn-primary"
+            />
+          </form>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.3/dist/inputmask.js"></script>
 
         <script>
+          let ibancheck = false;
 
-            let ibancheck = false;
+          let ibanToValue = document.getElementById("ibanTo");
+          let ibanFromValue = "[[${account.iban}]]";
+          ibanToValue.addEventListener("change", function ibanCheck() {
+            let ibanToInput = ibanToValue.value;
 
-            let ibanToValue = document.getElementById("ibanTo");
-            let ibanFromValue = "[[${account.iban}]]";
-            ibanToValue.addEventListener("change", function ibanCheck() {
-                let ibanToInput = ibanToValue.value;
-
-                //check ibanFrom does not equals ibanTO
-                if (ibanToInput == ibanFromValue) {
-                    document.querySelector("#ibanAlert").setAttribute("class", "alert alert-danger", "role", "alert");
-                    document.querySelector("#ibanError").textContent = "U kunt geen geld overmaken binnen dezelfde rekening";
-                    ibancheck = false;
-                } else {
-
-                    let URL = `http://miw-team-2.nl/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
-                    if (ibanToInput.length != 0) {
-                        fetch(URL) // API URL
-                            .then((response) => {
-                                if (!response.ok) {// Methode is een boolean en geeft true bij een een status 200-299
-                                    throw new Error("Error with respons"); // gooit een error met een message
-                                }
-                                return response.json(); // Zet de JSON promise om in een javascript object
-                            })
-                            .then((data) => { // promise => Javascript object met data.
-                                console.log(data)
-                                if (data == false) {
-                                    document.querySelector("#ibanAlert").setAttribute("class", "alert alert-danger", "role", "alert");
-                                    document.querySelector("#ibanError").textContent = "Ongeldig IBAN.";
-                                    ibancheck = false;
-                                } else {
-                                    document.querySelector("#ibanAlert").removeAttribute("class", "role");
-                                    document.querySelector("#ibanError").textContent = "";
-                                    ibancheck = true;
-                                }
-                                                            })
-                            .catch((error) => {
-                                console.log(error); // handelt de errors af en drukt ze af in de console
-                            })
+            //check ibanFrom does not equals ibanTO
+            if (ibanToInput == ibanFromValue) {
+              document
+                .querySelector("#ibanAlert")
+                .setAttribute("class", "alert alert-danger", "role", "alert");
+              document.querySelector("#ibanError").textContent =
+                "U kunt geen geld overmaken binnen dezelfde rekening";
+              ibancheck = false;
+            } else {
+              let URL = `http://miw-team-2.nl/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
+              if (ibanToInput.length != 0) {
+                fetch(URL) // API URL
+                  .then((response) => {
+                    if (!response.ok) {
+                      // Methode is een boolean en geeft true bij een een status 200-299
+                      throw new Error("Error with respons"); // gooit een error met een message
                     }
-                }
-            });
+                    return response.json(); // Zet de JSON promise om in een javascript object
+                  })
+                  .then((data) => {
+                    // promise => Javascript object met data.
+                    console.log(data);
+                    if (data == false) {
+                      document
+                        .querySelector("#ibanAlert")
+                        .setAttribute(
+                          "class",
+                          "alert alert-danger",
+                          "role",
+                          "alert"
+                        );
+                      document.querySelector("#ibanError").textContent =
+                        "Ongeldig IBAN.";
+                      ibancheck = false;
+                    } else {
+                      document
+                        .querySelector("#ibanAlert")
+                        .removeAttribute("class", "role");
+                      document.querySelector("#ibanError").textContent = "";
+                      ibancheck = true;
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error); // handelt de errors af en drukt ze af in de console
+                  });
+              }
+            }
+          });
 
-            Inputmask().mask(document.querySelectorAll("#amount"));
-            Inputmask("decimal", {
-                suffix: "€",
-                placeholder: "0",
-                digits: 2,
-                digitsOptional: false,
-                radixPoint: ",",
-                groupSeparator: ".",
-                autoGroup: true,
-                allowPlus: false,
-                allowMinus: false,
-                clearMaskOnLostFocus: false,
-                removeMaskOnSubmit: true,
-                autoUnmask: true,
-                onUnMask: function (maskedValue, unmaskedValue) {
-                    let x = unmaskedValue.split(",");
-                    return parseFloat(x[0].replace(/\./g, "") + "." + x[1]);
-                },
-            }).mask("amount");
+          Inputmask().mask(document.querySelectorAll("#amount"));
+          Inputmask("decimal", {
+            suffix: "€",
+            placeholder: "0",
+            digits: 2,
+            digitsOptional: false,
+            radixPoint: ",",
+            groupSeparator: ".",
+            autoGroup: true,
+            allowPlus: false,
+            allowMinus: false,
+            clearMaskOnLostFocus: false,
+            removeMaskOnSubmit: true,
+            autoUnmask: true,
+            onUnMask: function (maskedValue, unmaskedValue) {
+              let x = unmaskedValue.split(",");
+              let a = parseFloat(x[0].replace(/\./g, "") + "." + x[1]);
 
-            let balanceAmountCheck = false;
-            let amountValue = document.getElementById("amount");
-            let balanceValue = "[[${account.balance}]]";
-            amountValue.addEventListener("blur", function balanceCheck() {
-                let amountInput = amountValue.value;
+              if (a == 0) {
+                return 0.0;
+              } else {
+                return a;
+              }
+            },
+          }).mask("amount");
 
-                console.log(amountInput);
-                console.log(balanceValue);
+          let balanceAmountCheck = false;
+          let f = document.querySelector("form");
+          let balanceValue = "[[${account.balance}]]";
+          f.addEventListener("submit", () => {
+            let amountInput = document.getElementById("amount").value;
 
-                //check ibanFrom does not equals ibanTO
-                if (parseFloat(amountInput) > parseFloat(balanceValue)) {
-                    document.querySelector("#amountAlert").setAttribute("class", "alert alert-danger", "role", "alert");
-                    document.querySelector("#amountError").textContent = "Onvoldoende saldo op uw rekening.";
-                    balanceAmountCheck = false;
-                } else {
-                    document.querySelector("#amountAlert").removeAttribute("class", "role");
-                    document.querySelector("#amountError").textContent = "";
-                    balanceAmountCheck = true;
-                };
+            console.log(amountInput);
+            console.log(balanceValue);
 
-            });
+            //check ibanFrom does not equals ibanTO
+            if (isNaN(amountInput) || amountInput == 0) {
+              document
+                .querySelector("#amountAlert")
+                .setAttribute("class", "alert alert-danger", "role", "alert");
+              document.querySelector("#amountError").textContent =
+                "Uw overboeking moet meer dan 0,01€ bedragen.";
+              balanceAmountCheck = false;
+              console.log("to low to transfer");
+            } else if (parseFloat(amountInput) > parseFloat(balanceValue)) {
+              document
+                .querySelector("#amountAlert")
+                .setAttribute("class", "alert alert-danger", "role", "alert");
+              document.querySelector("#amountError").textContent =
+                "Onvoldoende saldo op uw rekening.";
+              balanceAmountCheck = false;
+            } else {
+              document
+                .querySelector("#amountAlert")
+                .removeAttribute("class", "role");
+              document.querySelector("#amountError").textContent = "";
+              balanceAmountCheck = true;
+            }
+          });
 
-
-            // only submit if checks are valid
-            document.querySelector('form')
-                .addEventListener('submit', (event) => {
-                    if (!ibancheck) {
-                        event.preventDefault();
-                        console.log('iban unconfirmed');
-                    } else if (!balanceAmountCheck) {
-                        event.preventDefault();
-                        console.log('amount higher then balance');
-                    } ;
-                });
-
-
+          // only submit if checks are valid
+          document.querySelector("form").addEventListener("submit", (event) => {
+            if (!ibancheck) {
+              event.preventDefault();
+              console.log("iban unconfirmed");
+            } else if (!balanceAmountCheck) {
+              event.preventDefault();
+              console.log("amount higher then balance or invalid amount");
+            }
+          });
         </script>
+      </div>
     </div>
-</div>
-
-</body>
-
+  </body>
 </html>
