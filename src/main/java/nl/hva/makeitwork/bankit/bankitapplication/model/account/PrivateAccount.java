@@ -3,6 +3,8 @@ package nl.hva.makeitwork.bankit.bankitapplication.model.account;
 import nl.hva.makeitwork.bankit.bankitapplication.model.user.Customer;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,11 @@ import java.util.Objects;
 @Entity
 public class PrivateAccount extends Bankaccount {
     @ManyToMany
+    @JoinTable(
+            name = "customer_private_accounts",
+            joinColumns = { @JoinColumn(name = "account_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     List<Customer> accountHolders = new ArrayList<>();
 
     public PrivateAccount(String iban, List<Transaction> history, double balance, List<Customer> accountHolders) {

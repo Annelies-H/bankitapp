@@ -41,11 +41,12 @@
         </form>
 
         <script>
+            let apihost = "http://localhost/api/ssn_check/";
             let bsnExists = false;
             function checkExist() {
                 let xmlhttp = new XMLHttpRequest();
                 let bsn = document.getElementById("bsn").value;
-                let url = "http://miw-team-2.nl/api/ssn_check/" + bsn;
+                let url = apihost + bsn;
 
                 setOnReadyStateChange(xmlhttp);
 

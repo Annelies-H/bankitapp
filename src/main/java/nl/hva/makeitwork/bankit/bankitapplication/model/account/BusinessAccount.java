@@ -13,6 +13,11 @@ public class BusinessAccount extends Bankaccount {
     @ManyToOne
     Company company;
     @ManyToMany
+    @JoinTable(
+            name = "customer_business_accounts",
+            joinColumns = { @JoinColumn(name = "account_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     List<Customer> accountHolders = new ArrayList<>();
 
     public BusinessAccount(String iban, List<Transaction> history, double balance) {

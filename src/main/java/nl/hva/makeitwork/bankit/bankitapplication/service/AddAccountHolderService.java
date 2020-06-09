@@ -53,7 +53,6 @@ public class AddAccountHolderService {
         account.addAccountHolder(customer);
         pdao.save(account);
         customer.addAccount(account);
-        cdao.save(customer);
     }
 
     private void updateBusinessAccount(String iban, Customer customer) {
@@ -65,7 +64,6 @@ public class AddAccountHolderService {
         account.addAccountHolder(customer);
         bdao.save(account);
         customer.addAccount(account);
-        cdao.save(customer);
     }
 
     public List<AddAccountholderRequest> getReceivedRequests(int bsn) {

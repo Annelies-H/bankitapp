@@ -20,9 +20,9 @@ public class Customer extends User {
 
     @Column(nullable = false, unique = true)
     private Integer socialSecurityNumber;
-    @ManyToMany
+    @ManyToMany(mappedBy="accountHolders")
     private List<PrivateAccount> privateAccounts = new ArrayList<>();
-    @ManyToMany
+    @ManyToMany(mappedBy="accountHolders")
     private List<BusinessAccount> businessAccounts = new ArrayList<>();
 
 

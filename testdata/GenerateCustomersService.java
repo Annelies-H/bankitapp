@@ -27,7 +27,7 @@ Some of the fields in the inputfile need some adjusting before they can be used:
 @Service
 public class GenerateCustomersService {
     //location of the file:
-    static final String FILE_PATH = "documentation/FakeNames.csv";
+    static final String FILE_PATH = "testdata/FakeNames.csv";
     //indeces of the different columns containing the required information:
     static final int GENDER_INDEX = 1;
     static final int FIRSTNAME_INDEX = 4;

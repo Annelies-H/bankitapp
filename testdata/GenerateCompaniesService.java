@@ -11,7 +11,7 @@ import java.util.*;
 
 @Service
 public class GenerateCompaniesService {
-    static final String FILE_PATH = "documentation/test_companies.csv";
+    static final String FILE_PATH = "testdata/test_companies.csv";
     static final int KVK_INDEX = 1;
     static final int COMPANY_NAME_INDEX = 2;
     static final int INDUSTRY_INDEX = 3;

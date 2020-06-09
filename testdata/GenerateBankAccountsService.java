@@ -141,7 +141,6 @@ public class GenerateBankAccountsService {
             BusinessAccount account = new BusinessAccount();
             account.setCompany(allCompanies.get(i));
             double randomBalance = ((int) (Math.random() * 200000) )/ 100.0;
-            System.out.println(randomBalance);
             account.setBalance(randomBalance);
             account.setIban("");
             account.addAccountHolder(customer);

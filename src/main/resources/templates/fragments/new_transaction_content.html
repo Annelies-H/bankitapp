@@ -115,7 +115,7 @@
                 "U kunt geen geld overmaken binnen dezelfde rekening";
               ibancheck = false;
             } else {
-              let URL = `http://miw-team-2.nl/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
+              let URL = `http://localhost/transaction_api/iban_check/${ibanToInput}`; // API URL voor de request
               if (ibanToInput.length != 0) {
                 fetch(URL) // API URL
                   .then((response) => {
